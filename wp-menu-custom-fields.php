@@ -125,6 +125,12 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 				?>
 			</p>
 			<p class="description description-wide">
+				<label for="menu-item-media-link-<?php echo esc_attr( $id ); ?>">
+					<?php esc_html_e( 'Media Link', 'wp-menu-custom-fields' ); ?><br>
+					<input type="text" id="menu-item-media-link-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-media-link" name="menu-item-media-link[<?php echo esc_attr( $id ); ?>]" value="<?php echo ( ! empty( $data['media-link'] ) ? esc_url( $data['media-link'] ) : '' ); ?>">
+				</label>
+			</p>
+			<p class="description description-wide">
 				<label for="menu-item-media-caption-<?php echo esc_attr( $id ); ?>">
 					<?php esc_html_e( 'Media Caption', 'wp-menu-custom-fields' ); ?><br>
 					<textarea id="menu-item-media-caption-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-media-caption" name="menu-item-media-caption[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['media-caption'] ) ? esc_attr( $data['media-caption'] ) : '' ); ?></textarea>
@@ -256,7 +262,15 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 
 			if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['media-url'] ) && ! empty( $nav_menu_custom_fields[ $item->ID ]['media-type'] ) ) {
 				if ( 'video' === $nav_menu_custom_fields[ $item->ID ]['media-type'] ) {
-					$html .= '<div class="nav-media type-video"><video src="' . esc_url( $nav_menu_custom_fields[ $item->ID ]['media-url'] ) . '" style="height: 50px;"></video>';
+					$html .= '<div class="nav-media type-video">';
+
+					if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['media-link'] ) ) {
+						$html .= '<a href="' . esc_url( $nav_menu_custom_fields[ $item->ID ]['media-link'] ) . '">';
+					}
+					$html .= '<video src="' . esc_url( $nav_menu_custom_fields[ $item->ID ]['media-url'] ) . '" style="height: 50px;"></video>';
+					if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['media-link'] ) ) {
+						$html .= '</a>';
+					}
 
 					if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['media-caption'] ) ) {
 						$html .= '<span>' . esc_html( $nav_menu_custom_fields[ $item->ID ]['media-caption'] ) . '</span>';
@@ -265,7 +279,15 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 					$html .= '</div>';
 
 				} elseif ( 'image' === $nav_menu_custom_fields[ $item->ID ]['media-type'] ) {
-					$html .= '<div class="nav-media type-image"><img src="' . esc_url( $nav_menu_custom_fields[ $item->ID ]['media-url'] ) . '" style="height: 50px;">';
+					$html .= '<div class="nav-media type-image">';
+
+					if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['media-link'] ) ) {
+						$html .= '<a href="' . esc_url( $nav_menu_custom_fields[ $item->ID ]['media-link'] ) . '">';
+					}
+					$html .= '<img src="' . esc_url( $nav_menu_custom_fields[ $item->ID ]['media-url'] ) . '" style="height: 50px;">';
+					if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['media-link'] ) ) {
+						$html .= '</a>';
+					}
 
 					if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['media-caption'] ) ) {
 						$html .= '<span>' . esc_html( $nav_menu_custom_fields[ $item->ID ]['media-caption'] ) . '</span>';
