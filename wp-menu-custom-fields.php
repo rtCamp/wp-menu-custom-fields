@@ -7,12 +7,12 @@
  * @package wp-menu-custom-fields
  */
 
-if ( ! class_exists( 'rt_Custom_Menu_Fields' ) ) {
+if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 
 	/**
-	 * Class rt_Custom_Menu_Fields
+	 * Class WP_Menu_Custom_Fields
 	 */
-	class rt_Custom_Menu_Fields /* phpcs:ignore PEAR.NamingConventions.ValidClassName.StartWithCapital */ {
+	class WP_Menu_Custom_Fields {
 
 		/**
 		 * Constructor
@@ -378,4 +378,4 @@ if ( ! class_exists( 'rt_Custom_Menu_Fields' ) ) {
 	}
 }
 
-new rt_Custom_Menu_Fields();
+new WP_Menu_Custom_Fields();
