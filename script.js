@@ -72,3 +72,19 @@ const navMenuSelectMediaHandler = ( e ) => {
         image_frame.open();
     } )( jQuery );
 }
+
+/**
+ * Code for tinymce editor.
+ */
+jQuery( document ).ready( () => {
+    if ( 'undefined' !== typeof tinymce ) {
+        tinymce.init( { 
+            selector: 'textarea.menu-item-custom-html',
+            setup: ( editor ) => {
+                editor.on( 'change', () => {
+                    tinymce.triggerSave();
+                } )
+            }
+        } );
+    }
+} );

@@ -27,6 +27,56 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 		}
 
 		/**
+		 * Returns meta keys which needs to be stored/fetched.
+		 *
+		 * @return array Meta keys.
+		 */
+		private function get_meta_keys() {
+			$meta_keys = array(
+				'custom-text',
+				'shortcode',
+				'shortcode-caption',
+				'media-id',
+				'media-type',
+				'media-link',
+				'media-caption',
+				'custom-html',
+			);
+
+			return $meta_keys;
+		}
+
+		/**
+		 * Get menu item meta data.
+		 *
+		 * @param int $menu_item_id Menu item ID.
+		 * @return array Meta data.
+		 */
+		private function get_nav_menu_meta_data( $menu_item_id ) {
+			$data = array();
+
+			$meta_keys = $this->get_meta_keys();
+
+			foreach ( $meta_keys as $meta_key ) {
+				$meta_value = get_post_meta( $menu_item_id, 'menu-item-' . $meta_key, true );
+
+				if ( ! empty( $meta_value ) ) {
+					$data[ $meta_key ] = $meta_value;
+
+					if ( 'media-id' === $meta_key ) {
+						$media_url = wp_get_attachment_url( $meta_value );
+
+						if ( ! empty( $media_url ) ) {
+							$data['media-url'] = $media_url;
+						}
+					}
+				}
+			}
+
+			return $data;
+		}
+
+		/**
 		 * Add custom fields on menu item edit screen.
 		 *
 		 * @param int    $id Current menu item ID.
@@ -36,78 +86,40 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 		 * @return void
 		 */
 		public function wp_nav_menu_item_custom_fields( $id, $item, $depth, $args ) {
-			$custom_field = get_post_meta( $id, 'menu-item-custom-field', true );
-			if ( empty( $custom_field ) ) {
-				$custom_field = '';
-			}
-
-			$shortcode = get_post_meta( $id, 'menu-item-shortcode', true );
-			if ( empty( $shortcode ) ) {
-				$shortcode = '';
-			}
-
-			$shortcode_caption = get_post_meta( $id, 'menu-item-shortcode-caption', true );
-			if ( empty( $shortcode_caption ) ) {
-				$shortcode_caption = '';
-			}
-
-			$media_url = '';
-			$media_id  = get_post_meta( $id, 'menu-item-media-id', true );
-			if ( empty( $media_id ) ) {
-				$media_id = '';
-			} else {
-				$media_url = wp_get_attachment_url( $media_id );
-			}
-
-			$media_type    = '';
-			$media_caption = '';
-			if ( empty( $media_url ) ) {
-				$media_id = '';
-			} else {
-				$media_type = get_post_meta( $id, 'menu-item-media-type', true );
-				if ( empty( $media_type ) ) {
-					$media_type = '';
-				}
-
-				$media_caption = get_post_meta( $id, 'menu-item-media-caption', true );
-				if ( empty( $media_caption ) ) {
-					$media_caption = '';
-				}
-			}
+			$data = $this->get_nav_menu_meta_data( $id );
 
 			$media_style = '';
-			if ( empty( $media_url ) || empty( $media_type ) ) {
+			if ( empty( $data['media-url'] ) || empty( $data['media-type'] ) ) {
 				$media_style = 'display: none;';
-			}
-
-			$shortcode_style = '';
-			if ( empty( $shortcode ) ) {
-				$shortcode_style = 'display: none;';
 			}
 
 			wp_nonce_field( 'menu-item-custom-fields-' . $id, 'menu-item-custom-fields-' . $id );
 
 			?>
 			<p class="description description-wide">
-				<label for="menu-item-custom-field-<?php echo esc_attr( $id ); ?>">
+				<label for="menu-item-custom-text-<?php echo esc_attr( $id ); ?>">
 					<?php esc_html_e( 'Custom Text', 'wp-menu-custom-fields' ); ?><br>
-					<input type="text" id="menu-item-custom-field-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-custom-field-<?php echo esc_attr( $id ); ?>" name="menu-item-custom-field[<?php echo esc_attr( $id ); ?>]" value="<?php echo esc_attr( $custom_field ); ?>">
+					<textarea id="menu-item-custom-text-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-custom-text-<?php echo esc_attr( $id ); ?>" name="menu-item-custom-text[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['custom-text'] ) ? esc_attr( $data['custom-text'] ) : '' ); ?></textarea>
 				</label>
 			</p>
 			<p class="description description-wide">
 				<label for="menu-item-media-id-<?php echo esc_attr( $id ); ?>">
+
 					<button onclick="navMenuSelectMediaHandler( this )" type="button" data-id="<?php echo esc_attr( $id ); ?>" class="custom-field-select-image"><?php esc_html_e( 'Select Media', 'wp-menu-custom-fields' ); ?></button>
-					<input type="hidden" value="<?php echo esc_attr( $media_id ); ?>" id="menu-item-media-id-<?php echo esc_attr( $id ); ?>" name="menu-item-media-id[<?php echo esc_attr( $id ); ?>]">
-					<input type="hidden" value="<?php echo esc_attr( $media_type ); ?>" id="menu-item-media-type-<?php echo esc_attr( $id ); ?>" name="menu-item-media-type[<?php echo esc_attr( $id ); ?>]">
+
+					<input type="hidden" value="<?php echo ( ! empty( $data['media-id'] ) ? esc_attr( $data['media-id'] ) : '' ); ?>" id="menu-item-media-id-<?php echo esc_attr( $id ); ?>" name="menu-item-media-id[<?php echo esc_attr( $id ); ?>]">
+
+					<input type="hidden" value="<?php echo ( ! empty( $data['media-type'] ) ? esc_attr( $data['media-type'] ) : '' ); ?>" id="menu-item-media-type-<?php echo esc_attr( $id ); ?>" name="menu-item-media-type[<?php echo esc_attr( $id ); ?>]">
+
 				</label>
 			</p>
 			<p id="menu-item-selected-media-display-paragraph-<?php echo esc_attr( $id ); ?>" class="description description-wide" style="<?php echo esc_attr( $media_style ); ?>">
 				<?php
-				if ( ! empty( $media_url ) && ! empty( $media_type ) ) {
-					if ( 'video' === $media_type ) {
-						echo '<video src="' . esc_url( $media_url ) . '" height="100"></video>';
-					} elseif ( 'image' === $media_type ) {
-						echo '<img src="' . esc_url( $media_url ) . '" height="100">';
+				if ( ! empty( $data['media-url'] ) && ! empty( $data['media-type'] ) ) {
+					if ( 'video' === $data['media-url'] ) {
+						echo '<video src="' . esc_url( $data['media-url'] ) . '" height="100"></video>';
+					} elseif ( 'image' === $data['media-type'] ) {
+						echo '<img src="' . esc_url( $data['media-url'] ) . '" height="100">';
 					}
 				}
 				?>
@@ -115,19 +127,19 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 			<p class="description description-wide">
 				<label for="menu-item-media-caption-<?php echo esc_attr( $id ); ?>">
 					<?php esc_html_e( 'Media Caption', 'wp-menu-custom-fields' ); ?><br>
-					<textarea id="menu-item-media-caption-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-media-caption-<?php echo esc_attr( $id ); ?>" name="menu-item-media-caption[<?php echo esc_attr( $id ); ?>]"><?php echo esc_attr( $media_caption ); ?></textarea>
+					<textarea id="menu-item-media-caption-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-media-caption" name="menu-item-media-caption[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['media-caption'] ) ? esc_attr( $data['media-caption'] ) : '' ); ?></textarea>
 				</label>
 			</p>
 			<p class="description description-wide">
 				<label for="menu-item-shortcode-<?php echo esc_attr( $id ); ?>">
 					<?php esc_html_e( 'Shortcode', 'wp-menu-custom-fields' ); ?><br>
-					<input type="text" id="menu-item-shortcode-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-shortcode-<?php echo esc_attr( $id ); ?>" name="menu-item-shortcode[<?php echo esc_attr( $id ); ?>]" value="<?php echo esc_attr( $shortcode ); ?>">
+					<input type="text" id="menu-item-shortcode-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-shortcode" name="menu-item-shortcode[<?php echo esc_attr( $id ); ?>]" value="<?php echo ( ! empty( $data['shortcode'] ) ? esc_attr( $data['shortcode'] ) : '' ); ?>">
 				</label>
 			</p>
 			<p class="description description-wide">
-				<label for="menu-item-shortcode-caption-<?php echo esc_attr( $id ); ?>">
-					<?php esc_html_e( 'Shortcode Caption', 'wp-menu-custom-fields' ); ?><br>
-					<textarea id="menu-item-shortcode-caption-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-shortcode-caption-<?php echo esc_attr( $id ); ?>" name="menu-item-shortcode-caption[<?php echo esc_attr( $id ); ?>]"><?php echo esc_attr( $shortcode_caption ); ?></textarea>
+				<label for="menu-item-custom-html-<?php echo esc_attr( $id ); ?>">
+					<?php esc_html_e( 'Custom HTML', 'wp-menu-custom-fields' ); ?><br>
+					<textarea id="menu-item-custom-html-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-custom-html" name="menu-item-custom-html[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['custom-html'] ) ? esc_attr( $data['custom-html'] ) : '' ); ?></textarea>
 				</label>
 			</p>
 			<?php
@@ -144,6 +156,7 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 				wp_enqueue_script( 'jquery' );
 				wp_enqueue_media();
 				wp_enqueue_script( 'custom-fields-script', plugin_dir_url( __FILE__ ) . '/script.js', array( 'jquery' ), time(), true );
+				wp_enqueue_script( 'tinyMCE-script', 'https://cdn.tiny.cloud/1/yg3c898omtym8cl4iczkjjcyq9l7oizcuhwfv8krczct33ns/tinymce/5/tinymce.min.js', array(), time(), true );
 			}
 		}
 
@@ -162,71 +175,34 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 
 			$data = array();
 
-			$key = 'menu-item-custom-field';
-			if ( isset( $_POST[ $key ][ $item_id ] ) ) {
-				$field = sanitize_text_field( wp_unslash( $_POST[ $key ][ $item_id ] ) );
-				update_post_meta( $item_id, $key, $field );
+			$meta_keys = $this->get_meta_keys();
 
-				$data['custom-field'] = $field;
-			} else {
-				delete_post_meta( $item_id, $key );
-			}
+			foreach ( $meta_keys as $meta_key ) {
 
-			$key = 'menu-item-media-id';
-			if ( isset( $_POST[ $key ][ $item_id ] ) ) {
-				$field = sanitize_text_field( wp_unslash( $_POST[ $key ][ $item_id ] ) );
-				update_post_meta( $item_id, $key, $field );
+				if ( isset( $_POST[ 'menu-item-' . $meta_key ][ $item_id ] ) ) {
 
-				$data['media-id'] = $field;
-				$media_url        = wp_get_attachment_url( $field );
-				if ( ! empty( $media_url ) ) {
-					$data['media-url'] = $media_url;
+					if ( 'custom-html' === $meta_key ) {
+						$meta_value = wp_kses_post( wp_unslash( $_POST[ 'menu-item-' . $meta_key ][ $item_id ] ) );
+					} else {
+						$meta_value = sanitize_text_field( wp_unslash( $_POST[ 'menu-item-' . $meta_key ][ $item_id ] ) );
+					}
+					update_post_meta( $item_id, 'menu-item-' . $meta_key, $meta_value );
+
+					$data[ $meta_key ] = $meta_value;
+
+					if ( 'media-id' === $meta_key ) {
+						$media_url = wp_get_attachment_url( $meta_value );
+
+						if ( ! empty( $media_url ) ) {
+							$data['media-url'] = $media_url;
+						}
+					}
+				} else {
+					delete_post_meta( $item_id, 'menu-item-' . $meta_key );
 				}
-			} else {
-				delete_post_meta( $item_id, $key );
 			}
 
-			$key = 'menu-item-media-type';
-			if ( isset( $_POST[ $key ][ $item_id ] ) ) {
-				$field = sanitize_text_field( wp_unslash( $_POST[ $key ][ $item_id ] ) );
-				update_post_meta( $item_id, $key, $field );
-
-				$data['media-type'] = $field;
-			} else {
-				delete_post_meta( $item_id, $key );
-			}
-
-			$key = 'menu-item-media-caption';
-			if ( isset( $_POST[ $key ][ $item_id ] ) ) {
-				$field = sanitize_text_field( wp_unslash( $_POST[ $key ][ $item_id ] ) );
-				update_post_meta( $item_id, $key, $field );
-
-				$data['media-caption'] = $field;
-			} else {
-				delete_post_meta( $item_id, $key );
-			}
-
-			$key = 'menu-item-shortcode';
-			if ( isset( $_POST[ $key ][ $item_id ] ) ) {
-				$field = sanitize_text_field( wp_unslash( $_POST[ $key ][ $item_id ] ) );
-				update_post_meta( $item_id, $key, $field );
-
-				$data['shortcode'] = $field;
-			} else {
-				delete_post_meta( $item_id, $key );
-			}
-
-			$key = 'menu-item-shortcode-caption';
-			if ( isset( $_POST[ $key ][ $item_id ] ) ) {
-				$field = sanitize_text_field( wp_unslash( $_POST[ $key ][ $item_id ] ) );
-				update_post_meta( $item_id, $key, $field );
-
-				$data['shortcode-caption'] = $field;
-			} else {
-				delete_post_meta( $item_id, $key );
-			}
-
-			$this->set_menu_item_data( $item_id, $data );
+			$this->cache_nav_menu_meta_data( $item_id, $data );
 		}
 
 		/**
@@ -243,50 +219,19 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 			}
 
 			foreach ( $sorted_items as $item ) {
-				$data          = $this->get_menu_item_data( $item->ID );
+				$data          = $this->get_nav_menu_cached_meta_data( $item->ID );
 				$data_modified = false;
 
 				if ( empty( $data ) ) {
-					$data = array();
-
-					$custom_field = get_post_meta( $item->ID, 'menu-item-custom-field', true );
-					if ( ! empty( $custom_field ) ) {
-						$data['custom-field'] = $custom_field;
-						$data_modified        = true;
-					}
-
-					$shortcode = get_post_meta( $item->ID, 'menu-item-shortcode', true );
-					if ( ! empty( $shortcode ) ) {
-						$data['shortcode'] = $shortcode;
-						$data_modified     = true;
-
-						$shortcode_caption = get_post_meta( $item->ID, 'menu-item-shortcode-caption', true );
-						if ( ! empty( $shortcode_caption ) ) {
-							$data['shortcode-caption'] = $shortcode_caption;
-						}
-					}
-
-					$media_id = get_post_meta( $item->ID, 'menu-item-media-id', true );
-					if ( ! empty( $media_id ) ) {
-						$media_url = wp_get_attachment_url( $media_id );
-						if ( ! empty( $media_url ) ) {
-							$data['media-id']  = $media_id;
-							$data['media-url'] = $media_url;
-							$data_modified     = true;
-
-							$media_type = get_post_meta( $item->ID, 'menu-item-media-type', true );
-							if ( ! empty( $media_type ) ) {
-								$data['media-type'] = $media_type;
-							}
-						}
-					}
+					$data          = $this->get_nav_menu_meta_data( $item->ID );
+					$data_modified = true;
 				}
 
 				if ( ! empty( $data ) ) {
 					$nav_menu_custom_fields[ $item->ID ] = $data;
 
 					if ( $data_modified ) {
-						$this->set_menu_item_data( $item->ID, $data );
+						$this->cache_nav_menu_meta_data( $item->ID, $data );
 					}
 				}
 			}
@@ -340,8 +285,12 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 				$html .= '</div>';
 			}
 
-			if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['custom-field'] ) ) {
-				$html .= '<span>' . esc_html( $nav_menu_custom_fields[ $item->ID ]['custom-field'] ) . '</span>';
+			if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['custom-html'] ) ) {
+				$html .= '<div class="nav-custom-html">' . $nav_menu_custom_fields[ $item->ID ]['custom-html'] . '</div>';
+			}
+
+			if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['custom-text'] ) ) {
+				$html .= '<span>' . esc_html( $nav_menu_custom_fields[ $item->ID ]['custom-text'] ) . '</span>';
 			}
 
 			return $html;
@@ -353,7 +302,7 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 		 * @param int $item_id Menu item ID.
 		 * @return array|boolean Transient data or false.
 		 */
-		private function get_menu_item_data( $item_id ) {
+		private function get_nav_menu_cached_meta_data( $item_id ) {
 			$key  = 'menu-item-' . $item_id . '-custom-data';
 			$data = get_transient( $key );
 			if ( ! empty( $data ) ) {
@@ -370,7 +319,7 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 		 * @param array $data Data to be stored in transient.
 		 * @return void
 		 */
-		private function set_menu_item_data( $item_id, $data ) {
+		private function cache_nav_menu_meta_data( $item_id, $data ) {
 			$key = 'menu-item-' . $item_id . '-custom-data';
 			set_transient( $key, $data, DAY_IN_SECONDS );
 		}
