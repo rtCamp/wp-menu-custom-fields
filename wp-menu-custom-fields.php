@@ -143,6 +143,12 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 				</label>
 			</p>
 			<p class="description description-wide">
+				<label for="menu-item-shortcode-caption-<?php echo esc_attr( $id ); ?>">
+					<?php esc_html_e( 'Shortcode Caption', 'wp-menu-custom-fields' ); ?><br>
+					<textarea id="menu-item-shortcode-caption-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-shortcode-caption" name="menu-item-shortcode-caption[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['shortcode-caption'] ) ? esc_html( $data['shortcode-caption'] ) : '' ); ?></textarea>
+				</label>
+			</p>
+			<p class="description description-wide">
 				<label for="menu-item-custom-html-<?php echo esc_attr( $id ); ?>">
 					<?php esc_html_e( 'Custom HTML', 'wp-menu-custom-fields' ); ?><br>
 					<textarea id="menu-item-custom-html-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-custom-html" name="menu-item-custom-html[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['custom-html'] ) ? wp_kses_post( $data['custom-html'] ) : '' ); ?></textarea>
