@@ -109,9 +109,22 @@ if ( 'undefined' !== typeof jQuery ) {
      * This is being done because menu items are added in DOM runtime.
      */
     jQuery( 'div#post-body' ).on( 'click', '.item-edit', ( e ) => {
-        var elem = jQuery( e.target );
 
-        elem = elem.prop( 'id' ).split( '-' );
+        if ( 'undefined' === typeof e.target ) {
+            return;
+        }
+
+        var elem = jQuery( e.target );
+        if ( 0 === elem.length ) {
+            return;
+        }
+
+        elem = elem.prop( 'id' );
+        if ( 0 === elem.length ) {
+            return;
+        }
+
+        elem = elem.split( '-' );
         if ( elem.length > 1 ) {
             elem = elem[1];
 
