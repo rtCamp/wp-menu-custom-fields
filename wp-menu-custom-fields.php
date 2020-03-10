@@ -99,7 +99,7 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 			<p class="description description-wide">
 				<label for="menu-item-custom-text-<?php echo esc_attr( $id ); ?>">
 					<?php esc_html_e( 'Custom Text', 'wp-menu-custom-fields' ); ?><br>
-					<textarea id="menu-item-custom-text-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-custom-text-<?php echo esc_attr( $id ); ?>" name="menu-item-custom-text[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['custom-text'] ) ? esc_attr( $data['custom-text'] ) : '' ); ?></textarea>
+					<textarea id="menu-item-custom-text-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-custom-text-<?php echo esc_attr( $id ); ?>" name="menu-item-custom-text[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['custom-text'] ) ? esc_html( $data['custom-text'] ) : '' ); ?></textarea>
 				</label>
 			</p>
 			<p class="description description-wide">
@@ -133,7 +133,7 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 			<p class="description description-wide">
 				<label for="menu-item-media-caption-<?php echo esc_attr( $id ); ?>">
 					<?php esc_html_e( 'Media Caption', 'wp-menu-custom-fields' ); ?><br>
-					<textarea id="menu-item-media-caption-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-media-caption" name="menu-item-media-caption[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['media-caption'] ) ? esc_attr( $data['media-caption'] ) : '' ); ?></textarea>
+					<textarea id="menu-item-media-caption-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-media-caption" name="menu-item-media-caption[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['media-caption'] ) ? esc_html( $data['media-caption'] ) : '' ); ?></textarea>
 				</label>
 			</p>
 			<p class="description description-wide">
@@ -145,7 +145,7 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 			<p class="description description-wide">
 				<label for="menu-item-custom-html-<?php echo esc_attr( $id ); ?>">
 					<?php esc_html_e( 'Custom HTML', 'wp-menu-custom-fields' ); ?><br>
-					<textarea id="menu-item-custom-html-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-custom-html" name="menu-item-custom-html[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['custom-html'] ) ? esc_attr( $data['custom-html'] ) : '' ); ?></textarea>
+					<textarea id="menu-item-custom-html-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-custom-html" name="menu-item-custom-html[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['custom-html'] ) ? esc_html( $data['custom-html'] ) : '' ); ?></textarea>
 				</label>
 			</p>
 			<?php
