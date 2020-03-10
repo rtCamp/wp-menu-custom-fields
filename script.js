@@ -74,17 +74,53 @@ const navMenuSelectMediaHandler = ( e ) => {
 }
 
 /**
- * Code for tinymce editor.
+ * Initiate tinymce editor.
+ * 
+ * @param {string|boolean} selector Editor selector.
+ * @return {void}
  */
-jQuery( document ).ready( () => {
+const initTinyMce = ( selector = false ) => {
     if ( 'undefined' !== typeof tinymce ) {
+
+        if ( ! selector || selector.length === 0 ) {
+            selector = 'textarea.menu-item-custom-html';
+        }
+
         tinymce.init( { 
-            selector: 'textarea.menu-item-custom-html',
+            selector: selector,
             setup: ( editor ) => {
                 editor.on( 'change', () => {
                     tinymce.triggerSave();
-                } )
+                } );
             }
         } );
     }
-} );
+};
+
+/**
+ * We keep track of initiated editors, so we don't initiate them again.
+ */
+var initiatedEditors = {};
+
+if ( 'undefined' !== typeof jQuery ) {
+
+    /**
+     * We dynamically initiate editors on .item-edit click event.
+     * This is being done because menu items are added in DOM runtime.
+     */
+    jQuery( 'div#post-body' ).on( 'click', '.item-edit', ( e ) => {
+        var elem = jQuery( e.target );
+
+        elem = elem.prop( 'id' ).split( '-' );
+        if ( elem.length > 1 ) {
+            elem = elem[1];
+
+            if ( 'undefined' !== typeof initiatedEditors[ elem ] ) {
+                return;
+            }
+
+            initiatedEditors[ elem ] = 1;
+            initTinyMce( 'textarea#menu-item-custom-html-' + elem );
+        }
+    } );
+}
