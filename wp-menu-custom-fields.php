@@ -145,7 +145,7 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 			<p class="description description-wide">
 				<label for="menu-item-custom-html-<?php echo esc_attr( $id ); ?>">
 					<?php esc_html_e( 'Custom HTML', 'wp-menu-custom-fields' ); ?><br>
-					<textarea id="menu-item-custom-html-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-custom-html" name="menu-item-custom-html[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['custom-html'] ) ? esc_html( $data['custom-html'] ) : '' ); ?></textarea>
+					<textarea id="menu-item-custom-html-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-custom-html" name="menu-item-custom-html[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['custom-html'] ) ? wp_kses_post( $data['custom-html'] ) : '' ); ?></textarea>
 				</label>
 			</p>
 			<?php
@@ -308,7 +308,7 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 			}
 
 			if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['custom-html'] ) ) {
-				$html .= '<div class="nav-custom-html">' . $nav_menu_custom_fields[ $item->ID ]['custom-html'] . '</div>';
+				$html .= '<div class="nav-custom-html">' . wp_kses_post( $nav_menu_custom_fields[ $item->ID ]['custom-html'] ) . '</div>';
 			}
 
 			if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['custom-text'] ) ) {
