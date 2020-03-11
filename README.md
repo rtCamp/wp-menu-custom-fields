@@ -10,13 +10,13 @@
 
 # What plugin does #
 
-	- It uses the newly added action hook of WordPress 5.4 wp_nav_menu_item_custom_fields to add custom fields on Menu Item edit interface.
-    - It then shows data stored in these custom fields on menu items on frontend.
-    - Plugin gives these custom fields:
-        - Custom text
-        - Media (image/video) with link and caption
-        - Shortcode with caption
-        - Custom HTML with [tinyMCE](https://www.tiny.cloud/) editor
+- It uses the newly added action hook of WordPress 5.4 wp_nav_menu_item_custom_fields to add custom fields on Menu Item edit interface.
+- It then shows data stored in these custom fields on menu items on frontend.
+- Plugin provides below custom fields:
+  - Custom text
+  - Media (image/video) with link and caption
+  - Shortcode with caption
+  - Custom HTML with [tinyMCE](https://www.tiny.cloud/) editor
 
 
 # Branches #
