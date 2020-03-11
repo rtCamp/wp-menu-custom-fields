@@ -10,7 +10,7 @@
 
 # What plugin does #
 
-- It uses the newly added action hook of WordPress 5.4 wp_nav_menu_item_custom_fields to add custom fields on Menu Item edit interface.
+- It uses the newly added action hook of WordPress 5.4 `wp_nav_menu_item_custom_fields` to add custom fields on Menu Item edit interface.
 - It then shows data stored in these custom fields on menu items on frontend.
 - Plugin provides below custom fields:
   - Custom text
@@ -21,7 +21,7 @@
 
 # Branches #
 
- 	- master
+    master
 
 # Issue reporting #
 
