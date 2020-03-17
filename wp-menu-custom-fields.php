@@ -11,6 +11,8 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 
 	/**
 	 * Class WP_Menu_Custom_Fields
+	 * Adds custom fields on nav menu edit screen and stores it, shows custom fields on frontend.
+	 * Enqueues necessary scripts on admin side.
 	 */
 	class WP_Menu_Custom_Fields {
 
