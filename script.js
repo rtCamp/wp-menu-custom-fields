@@ -1,139 +1,194 @@
 /**
- * Function to handle media upload button click.
- * 
- * @param {object} e Current Object.
- * @return {void}
+ * Single nav menu Item.
+ *
+ * @type {Object}
  */
-const navMenuSelectMediaHandler = ( e ) => {
-    if ( 'undefined' === typeof jQuery ) {
-        return;
-    }
+class NavMenuItem {
+	/**
+	 * Initialize.
+	 *
+	 * @param {Element} menuLi Menu item li with class 'menu-item
+	 * @param {int|string} menuId  Menu id.
+	 *
+	 * @return {void}
+	 */
+	constructor( menuLi, menuId ) {
+		this.menuLi = menuLi;
+		this.menuId = menuId;
+		this.mediaModal = {};
 
-    ( function( $ ) {
-        var id = $( e ).attr( 'data-id' );
-        var image_frame = wp.media( {
-            title: 'Select Media',
-            multiple : false,
-            library : {
-                type : [ 'image', 'video' ],
-            }
-        } );
-        
-        image_frame.on( 'close', () => {
-            var selection = image_frame.state().get( 'selection' );
-            var mediaId = false;
-            var mediaUrl = false;
-            var mediaType = false;
+		if ( ! menuLi.length ) {
+			return;
+		}
 
-            if ( ! selection.length ) {
-                $( '#menu-item-media-id-' + id ).val( '' );
-                $( '#menu-item-media-type-' + id ).val( '' );
-                $( '#menu-item-selected-media-display-paragraph-' + id ).html( '' ).css( 'display', 'none' );
+		this.openMediaModal = this.openMediaModal.bind( this );
+		this.destroy = this.destroy.bind( this );
+		this.handleMediaModalOpen = this.handleMediaModalOpen.bind( this );
+		this.handleMediaModalClose = this.handleMediaModalClose.bind( this );
+		this.initTinyMce = this.initTinyMce.bind( this );
 
-                return;
-            }
+		this.mediaUploaderButton = this.menuLi.find( '#custom-field-select-image-' + this.menuId );
+		this.deleteButton = this.menuLi.find( '#delete-' + this.menuId );
 
-            selection.each( ( attachment ) => {
-                mediaId = attachment['id'];
-                if ( attachment['attributes'] ) {
-                    mediaUrl = attachment['attributes']['url'];
-                    mediaType = attachment['attributes']['type'];
-                }
-            } );
+		this.mediaUploaderButton.on( 'click', this.openMediaModal );
+		this.deleteButton.on( 'click', this.destroy );
 
-            if ( ! mediaId || ! mediaUrl ) {
-                return;
-            }
+		this.initTinyMce();
+	}
 
-            $( '#menu-item-media-id-' + id ).val( mediaId );
-            $( '#menu-item-media-type-' + id ).val( mediaType );
-            var displayMedia = $( '#menu-item-selected-media-display-paragraph-' + id );
-            if ( 'video' === mediaType ) {
-                displayMedia.css( 'display', 'block' );
-                displayMedia.html( '<video height="100" src="' + mediaUrl + '"></video>' );
-            } else if ( 'image' === mediaType ) {
-                displayMedia.css( 'display', 'block' );
-                displayMedia.html( '<img height="100" src="' + mediaUrl + '">' );
-            }
-        } );
+	/**
+	 * Remove all event listeners, destroy tinyMCE.
+	 *
+	 * @return {void}
+	 */
+	destroy() {
+		this.mediaUploaderButton.off( 'click', this.openMediaModal );
+		this.mediaModal = null;
 
-        image_frame.on( 'open', () => {
-            var selection =  image_frame.state().get( 'selection' );
-            var mediaId = $( '#menu-item-media-id-' + id ).val();
-            if ( ! mediaId ) {
-                return;
-            }
+		if ( 'undefined' !== typeof tinymce ) {
+			const selector = '#menu-item-custom-html-' + this.menuId;
+			tinymce.remove( selector );
+		}
+	}
 
-            var attachment = wp.media.attachment( mediaId );
-            attachment.fetch();
-            selection.add( attachment ? [ attachment ] : [] );
-        } );
+	initTinyMce() {
+		if ( 'undefined' !== typeof tinymce ) {
+			const selector = '#menu-item-custom-html-' + this.menuId;
 
-        image_frame.open();
-    } )( jQuery );
+			tinymce.init( {
+				selector: selector,
+				setup: ( editor ) => {
+					editor.on( 'change', () => {
+						tinymce.triggerSave();
+					} );
+				},
+			} );
+		}
+	}
+
+	/**
+	 * Open media library modal.
+	 *
+	 * @return {void}
+	 */
+	openMediaModal() {
+		const config = {
+			title: wpMenuCustomFields.selectMediaText,
+			multiple: false,
+			library: {
+				type: ['image'],
+			},
+		};
+
+		this.mediaModal = wp.media( config );
+		this.mediaModal.on( 'open', this.handleMediaModalOpen );
+		this.mediaModal.on( 'close', this.handleMediaModalClose );
+		this.mediaModal.open();
+	}
+
+	/**
+	 * Handle media modal open.
+	 *
+	 * @return {void}
+	 */
+	handleMediaModalOpen() {
+		const mediaId = jQuery( '#menu-item-media-id-' + this.menuId ).val();
+		if ( ! mediaId ) {
+			return;
+		}
+
+		const attachment = wp.media.attachment( mediaId );
+		if ( attachment ) {
+			attachment.fetch();
+			this.mediaModal.state().get( 'selection' ).add( attachment ? [ attachment ] : [] );
+		}
+	}
+
+	/**
+	 * Handle media modal close.
+	 *
+	 * @return {void}
+	 */
+	handleMediaModalClose() {
+		const selection = this.mediaModal.state().get( 'selection' );
+		let mediaId = false;
+		let mediaUrl = false;
+		let mediaType = false;
+
+		if ( ! selection.length ) {
+			jQuery( '#menu-item-media-id-' + this.menuId ).val( '' );
+			jQuery( '#menu-item-media-type-' + this.menuId ).val( '' );
+			jQuery( '#menu-item-selected-media-display-paragraph-' + this.menuId ).html( '' ).css( 'display', 'none' );
+
+			return;
+		}
+
+		selection.each( ( attachment ) => {
+			mediaId = attachment['id'];
+			if ( attachment['attributes'] ) {
+				mediaUrl = attachment['attributes']['url'];
+				mediaType = attachment['attributes']['type'];
+			}
+		} );
+
+		if ( ! mediaId || ! mediaUrl ) {
+			return;
+		}
+
+		if ( 'image' === mediaType ) {
+			jQuery( '#menu-item-media-id-' + this.menuId ).val( mediaId );
+			jQuery( '#menu-item-media-type-' + this.menuId ).val( mediaType );
+			jQuery( '#menu-item-selected-media-display-paragraph-' + this.menuId ).html( '<img height="100" src="' + mediaUrl + '">' ).css( 'display', 'block' );
+		}
+	}
 }
 
 /**
- * Initiate tinymce editor.
- * 
- * @param {string|boolean} selector Editor selector.
- * @return {void}
+ * Nav Menus.
+ *
+ * @type {Object}
  */
-const initTinyMce = ( selector = false ) => {
-    if ( 'undefined' !== typeof tinymce ) {
+const NavMenu = {
+	/**
+	 * Initialized nav menu ids.
+	 *
+	 * @type {object}
+	 */
+	initializedNavMenuIds: {},
 
-        if ( ! selector || selector.length === 0 ) {
-            selector = 'textarea.menu-item-custom-html';
-        }
+	/**
+	 * Initialize.
+	 *
+	 * @return {void}
+	 */
+	init() {
+		this.menuContainer = jQuery( '#menu-to-edit' );
+		this.menuContainer.on( 'click', '.item-edit', ( e ) => {
+			const menuId = this.getMenuId( jQuery( e.target ) );
 
-        tinymce.init( { 
-            selector: selector,
-            setup: ( editor ) => {
-                editor.on( 'change', () => {
-                    tinymce.triggerSave();
-                } );
-            }
-        } );
-    }
+			if ( 'undefined' === typeof this.initializedNavMenuIds[ menuId ] ) {
+				const menuLi = jQuery( `#menu-item-${ menuId }` );
+				new NavMenuItem( menuLi, menuId );
+
+				this.initializedNavMenuIds[ menuId ] = true;
+			}
+		});
+	},
+
+	/**
+	 * Get menu id.
+	 *
+	 * @param {Element} element Element.
+	 *
+	 * @return {string}
+	 */
+	getMenuId( element ) {
+		if ( ! element ||  ! element.prop( 'id' ).length ) {
+			return '';
+		}
+
+		return element.prop( 'id' ).replace( /[^\d.]/g, '' );
+	},
 };
 
-/**
- * We keep track of initiated editors, so we don't initiate them again.
- */
-var initiatedEditors = {};
-
-if ( 'undefined' !== typeof jQuery ) {
-
-    /**
-     * We dynamically initiate editors on .item-edit click event.
-     * This is being done because menu items are added in DOM runtime.
-     */
-    jQuery( 'div#post-body' ).on( 'click', '.item-edit', ( e ) => {
-
-        if ( 'undefined' === typeof e.target ) {
-            return;
-        }
-
-        var elem = jQuery( e.target );
-        if ( 0 === elem.length ) {
-            return;
-        }
-
-        elem = elem.prop( 'id' );
-        if ( 0 === elem.length ) {
-            return;
-        }
-
-        elem = elem.split( '-' );
-        if ( elem.length > 1 ) {
-            elem = elem[1];
-
-            if ( 'undefined' !== typeof initiatedEditors[ elem ] ) {
-                return;
-            }
-
-            initiatedEditors[ elem ] = 1;
-            initTinyMce( 'textarea#menu-item-custom-html-' + elem );
-        }
-    } );
-}
+NavMenu.init();

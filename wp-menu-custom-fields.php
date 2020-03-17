@@ -49,14 +49,21 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 		/**
 		 * Get menu item meta data.
 		 *
-		 * @param int $menu_item_id Menu item ID.
+		 * @param int     $menu_item_id Menu item ID.
+		 * @param boolean $from_cache Whether to fetch from cache.
 		 * @return array Meta data.
 		 */
-		private function get_nav_menu_meta_data( $menu_item_id ) {
+		private function get_nav_menu_meta_data( $menu_item_id, $from_cache = true ) {
 			$data = array();
+			if ( $from_cache ) {
+				$data = $this->get_nav_menu_cached_meta_data( $menu_item_id );
+
+				if ( ! empty( $data ) ) {
+					return $data;
+				}
+			}
 
 			$meta_keys = $this->get_meta_keys();
-
 			foreach ( $meta_keys as $meta_key ) {
 				$meta_value = get_post_meta( $menu_item_id, 'menu-item-' . $meta_key, true );
 
@@ -86,7 +93,7 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 		 * @return void
 		 */
 		public function wp_nav_menu_item_custom_fields( $id, $item, $depth, $args ) {
-			$data = $this->get_nav_menu_meta_data( $id );
+			$data = $this->get_nav_menu_meta_data( $id, false );
 
 			$media_style = '';
 			if ( empty( $data['media-url'] ) || empty( $data['media-type'] ) ) {
@@ -105,7 +112,7 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 			<p class="description description-wide">
 				<label for="menu-item-media-id-<?php echo esc_attr( $id ); ?>">
 
-					<button onclick="navMenuSelectMediaHandler( this )" type="button" data-id="<?php echo esc_attr( $id ); ?>" class="custom-field-select-image"><?php esc_html_e( 'Select Media', 'wp-menu-custom-fields' ); ?></button>
+					<button type="button" class="custom-field-select-image" id="custom-field-select-image-<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Media', 'wp-menu-custom-fields' ); ?></button>
 
 					<input type="hidden" value="<?php echo ( ! empty( $data['media-id'] ) ? esc_attr( $data['media-id'] ) : '' ); ?>" id="menu-item-media-id-<?php echo esc_attr( $id ); ?>" name="menu-item-media-id[<?php echo esc_attr( $id ); ?>]">
 
@@ -116,9 +123,7 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 			<p id="menu-item-selected-media-display-paragraph-<?php echo esc_attr( $id ); ?>" class="description description-wide" style="<?php echo esc_attr( $media_style ); ?>">
 				<?php
 				if ( ! empty( $data['media-url'] ) && ! empty( $data['media-type'] ) ) {
-					if ( 'video' === $data['media-url'] ) {
-						echo '<video src="' . esc_url( $data['media-url'] ) . '" height="100"></video>';
-					} elseif ( 'image' === $data['media-type'] ) {
+					if ( 'image' === $data['media-type'] ) {
 						echo '<img src="' . esc_url( $data['media-url'] ) . '" height="100">';
 					}
 				}
@@ -166,9 +171,17 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 		public function admin_enqueue_scripts( $hook_suffix ) {
 			if ( 'nav-menus.php' === $hook_suffix ) {
 				wp_enqueue_script( 'jquery' );
+				wp_enqueue_script( 'wp-tinymce' );
 				wp_enqueue_media();
-				wp_enqueue_script( 'custom-fields-script', plugin_dir_url( __FILE__ ) . '/script.js', array( 'jquery' ), time(), true );
-				wp_enqueue_script( 'tinyMCE-script', 'https://cdn.tiny.cloud/1/yg3c898omtym8cl4iczkjjcyq9l7oizcuhwfv8krczct33ns/tinymce/5/tinymce.min.js', array(), time(), true );
+				wp_enqueue_script( 'custom-fields-script', plugin_dir_url( __FILE__ ) . '/script.js', array( 'jquery', 'wp-tinymce', 'media-editor', 'media-views' ), time(), true );
+
+				wp_localize_script(
+					'custom-fields-script',
+					'wpMenuCustomFields',
+					array(
+						'selectMediaText' => esc_html__( 'Select Media', 'wp-menu-custom-fields' ),
+					)
+				);
 			}
 		}
 
@@ -231,20 +244,10 @@ if ( ! class_exists( 'WP_Menu_Custom_Fields' ) ) {
 			}
 
 			foreach ( $sorted_items as $item ) {
-				$data          = $this->get_nav_menu_cached_meta_data( $item->ID );
-				$data_modified = false;
-
-				if ( empty( $data ) ) {
-					$data          = $this->get_nav_menu_meta_data( $item->ID );
-					$data_modified = true;
-				}
+				$data = $this->get_nav_menu_meta_data( $item->ID );
 
 				if ( ! empty( $data ) ) {
 					$nav_menu_custom_fields[ $item->ID ] = $data;
-
-					if ( $data_modified ) {
-						$this->cache_nav_menu_meta_data( $item->ID, $data );
-					}
 				}
 			}
 
