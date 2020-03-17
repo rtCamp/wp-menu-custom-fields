@@ -7,6 +7,8 @@
 
 **Tested with:** 5.4-RC2-47447
 
+**Required WordPress version:** 5.4-RC2-47447
+
 
 # What plugin does #
 
