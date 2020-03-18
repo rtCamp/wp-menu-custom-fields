@@ -63,7 +63,7 @@ class Assets {
 				'wp-menu-custom-fields-script',
 				'wpMenuCustomFields',
 				array(
-					'selectMediaText' => esc_html__( 'Select Media', 'wp-menu-custom-fields' ),
+					'selectMediaText' => esc_html__( 'Select Image', 'wp-menu-custom-fields' ),
 				)
 			);
 		}

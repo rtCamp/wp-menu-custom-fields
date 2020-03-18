@@ -132,7 +132,7 @@ class Custom_Nav_Menu_Fields {
 		<p class="description description-wide">
 			<label for="menu-item-media-id-<?php echo esc_attr( $id ); ?>">
 
-				<button type="button" class="custom-field-select-image" id="custom-field-select-image-<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Media', 'wp-menu-custom-fields' ); ?></button>
+				<button type="button" class="custom-field-select-image" id="custom-field-select-image-<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Image', 'wp-menu-custom-fields' ); ?></button>
 
 				<input type="hidden" value="<?php echo ( ! empty( $data['media-id'] ) ? esc_attr( $data['media-id'] ) : '' ); ?>" id="menu-item-media-id-<?php echo esc_attr( $id ); ?>" name="menu-item-media-id[<?php echo esc_attr( $id ); ?>]">
 
@@ -151,13 +151,13 @@ class Custom_Nav_Menu_Fields {
 		</p>
 		<p class="description description-wide">
 			<label for="menu-item-media-link-<?php echo esc_attr( $id ); ?>">
-				<?php esc_html_e( 'Media Link', 'wp-menu-custom-fields' ); ?><br>
+				<?php esc_html_e( 'Image Link', 'wp-menu-custom-fields' ); ?><br>
 				<input type="text" id="menu-item-media-link-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-media-link" name="menu-item-media-link[<?php echo esc_attr( $id ); ?>]" value="<?php echo ( ! empty( $data['media-link'] ) ? esc_url( $data['media-link'] ) : '' ); ?>">
 			</label>
 		</p>
 		<p class="description description-wide">
 			<label for="menu-item-media-caption-<?php echo esc_attr( $id ); ?>">
-				<?php esc_html_e( 'Media Caption', 'wp-menu-custom-fields' ); ?><br>
+				<?php esc_html_e( 'Image Caption', 'wp-menu-custom-fields' ); ?><br>
 				<textarea id="menu-item-media-caption-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-media-caption" name="menu-item-media-caption[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['media-caption'] ) ? esc_html( $data['media-caption'] ) : '' ); ?></textarea>
 			</label>
 		</p>
