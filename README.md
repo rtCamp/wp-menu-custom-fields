@@ -35,6 +35,8 @@ Below is the list of custom fields this plugin adds.
 - Shortcode with caption
 - Custom HTML with [tinyMCE](https://www.tiny.cloud/) editor
 
+**Note:** You'll need to add stylings to properly show these custom fields on the frontend.
+
 ## Installation ##
 
 1. Extract the zip file.
