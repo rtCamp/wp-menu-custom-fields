@@ -1,4 +1,4 @@
-=== WP Menu Custom Fields - v1.0 ===
+=== WP Menu Custom Fields ===
 Contributors: sid177, kiranpotphode, devikvekariya
 Donate Link: http://rtcamp.com/donate/
 Tags: Navigation Menu, Navigation Menu Custom Fields
