@@ -18,7 +18,6 @@ define( 'WP_MENU_CUSTOM_FIELDS_URL', untrailingslashit( plugin_dir_url( __FILE__
 
 // phpcs:disable WordPressVIPMinimum.Files.IncludingFile.UsingCustomConstant
 require_once WP_MENU_CUSTOM_FIELDS_PATH . '/inc/helpers/autoloader.php';
-// require_once WP_MENU_CUSTOM_FIELDS_PATH . '/inc/helpers/custom-functions.php';
 // phpcs:enable WordPressVIPMinimum.Files.IncludingFile.UsingCustomConstant
 
 /**

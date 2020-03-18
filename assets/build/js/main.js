@@ -251,11 +251,11 @@ function () {
       }
 
       selection.each(function (attachment) {
-        mediaId = attachment['id'];
+        mediaId = attachment.id;
 
-        if (attachment['attributes']) {
-          mediaUrl = attachment['attributes']['url'];
-          mediaType = attachment['attributes']['type'];
+        if (attachment.attributes) {
+          mediaUrl = attachment.attributes.url;
+          mediaType = attachment.attributes.type;
         }
       });
 

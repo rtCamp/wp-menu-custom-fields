@@ -17,6 +17,7 @@ window.$ = window.$ || jQuery;
  * @type {Object}
  */
 class NavMenuItem {
+
 	/**
 	 * Initialize.
 	 *
@@ -74,7 +75,7 @@ class NavMenuItem {
 					editor.on( 'change', () => {
 						tinymce.triggerSave();
 					} );
-				},
+				}
 			} );
 		}
 	}
@@ -89,8 +90,8 @@ class NavMenuItem {
 			title: wpMenuCustomFields.selectMediaText,
 			multiple: false,
 			library: {
-				type: ['image'],
-			},
+				type: [ 'image' ]
+			}
 		};
 
 		this.mediaModal = wp.media( config );
@@ -137,10 +138,10 @@ class NavMenuItem {
 		}
 
 		selection.each( ( attachment ) => {
-			mediaId = attachment['id'];
-			if ( attachment['attributes'] ) {
-				mediaUrl = attachment['attributes']['url'];
-				mediaType = attachment['attributes']['type'];
+			mediaId = attachment.id;
+			if ( attachment.attributes ) {
+				mediaUrl = attachment.attributes.url;
+				mediaType = attachment.attributes.type;
 			}
 		} );
 
@@ -162,6 +163,7 @@ class NavMenuItem {
  * @type {Object}
  */
 const NavMenu = {
+
 	/**
 	 * Initialized nav menu ids.
 	 *
@@ -185,7 +187,7 @@ const NavMenu = {
 
 				this.initializedNavMenuIds[ menuId ] = true;
 			}
-		});
+		} );
 	},
 
 	/**
@@ -201,7 +203,7 @@ const NavMenu = {
 		}
 
 		return element.prop( 'id' ).replace( /[^\d.]/g, '' );
-	},
+	}
 };
 
 NavMenu.init();

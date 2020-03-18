@@ -1,7 +1,7 @@
 {
-	"name": "features-plugin",
+	"name": "wp-menu-custom-fields",
 	"version": "1.0.0",
-	"description": "Plugin for features",
+	"description": "Adds custom fields on nav menu edit screen and shows it on site menu.",
 	"main": "src/js/index.js",
 	"scripts": {
 		"prod": "cross-env NODE_ENV=production webpack --mode production --progress",
@@ -9,7 +9,7 @@
 		"eslint:fix": "eslint --fix"
 	},
 	"keywords": [
-		"features-plugin"
+		"wp-menu-custom-fields"
 	],
 	"author": "rtCamp",
 	"license": "ISC",
