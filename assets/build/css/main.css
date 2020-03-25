@@ -1,3 +1,16 @@
+p.feature-list-label-p {
+  margin-bottom: 0; }
+
+p.menu-item-hidden {
+  display: none; }
+
+div.menu-item-select-feature-list-wrapper {
+  margin-bottom: 0.7em; }
+  div.menu-item-select-feature-list-wrapper ul.menu-item-select-feature-list {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+            justify-content: space-between; }
 
 
 /*# sourceMappingURL=main.css.map*/

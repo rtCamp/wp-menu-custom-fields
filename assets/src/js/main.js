@@ -29,25 +29,104 @@ class NavMenuItem {
 	constructor( menuLi, menuId ) {
 		this.menuLi = menuLi;
 		this.menuId = menuId;
+		this.tinyMceSet = false;
 		this.mediaModal = {};
 
 		if ( ! menuLi.length ) {
 			return;
 		}
 
-		this.openMediaModal = this.openMediaModal.bind( this );
 		this.destroy = this.destroy.bind( this );
+		this.initTinyMce = this.initTinyMce.bind( this );
+		this.handleRadioImage = this.handleRadioImage.bind( this );
+		this.handleRadioShortcode = this.handleRadioShortcode.bind( this );
+		this.handleRadioHtml = this.handleRadioHtml.bind( this );
+		this.openMediaModal = this.openMediaModal.bind( this );
 		this.handleMediaModalOpen = this.handleMediaModalOpen.bind( this );
 		this.handleMediaModalClose = this.handleMediaModalClose.bind( this );
-		this.initTinyMce = this.initTinyMce.bind( this );
+		this.setMediaUploader = this.setMediaUploader.bind( this );
+		this.setTinyMce = this.setTinyMce.bind( this );
 
-		this.mediaUploaderButton = this.menuLi.find( '#custom-field-select-image-' + this.menuId );
+		this.radioImage = jQuery( '#menu-item-selected-feature-radio-image-' + this.menuId );
+		this.radioShortcode = jQuery( '#menu-item-selected-feature-radio-shortcode-' + this.menuId );
+		this.radioHtml = jQuery( '#menu-item-selected-feature-radio-html-' + this.menuId );
 		this.deleteButton = this.menuLi.find( '#delete-' + this.menuId );
 
-		this.mediaUploaderButton.on( 'click', this.openMediaModal );
+		this.radioImage.on( 'click', this.handleRadioImage );
+		this.radioShortcode.on( 'click', this.handleRadioShortcode );
+		this.radioHtml.on( 'click', this.handleRadioHtml );
 		this.deleteButton.on( 'click', this.destroy );
 
-		this.initTinyMce();
+		if ( this.radioImage.prop( 'checked' ) ) {
+			this.setMediaUploader();
+		} else if ( this.radioHtml.prop( 'checked' ) ) {
+			this.setTinyMce();
+		}
+
+		this.imageP = this.menuLi.find( '.menu-item-media-p-' + this.menuId );
+		this.shortcodeP = this.menuLi.find( '.menu-item-shortcode-p-' + this.menuId );
+		this.htmlP = this.menuLi.find( '.menu-item-html-p-' + this.menuId );
+	}
+
+	/**
+	 * Set media uploader button and it's event.
+	 *
+	 * @return {void}
+	 */
+	setMediaUploader() {
+		if ( ! this.mediaUploaderButton ) {
+			this.mediaUploaderButton = jQuery( '#custom-field-select-image-' + this.menuId );
+			this.mediaUploaderButton.on( 'click', this.openMediaModal );
+		}
+	}
+
+	/**
+	 * Call Initiate tinymce and set tinymce set variable.
+	 *
+	 * @return {void}
+	 */
+	setTinyMce() {
+		if ( ! this.tinyMceSet ) {
+			this.initTinyMce();
+			this.tinyMceSet = true;
+		}
+	}
+
+	/**
+	 * Handle image radio button click event.
+	 *
+	 * @return {void}
+	 */
+	handleRadioImage() {
+		this.setMediaUploader();
+
+		this.imageP.removeClass( 'menu-item-hidden' );
+		this.shortcodeP.addClass( 'menu-item-hidden' );
+		this.htmlP.addClass( 'menu-item-hidden' );
+	}
+
+	/**
+	 * Handle shortcode radio button click event.
+	 *
+	 * @return {void}
+	 */
+	handleRadioShortcode() {
+		this.imageP.addClass( 'menu-item-hidden' );
+		this.shortcodeP.removeClass( 'menu-item-hidden' );
+		this.htmlP.addClass( 'menu-item-hidden' );
+	}
+
+	/**
+	 * Handle html radio button click event.
+	 *
+	 * @return {void}
+	 */
+	handleRadioHtml() {
+		this.setTinyMce();
+
+		this.imageP.addClass( 'menu-item-hidden' );
+		this.shortcodeP.addClass( 'menu-item-hidden' );
+		this.htmlP.removeClass( 'menu-item-hidden' );
 	}
 
 	/**
@@ -56,15 +135,26 @@ class NavMenuItem {
 	 * @return {void}
 	 */
 	destroy() {
-		this.mediaUploaderButton.off( 'click', this.openMediaModal );
-		this.mediaModal = null;
+		if ( this.mediaUploaderButton ) {
+			this.mediaUploaderButton.off( 'click', this.openMediaModal );
+			this.mediaModal = null;
+		}
 
-		if ( 'undefined' !== typeof tinymce ) {
+		if ( this.tinyMceSet && 'undefined' !== typeof tinymce ) {
 			const selector = '#menu-item-custom-html-' + this.menuId;
 			tinymce.remove( selector );
 		}
+
+		this.radioImage.off( 'click', this.handleRadioImage );
+		this.radioShortcode.off( 'click', this.handleRadioShortcode );
+		this.radioHtml.off( 'click', this.handleRadioHtml );
 	}
 
+	/**
+	 * Initiate tinymce editor.
+	 *
+	 * @return {void}
+	 */
 	initTinyMce() {
 		if ( 'undefined' !== typeof tinymce ) {
 			const selector = '#menu-item-custom-html-' + this.menuId;
@@ -132,7 +222,7 @@ class NavMenuItem {
 		if ( ! selection.length ) {
 			jQuery( '#menu-item-media-id-' + this.menuId ).val( '' );
 			jQuery( '#menu-item-media-type-' + this.menuId ).val( '' );
-			jQuery( '#menu-item-selected-media-display-paragraph-' + this.menuId ).html( '' ).css( 'display', 'none' );
+			jQuery( '#menu-item-selected-media-display-paragraph-' + this.menuId ).html( '' );
 
 			return;
 		}
@@ -152,7 +242,7 @@ class NavMenuItem {
 		if ( 'image' === mediaType ) {
 			jQuery( '#menu-item-media-id-' + this.menuId ).val( mediaId );
 			jQuery( '#menu-item-media-type-' + this.menuId ).val( mediaType );
-			jQuery( '#menu-item-selected-media-display-paragraph-' + this.menuId ).html( '<img height="100" src="' + mediaUrl + '">' ).css( 'display', 'block' );
+			jQuery( '#menu-item-selected-media-display-paragraph-' + this.menuId ).html( '<img height="100" src="' + mediaUrl + '">' );
 		}
 	}
 }

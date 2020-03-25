@@ -19,6 +19,34 @@ class Custom_Nav_Menu_Fields {
 	use Singleton;
 
 	/**
+	 * Holds features and it's required fields.
+	 *
+	 * @var array
+	 */
+	private $feature_keys = array(
+		'shortcode' => array(
+			'shortcode',
+			'shortcode-caption',
+		),
+		'image'     => array(
+			'media-id',
+			'media-type',
+			'media-link',
+			'media-caption',
+		),
+		'html'      => array(
+			'custom-html',
+		),
+	);
+
+	/**
+	 * Holds meta key.
+	 *
+	 * @var string
+	 */
+	private $meta_key = 'rt-wp-menu-custom-fields';
+
+	/**
 	 * Construct method.
 	 */
 	protected function __construct() {
@@ -47,30 +75,11 @@ class Custom_Nav_Menu_Fields {
 	}
 
 	/**
-	 * Returns meta keys which needs to be stored/fetched.
-	 *
-	 * @return array Meta keys.
-	 */
-	private function get_meta_keys() {
-		$meta_keys = array(
-			'custom-text',
-			'shortcode',
-			'shortcode-caption',
-			'media-id',
-			'media-type',
-			'media-link',
-			'media-caption',
-			'custom-html',
-		);
-
-		return $meta_keys;
-	}
-
-	/**
 	 * Get menu item meta data.
 	 *
 	 * @param int     $menu_item_id Menu item ID.
 	 * @param boolean $from_cache Whether to fetch from cache.
+	 *
 	 * @return array Meta data.
 	 */
 	private function get_nav_menu_meta_data( $menu_item_id, $from_cache = true ) {
@@ -83,20 +92,11 @@ class Custom_Nav_Menu_Fields {
 			}
 		}
 
-		$meta_keys = $this->get_meta_keys();
-		foreach ( $meta_keys as $meta_key ) {
-			$meta_value = get_post_meta( $menu_item_id, 'menu-item-' . $meta_key, true );
-
-			if ( ! empty( $meta_value ) ) {
-				$data[ $meta_key ] = $meta_value;
-
-				if ( 'media-id' === $meta_key ) {
-					$media_url = wp_get_attachment_url( $meta_value );
-
-					if ( ! empty( $media_url ) ) {
-						$data['media-url'] = $media_url;
-					}
-				}
+		$data = get_post_meta( $menu_item_id, $this->meta_key, true );
+		if ( ! empty( $data['image']['media-id'] ) ) {
+			$media_url = wp_get_attachment_url( $data['image']['media-id'] );
+			if ( ! empty( $media_url ) ) {
+				$data['image']['media-url'] = $media_url;
 			}
 		}
 
@@ -110,76 +110,141 @@ class Custom_Nav_Menu_Fields {
 	 * @param object $item Current menu object.
 	 * @param int    $depth Current menu children depth.
 	 * @param array  $args Current menu Arguments.
+	 *
 	 * @return void
 	 */
 	public function wp_nav_menu_item_custom_fields( $id, $item, $depth, $args ) {
 		$data = $this->get_nav_menu_meta_data( $id, false );
 
-		$media_style = '';
-		if ( empty( $data['media-url'] ) || empty( $data['media-type'] ) ) {
-			$media_style = 'display: none;';
+		$features         = array(
+			'image'     => __( 'Image', 'wp-menu-custom-fields' ),
+			'shortcode' => __( 'Shortcode', 'wp-menu-custom-fields' ),
+			'html'      => __( 'Custom HTML', 'wp-menu-custom-fields' ),
+		);
+		$selected_feature = 'image';
+
+		if ( ! empty( $data['selected-feature'] ) && ! empty( $features[ $data['selected-feature'] ] ) ) {
+			$selected_feature = $data['selected-feature'];
 		}
 
-		wp_nonce_field( 'menu-item-custom-fields-' . $id, 'menu-item-custom-fields-' . $id );
+		wp_nonce_field( $this->meta_key . '-' . $id, $this->meta_key . '-' . $id );
 
 		?>
 		<p class="description description-wide">
 			<label for="menu-item-custom-text-<?php echo esc_attr( $id ); ?>">
 				<?php esc_html_e( 'Custom Text', 'wp-menu-custom-fields' ); ?><br>
-				<textarea id="menu-item-custom-text-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-custom-text-<?php echo esc_attr( $id ); ?>" name="menu-item-custom-text[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['custom-text'] ) ? esc_html( $data['custom-text'] ) : '' ); ?></textarea>
+				<textarea id="menu-item-custom-text-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-custom-text-<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $this->meta_key ); ?>-custom-text[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['custom-text'] ) ? esc_html( $data['custom-text'] ) : '' ); ?></textarea>
 			</label>
 		</p>
-		<p class="description description-wide">
-			<label for="menu-item-media-id-<?php echo esc_attr( $id ); ?>">
 
-				<button type="button" class="custom-field-select-image" id="custom-field-select-image-<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Image', 'wp-menu-custom-fields' ); ?></button>
-
-				<input type="hidden" value="<?php echo ( ! empty( $data['media-id'] ) ? esc_attr( $data['media-id'] ) : '' ); ?>" id="menu-item-media-id-<?php echo esc_attr( $id ); ?>" name="menu-item-media-id[<?php echo esc_attr( $id ); ?>]">
-
-				<input type="hidden" value="<?php echo ( ! empty( $data['media-type'] ) ? esc_attr( $data['media-type'] ) : '' ); ?>" id="menu-item-media-type-<?php echo esc_attr( $id ); ?>" name="menu-item-media-type[<?php echo esc_attr( $id ); ?>]">
-
+		<p class="description description-wide feature-list-label-p">
+			<label for="menu-item-select-feature-list-<?php echo esc_attr( $id ); ?>">
+			<?php esc_html_e( 'Select Feature', 'wp-menu-custom-fields' ); ?>
 			</label>
 		</p>
-		<p id="menu-item-selected-media-display-paragraph-<?php echo esc_attr( $id ); ?>" class="description description-wide" style="<?php echo esc_attr( $media_style ); ?>">
-			<?php
-			if ( ! empty( $data['media-url'] ) && ! empty( $data['media-type'] ) ) {
-				if ( 'image' === $data['media-type'] ) {
-					echo '<img src="' . esc_url( $data['media-url'] ) . '" height="100">';
+		<div class="menu-item-select-feature-list-wrapper description description-wide" id="menu-item-select-feature-list-wrapper-<?php echo esc_attr( $id ); ?>">
+			<ul id="menu-item-select-feature-list-<?php echo esc_attr( $id ); ?>" class="menu-item-select-feature-list">
+				<?php
+				foreach ( $features as $feature => $label ) {
+					?>
+					<li class="menu-item-select-feature-div-list-item">
+						<label for="menu-item-selected-feature-radio-<?php echo esc_attr( $feature ); ?>-<?php echo esc_attr( $id ); ?>">
+							<input <?php checked( $feature, $selected_feature ); ?> type="radio" id="menu-item-selected-feature-radio-<?php echo esc_attr( $feature ); ?>-<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $this->meta_key ); ?>-selected-feature[<?php echo esc_attr( $id ); ?>]" value="<?php echo esc_attr( $feature ); ?>">
+							<?php echo esc_html( $label ); ?>
+						</label>
+					</li>
+					<?php
 				}
-			}
-			?>
-		</p>
-		<p class="description description-wide">
-			<label for="menu-item-media-link-<?php echo esc_attr( $id ); ?>">
-				<?php esc_html_e( 'Image Link', 'wp-menu-custom-fields' ); ?><br>
-				<input type="text" id="menu-item-media-link-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-media-link" name="menu-item-media-link[<?php echo esc_attr( $id ); ?>]" value="<?php echo ( ! empty( $data['media-link'] ) ? esc_url( $data['media-link'] ) : '' ); ?>">
-			</label>
-		</p>
-		<p class="description description-wide">
-			<label for="menu-item-media-caption-<?php echo esc_attr( $id ); ?>">
-				<?php esc_html_e( 'Image Caption', 'wp-menu-custom-fields' ); ?><br>
-				<textarea id="menu-item-media-caption-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-media-caption" name="menu-item-media-caption[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['media-caption'] ) ? esc_html( $data['media-caption'] ) : '' ); ?></textarea>
-			</label>
-		</p>
-		<p class="description description-wide">
-			<label for="menu-item-shortcode-<?php echo esc_attr( $id ); ?>">
-				<?php esc_html_e( 'Shortcode', 'wp-menu-custom-fields' ); ?><br>
-				<input type="text" id="menu-item-shortcode-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-shortcode" name="menu-item-shortcode[<?php echo esc_attr( $id ); ?>]" value="<?php echo ( ! empty( $data['shortcode'] ) ? esc_attr( $data['shortcode'] ) : '' ); ?>">
-			</label>
-		</p>
-		<p class="description description-wide">
-			<label for="menu-item-shortcode-caption-<?php echo esc_attr( $id ); ?>">
-				<?php esc_html_e( 'Shortcode Caption', 'wp-menu-custom-fields' ); ?><br>
-				<textarea id="menu-item-shortcode-caption-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-shortcode-caption" name="menu-item-shortcode-caption[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['shortcode-caption'] ) ? esc_html( $data['shortcode-caption'] ) : '' ); ?></textarea>
-			</label>
-		</p>
-		<p class="description description-wide">
-			<label for="menu-item-custom-html-<?php echo esc_attr( $id ); ?>">
-				<?php esc_html_e( 'Custom HTML', 'wp-menu-custom-fields' ); ?><br>
-				<textarea id="menu-item-custom-html-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-custom-html" name="menu-item-custom-html[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['custom-html'] ) ? wp_kses_post( $data['custom-html'] ) : '' ); ?></textarea>
-			</label>
-		</p>
+				?>
+			</ul>
+		</div>
 		<?php
+
+		foreach ( $features as $feature => $label ) {
+			$is_hidden = true;
+			if ( $selected_feature === $feature ) {
+				$is_hidden = false;
+			}
+
+			$this->get_html( $feature, $id, $data, $is_hidden );
+		}
+	}
+
+	/**
+	 * Print HTML of a feature.
+	 *
+	 * @param string  $feature Selected feature.
+	 * @param int     $id Menu item ID.
+	 * @param array   $data Menu item meta data.
+	 * @param boolean $is_hidden Whether to add menu-item-hidden class or not.
+	 *
+	 * @return void
+	 */
+	private function get_html( $feature, $id, $data, $is_hidden = false ) {
+		if ( isset( $data[ $feature ] ) ) {
+			$data = $data[ $feature ];
+		}
+
+		if ( 'image' === $feature ) {
+			?>
+			<p class="description description-wide menu-item-media-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
+				<label for="menu-item-media-id-<?php echo esc_attr( $id ); ?>">
+
+					<button type="button" class="custom-field-select-image" id="custom-field-select-image-<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Image', 'wp-menu-custom-fields' ); ?></button>
+
+					<input type="hidden" value="<?php echo ( isset( $data['media-id'] ) ? esc_attr( $data['media-id'] ) : '' ); ?>" id="menu-item-media-id-<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $this->meta_key ); ?>-media-id[<?php echo esc_attr( $id ); ?>]">
+
+					<input type="hidden" value="<?php echo ( isset( $data['media-type'] ) ? esc_attr( $data['media-type'] ) : '' ); ?>" id="menu-item-media-type-<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $this->meta_key ); ?>-media-type[<?php echo esc_attr( $id ); ?>]">
+
+				</label>
+			</p>
+			<p id="menu-item-selected-media-display-paragraph-<?php echo esc_attr( $id ); ?>" class="description description-wide menu-item-media-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
+				<?php
+				if ( isset( $data['media-url'] ) && isset( $data['media-type'] ) ) {
+					if ( 'image' === $data['media-type'] ) {
+						echo '<img src="' . esc_url( $data['media-url'] ) . '" height="100">';
+					}
+				}
+				?>
+			</p>
+			<p class="description description-wide menu-item-media-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
+				<label for="menu-item-media-link-<?php echo esc_attr( $id ); ?>">
+					<?php esc_html_e( 'Image Link', 'wp-menu-custom-fields' ); ?><br>
+					<input type="text" id="menu-item-media-link-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php echo esc_attr( $this->meta_key ); ?>-media-link[<?php echo esc_attr( $id ); ?>]" value="<?php echo ( isset( $data['media-link'] ) ? esc_url( $data['media-link'] ) : '' ); ?>">
+				</label>
+			</p>
+			<p class="description description-wide menu-item-media-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
+				<label for="menu-item-media-caption-<?php echo esc_attr( $id ); ?>">
+					<?php esc_html_e( 'Image Caption', 'wp-menu-custom-fields' ); ?><br>
+					<textarea id="menu-item-media-caption-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php echo esc_attr( $this->meta_key ); ?>-media-caption[<?php echo esc_attr( $id ); ?>]"><?php echo ( isset( $data['media-caption'] ) ? esc_html( $data['media-caption'] ) : '' ); ?></textarea>
+				</label>
+			</p>
+			<?php
+		} elseif ( 'shortcode' === $feature ) {
+			?>
+			<p class="description description-wide menu-item-shortcode-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
+				<label for="menu-item-shortcode-<?php echo esc_attr( $id ); ?>">
+					<?php esc_html_e( 'Shortcode', 'wp-menu-custom-fields' ); ?><br>
+					<input type="text" id="menu-item-shortcode-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php echo esc_attr( $this->meta_key ); ?>-shortcode[<?php echo esc_attr( $id ); ?>]" value="<?php echo ( isset( $data['shortcode'] ) ? esc_attr( $data['shortcode'] ) : '' ); ?>">
+				</label>
+			</p>
+			<p class="description description-wide menu-item-shortcode-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
+				<label for="menu-item-shortcode-caption-<?php echo esc_attr( $id ); ?>">
+					<?php esc_html_e( 'Shortcode Caption', 'wp-menu-custom-fields' ); ?><br>
+					<textarea id="menu-item-shortcode-caption-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php echo esc_attr( $this->meta_key ); ?>-shortcode-caption[<?php echo esc_attr( $id ); ?>]"><?php echo ( isset( $data['shortcode-caption'] ) ? esc_html( $data['shortcode-caption'] ) : '' ); ?></textarea>
+				</label>
+			</p>
+			<?php
+		} elseif ( 'html' === $feature ) {
+			?>
+			<p class="description description-wide menu-item-html-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
+				<label for="menu-item-custom-html-<?php echo esc_attr( $id ); ?>">
+					<?php esc_html_e( 'Custom HTML', 'wp-menu-custom-fields' ); ?><br>
+					<textarea id="menu-item-custom-html-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php echo esc_attr( $this->meta_key ); ?>-custom-html[<?php echo esc_attr( $id ); ?>]"><?php echo ( isset( $data['custom-html'] ) ? wp_kses_post( $data['custom-html'] ) : '' ); ?></textarea>
+				</label>
+			</p>
+			<?php
+		}
 	}
 
 	/**
@@ -187,43 +252,55 @@ class Custom_Nav_Menu_Fields {
 	 *
 	 * @param int $menu_id Menu ID.
 	 * @param int $item_id Item ID.
+	 *
 	 * @return void
 	 */
 	public function wp_update_nav_menu_item( $menu_id, $item_id ) {
-		$nonce = filter_input( INPUT_POST, 'menu-item-custom-fields-' . $item_id, FILTER_SANITIZE_STRING );
-		if ( empty( $nonce ) || ! wp_verify_nonce( $nonce, 'menu-item-custom-fields-' . $item_id ) ) {
+		$nonce = filter_input( INPUT_POST, $this->meta_key . '-' . $item_id, FILTER_SANITIZE_STRING );
+		if ( empty( $nonce ) || ! wp_verify_nonce( $nonce, $this->meta_key . '-' . $item_id ) ) {
 			return;
 		}
 
+		$keys = array(
+			'custom-text',
+			'selected-feature',
+		);
+
 		$data = array();
-
-		$meta_keys = $this->get_meta_keys();
-
-		foreach ( $meta_keys as $meta_key ) {
-
-			if ( isset( $_POST[ 'menu-item-' . $meta_key ][ $item_id ] ) ) {
-
-				if ( 'custom-html' === $meta_key ) {
-					$meta_value = wp_kses_post( wp_unslash( $_POST[ 'menu-item-' . $meta_key ][ $item_id ] ) );
-				} else {
-					$meta_value = sanitize_text_field( wp_unslash( $_POST[ 'menu-item-' . $meta_key ][ $item_id ] ) );
-				}
-				update_post_meta( $item_id, 'menu-item-' . $meta_key, $meta_value );
-
-				$data[ $meta_key ] = $meta_value;
-
-				if ( 'media-id' === $meta_key ) {
-					$media_url = wp_get_attachment_url( $meta_value );
-
-					if ( ! empty( $media_url ) ) {
-						$data['media-url'] = $media_url;
-					}
-				}
-			} else {
-				delete_post_meta( $item_id, 'menu-item-' . $meta_key );
+		foreach ( $keys as $key ) {
+			if ( isset( $_POST[ $this->meta_key . '-' . $key ][ $item_id ] ) ) {
+				$data[ $key ] = sanitize_text_field( wp_unslash( $_POST[ $this->meta_key . '-' . $key ][ $item_id ] ) );
 			}
 		}
 
+		if ( ! empty( $data['selected-feature'] ) && ! empty( $this->feature_keys[ $data['selected-feature'] ] ) ) {
+			$selected_feature = $data['selected-feature'];
+
+			foreach ( $this->feature_keys[ $selected_feature ] as $feature_field ) {
+				$key = $this->meta_key . '-' . $feature_field;
+
+				if ( isset( $_POST[ $key ][ $item_id ] ) ) {
+					if ( ! isset( $data[ $selected_feature ] ) ) {
+						$data[ $selected_feature ] = array();
+					}
+
+					if ( 'custom-html' === $feature_field ) {
+						$data[ $selected_feature ][ $feature_field ] = wp_kses_post( wp_unslash( $_POST[ $key ][ $item_id ] ) );
+					} else {
+						$data[ $selected_feature ][ $feature_field ] = sanitize_text_field( wp_unslash( $_POST[ $key ][ $item_id ] ) );
+					}
+				}
+			}
+		}
+
+		if ( ! empty( $data['image']['media-id'] ) ) {
+			$media_url = wp_get_attachment_url( $data['image']['media-id'] );
+			if ( ! empty( $media_url ) ) {
+				$data['image']['media-url'] = $media_url;
+			}
+		}
+
+		update_post_meta( $item_id, $this->meta_key, $data );
 		$this->cache_nav_menu_meta_data( $item_id, $data );
 	}
 
@@ -232,6 +309,7 @@ class Custom_Nav_Menu_Fields {
 	 *
 	 * @param array $sorted_items Menu items after being sorted.
 	 * @param array $args Menu arguments.
+	 *
 	 * @return array Sorted menu items.
 	 */
 	public function wp_nav_menu_objects( $sorted_items, $args ) {
@@ -258,6 +336,7 @@ class Custom_Nav_Menu_Fields {
 	 * @param object $item Menu item object.
 	 * @param int    $depth Menu item's children depth.
 	 * @param array  $args Menu item's arguments.
+	 *
 	 * @return string HTML of nav menu item.
 	 */
 	public function walker_nav_menu_start_el( $html, $item, $depth, $args ) {
@@ -266,59 +345,41 @@ class Custom_Nav_Menu_Fields {
 			return $html;
 		}
 
-		if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['media-url'] ) && ! empty( $nav_menu_custom_fields[ $item->ID ]['media-type'] ) ) {
-			if ( 'video' === $nav_menu_custom_fields[ $item->ID ]['media-type'] ) {
-				$html .= '<div class="nav-media type-video">';
-
-				if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['media-link'] ) ) {
-					$html .= '<a href="' . esc_url( $nav_menu_custom_fields[ $item->ID ]['media-link'] ) . '">';
-				}
-				$html .= '<video src="' . esc_url( $nav_menu_custom_fields[ $item->ID ]['media-url'] ) . '" style="height: 50px;"></video>';
-				if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['media-link'] ) ) {
-					$html .= '</a>';
-				}
-
-				if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['media-caption'] ) ) {
-					$html .= '<span>' . esc_html( $nav_menu_custom_fields[ $item->ID ]['media-caption'] ) . '</span>';
-				}
-
-				$html .= '</div>';
-
-			} elseif ( 'image' === $nav_menu_custom_fields[ $item->ID ]['media-type'] ) {
-				$html .= '<div class="nav-media type-image">';
-
-				if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['media-link'] ) ) {
-					$html .= '<a href="' . esc_url( $nav_menu_custom_fields[ $item->ID ]['media-link'] ) . '">';
-				}
-				$html .= '<img src="' . esc_url( $nav_menu_custom_fields[ $item->ID ]['media-url'] ) . '" style="height: 50px;">';
-				if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['media-link'] ) ) {
-					$html .= '</a>';
-				}
-
-				if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['media-caption'] ) ) {
-					$html .= '<span>' . esc_html( $nav_menu_custom_fields[ $item->ID ]['media-caption'] ) . '</span>';
-				}
-
-				$html .= '</div>';
-			}
-		}
-
-		if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['shortcode'] ) ) {
-			$html .= '<div class="nav-shortcode">' . do_shortcode( $nav_menu_custom_fields[ $item->ID ]['shortcode'] );
-
-			if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['shortcode-caption'] ) ) {
-				$html .= '<span>' . esc_html( $nav_menu_custom_fields[ $item->ID ]['shortcode-caption'] ) . '</span>';
-			}
-
-			$html .= '</div>';
-		}
-
-		if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['custom-html'] ) ) {
-			$html .= '<div class="nav-custom-html">' . wp_kses_post( $nav_menu_custom_fields[ $item->ID ]['custom-html'] ) . '</div>';
-		}
-
 		if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['custom-text'] ) ) {
-			$html .= '<span>' . esc_html( $nav_menu_custom_fields[ $item->ID ]['custom-text'] ) . '</span>';
+			$html .= '<span class="' . $this->meta_key . '-custom-text">' . esc_html( $nav_menu_custom_fields[ $item->ID ]['custom-text'] ) . '</span>';
+		}
+
+		if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['selected-feature'] ) ) {
+			$selected_feature = $nav_menu_custom_fields[ $item->ID ]['selected-feature'];
+			$data             = $nav_menu_custom_fields[ $item->ID ][ $selected_feature ];
+
+			if ( 'image' === $selected_feature && ! empty( $data['media-url'] ) ) {
+				$html .= '<div class="' . $this->meta_key . '-image-div">';
+
+				if ( ! empty( $data['media-link'] ) ) {
+					$html .= '<a href="' . esc_url( $data['media-link'] ) . '">';
+				}
+				$html .= '<img class="' . $this->meta_key . '-image" src="' . esc_url( $data['media-url'] ) . '" style="height: 50px;">';
+				if ( ! empty( $data['media-link'] ) ) {
+					$html .= '</a>';
+				}
+
+				if ( ! empty( $data['media-caption'] ) ) {
+					$html .= '<span class="' . $this->meta_key . '-image-caption">' . esc_html( $data['media-caption'] ) . '</span>';
+				}
+
+				$html .= '</div>';
+			} elseif ( 'shortcode' === $selected_feature && isset( $data['shortcode'] ) ) {
+				$html .= '<div class="' . $this->meta_key . '-shortcode">' . do_shortcode( $data['shortcode'] );
+
+				if ( ! empty( $data['shortcode-caption'] ) ) {
+					$html .= '<span class="' . $this->meta_key . '-shortcode-caption">' . esc_html( $data['shortcode-caption'] ) . '</span>';
+				}
+
+				$html .= '</div>';
+			} elseif ( 'html' === $selected_feature && isset( $data['custom-html'] ) ) {
+				$html .= '<div class="' . $this->meta_key . '-custom-html">' . wp_kses_post( $data['custom-html'] ) . '</div>';
+			}
 		}
 
 		return $html;
@@ -328,11 +389,11 @@ class Custom_Nav_Menu_Fields {
 	 * Function to get transient data.
 	 *
 	 * @param int $item_id Menu item ID.
+	 *
 	 * @return array|boolean Transient data or false.
 	 */
 	private function get_nav_menu_cached_meta_data( $item_id ) {
-		$key  = 'menu-item-' . $item_id . '-custom-data';
-		$data = get_transient( $key );
+		$data = get_transient( $this->meta_key . '-' . $item_id );
 		if ( false !== $data ) {
 			return $data;
 		}
@@ -345,11 +406,11 @@ class Custom_Nav_Menu_Fields {
 	 *
 	 * @param int   $item_id Menu item ID.
 	 * @param array $data Data to be stored in transient.
+	 *
 	 * @return void
 	 */
 	private function cache_nav_menu_meta_data( $item_id, $data ) {
-		$key = 'menu-item-' . $item_id . '-custom-data';
-		set_transient( $key, $data, DAY_IN_SECONDS );
+		set_transient( $this->meta_key . '-' . $item_id, $data, DAY_IN_SECONDS );
 	}
 
 }
