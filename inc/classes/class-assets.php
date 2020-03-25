@@ -33,8 +33,8 @@ class Assets {
 		/**
 		 * Action
 		 */
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
-		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
 	}
 
@@ -54,6 +54,8 @@ class Assets {
 	 */
 	public function admin_enqueue_scripts( $hook_suffix ) {
 		if ( 'nav-menus.php' === $hook_suffix ) {
+			wp_enqueue_style( 'wp-menu-custom-fields-style', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/css/main.css', array(), time() );
+
 			wp_enqueue_script( 'jquery' );
 			wp_enqueue_script( 'wp-tinymce' );
 			wp_enqueue_media();
