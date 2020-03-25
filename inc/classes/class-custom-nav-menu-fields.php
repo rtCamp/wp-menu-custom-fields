@@ -79,6 +79,7 @@ class Custom_Nav_Menu_Fields {
 	 *
 	 * @param int     $menu_item_id Menu item ID.
 	 * @param boolean $from_cache Whether to fetch from cache.
+	 *
 	 * @return array Meta data.
 	 */
 	private function get_nav_menu_meta_data( $menu_item_id, $from_cache = true ) {
@@ -109,6 +110,7 @@ class Custom_Nav_Menu_Fields {
 	 * @param object $item Current menu object.
 	 * @param int    $depth Current menu children depth.
 	 * @param array  $args Current menu Arguments.
+	 *
 	 * @return void
 	 */
 	public function wp_nav_menu_item_custom_fields( $id, $item, $depth, $args ) {
@@ -175,6 +177,7 @@ class Custom_Nav_Menu_Fields {
 	 * @param int     $id Menu item ID.
 	 * @param array   $data Menu item meta data.
 	 * @param boolean $is_hidden Whether to add menu-item-hidden class or not.
+	 *
 	 * @return void
 	 */
 	private function get_html( $feature, $id, $data, $is_hidden = false ) {
@@ -249,6 +252,7 @@ class Custom_Nav_Menu_Fields {
 	 *
 	 * @param int $menu_id Menu ID.
 	 * @param int $item_id Item ID.
+	 *
 	 * @return void
 	 */
 	public function wp_update_nav_menu_item( $menu_id, $item_id ) {
@@ -305,6 +309,7 @@ class Custom_Nav_Menu_Fields {
 	 *
 	 * @param array $sorted_items Menu items after being sorted.
 	 * @param array $args Menu arguments.
+	 *
 	 * @return array Sorted menu items.
 	 */
 	public function wp_nav_menu_objects( $sorted_items, $args ) {
@@ -331,6 +336,7 @@ class Custom_Nav_Menu_Fields {
 	 * @param object $item Menu item object.
 	 * @param int    $depth Menu item's children depth.
 	 * @param array  $args Menu item's arguments.
+	 *
 	 * @return string HTML of nav menu item.
 	 */
 	public function walker_nav_menu_start_el( $html, $item, $depth, $args ) {
@@ -383,6 +389,7 @@ class Custom_Nav_Menu_Fields {
 	 * Function to get transient data.
 	 *
 	 * @param int $item_id Menu item ID.
+	 *
 	 * @return array|boolean Transient data or false.
 	 */
 	private function get_nav_menu_cached_meta_data( $item_id ) {
@@ -399,6 +406,7 @@ class Custom_Nav_Menu_Fields {
 	 *
 	 * @param int   $item_id Menu item ID.
 	 * @param array $data Data to be stored in transient.
+	 *
 	 * @return void
 	 */
 	private function cache_nav_menu_meta_data( $item_id, $data ) {
