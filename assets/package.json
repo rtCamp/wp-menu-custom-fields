@@ -10,7 +10,7 @@
 		"dev": "cross-env NODE_ENV=development webpack --watch --mode development --progress",
 		"clean": "rm -rf build/*",
 		"lint-css": "npx stylelint src/sass/**/*.scss --syntax scss",
-		"lint-js": "npx eslint src/js/admin.js",
+		"lint-js": "npx eslint src/js/",
 		"test": "jest  --verbose"
 	},
 	"dependencies": {
