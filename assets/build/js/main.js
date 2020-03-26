@@ -110,7 +110,9 @@ $(document).ready(function () {
   wrappers.find('.rt-wp-menu-custom-fields-shortcode').closest('.sub-menu').css('min-width', '600px');
   var li = wrappers.closest('li.menu-item');
   li.css({
-    display: 'flex',
+    display: 'grid',
+    gridTemplateColumns: '23% 75%',
+    columnGap: '2%',
     paddingBottom: '0.5em'
   });
   var a = li.find('> a').css('width', 'auto');

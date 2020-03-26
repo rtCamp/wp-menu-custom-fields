@@ -244,6 +244,9 @@ class Custom_Nav_Menu_Fields {
 				'textarea_name' => esc_attr( $this->meta_key ) . '-custom-html[' . esc_attr( $id ) . ']',
 				'media_buttons' => false,
 				'editor_height' => '240',
+				'tinymce'       => array(
+					'toolbar1' => 'bold,italic,bullist,numlist,link',
+				),
 			);
 			?>
 			<div class="description description-wide menu-item-html-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">

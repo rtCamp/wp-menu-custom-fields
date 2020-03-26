@@ -14,7 +14,7 @@ $( document ).ready( () => {
 	wrappers.find( '.rt-wp-menu-custom-fields-shortcode' ).closest( '.sub-menu' ).css( 'min-width', '600px' );
 
 	let li = wrappers.closest( 'li.menu-item' );
-	li.css( { display: 'flex', paddingBottom: '0.5em' } );
+	li.css( { display: 'grid', gridTemplateColumns: '23% 75%', columnGap: '2%', paddingBottom: '0.5em' } );
 	let a = li.find( '> a' ).css( 'width', 'auto' );
 	wrappers.css( { paddingTop: a.css( 'padding-top' ), paddingRight: a.css( 'padding-left' ) } );
 } );
