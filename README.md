@@ -46,7 +46,8 @@ Below is the list of custom fields this plugin adds.
 ### Screenshots ###
 Custom fields added on (Appearance -> Menus):
 
-![Custom Fields](/screenshots/screenshot-1.png?raw=true)
+![Custom Fields](/screenshots/edit-menu-custom-field.gif?raw=true)
+![FrontEnd](/screenshots/frontend.png?raw=true)
 
 ## Contribute
 
