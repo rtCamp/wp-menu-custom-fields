@@ -95,350 +95,36 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/main.scss */ "./src/scss/main.scss");
-/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_main_scss__WEBPACK_IMPORTED_MODULE_0__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
+/* harmony import */ var _sass_main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sass/main.scss */ "./src/sass/main.scss");
+/* harmony import */ var _sass_main_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_main_scss__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * Main scripts, loaded on all pages.
  *
- * @package wp-menu-custom-fields
- */
-
-/**
- * Internal dependencies
+ * @package WP-Menu-Custom-Fields
  */
 
 window.$ = window.$ || jQuery;
-/**
- * Single nav menu Item.
- *
- * @type {Object}
- */
-
-var NavMenuItem =
-/*#__PURE__*/
-function () {
-  /**
-   * Initialize.
-   *
-   * @param {Element} menuLi Menu item li with class 'menu-item
-   * @param {int|string} menuId  Menu id.
-   *
-   * @return {void}
-   */
-  function NavMenuItem(menuLi, menuId) {
-    _classCallCheck(this, NavMenuItem);
-
-    this.menuLi = menuLi;
-    this.menuId = menuId;
-    this.mediaModal = {};
-
-    if (!menuLi.length) {
-      return;
-    }
-
-    this.destroy = this.destroy.bind(this);
-    this.handleRadioImage = this.handleRadioImage.bind(this);
-    this.handleRadioShortcode = this.handleRadioShortcode.bind(this);
-    this.handleRadioHtml = this.handleRadioHtml.bind(this);
-    this.openMediaModal = this.openMediaModal.bind(this);
-    this.handleMediaModalOpen = this.handleMediaModalOpen.bind(this);
-    this.handleMediaModalClose = this.handleMediaModalClose.bind(this);
-    this.setMediaUploader = this.setMediaUploader.bind(this);
-    this.radioImage = jQuery('#menu-item-selected-feature-radio-image-' + this.menuId);
-    this.radioShortcode = jQuery('#menu-item-selected-feature-radio-shortcode-' + this.menuId);
-    this.radioHtml = jQuery('#menu-item-selected-feature-radio-html-' + this.menuId);
-    this.deleteButton = this.menuLi.find('#delete-' + this.menuId);
-    this.radioImage.on('click', this.handleRadioImage);
-    this.radioShortcode.on('click', this.handleRadioShortcode);
-    this.radioHtml.on('click', this.handleRadioHtml);
-    this.deleteButton.on('click', this.destroy);
-
-    if (this.radioImage.prop('checked')) {
-      this.setMediaUploader();
-    }
-
-    this.imageP = this.menuLi.find('.menu-item-media-p-' + this.menuId);
-    this.shortcodeP = this.menuLi.find('.menu-item-shortcode-p-' + this.menuId);
-    this.htmlP = this.menuLi.find('.menu-item-html-p-' + this.menuId);
-    this.initTinyMce();
-  }
-  /**
-   * Set media uploader button and it's event.
-   *
-   * @return {void}
-   */
-
-
-  _createClass(NavMenuItem, [{
-    key: "setMediaUploader",
-    value: function setMediaUploader() {
-      if (!this.mediaUploaderButton) {
-        this.mediaUploaderButton = jQuery('#custom-field-select-image-' + this.menuId);
-        this.mediaUploaderButton.on('click', this.openMediaModal);
-      }
-    }
-    /**
-     * Handle image radio button click event.
-     *
-     * @return {void}
-     */
-
-  }, {
-    key: "handleRadioImage",
-    value: function handleRadioImage() {
-      this.setMediaUploader();
-      this.imageP.removeClass('menu-item-hidden');
-      this.shortcodeP.addClass('menu-item-hidden');
-      this.htmlP.addClass('menu-item-hidden');
-    }
-    /**
-     * Handle shortcode radio button click event.
-     *
-     * @return {void}
-     */
-
-  }, {
-    key: "handleRadioShortcode",
-    value: function handleRadioShortcode() {
-      this.imageP.addClass('menu-item-hidden');
-      this.shortcodeP.removeClass('menu-item-hidden');
-      this.htmlP.addClass('menu-item-hidden');
-    }
-    /**
-     * Handle html radio button click event.
-     *
-     * @return {void}
-     */
-
-  }, {
-    key: "handleRadioHtml",
-    value: function handleRadioHtml() {
-      // this.setTinyMce();
-      this.imageP.addClass('menu-item-hidden');
-      this.shortcodeP.addClass('menu-item-hidden');
-      this.htmlP.removeClass('menu-item-hidden');
-    }
-    /**
-     * Remove all event listeners, destroy tinyMCE.
-     *
-     * @return {void}
-     */
-
-  }, {
-    key: "destroy",
-    value: function destroy() {
-      if (this.mediaUploaderButton) {
-        this.mediaUploaderButton.off('click', this.openMediaModal);
-        this.mediaModal = null;
-      }
-
-      if ('undefined' !== typeof tinyMCE && tinyMCE) {
-        tinyMCE.remove('#menu-item-custom-html-' + this.menuId);
-      }
-
-      this.radioImage.off('click', this.handleRadioImage);
-      this.radioShortcode.off('click', this.handleRadioShortcode);
-      this.radioHtml.off('click', this.handleRadioHtml);
-    }
-    /**
-     * Initiate tinymce editor.
-     *
-     * @return {void}
-     */
-
-  }, {
-    key: "initTinyMce",
-    value: function initTinyMce() {
-      if ('undefined' !== typeof tinyMCE) {
-        var selector = 'menu-item-custom-html-' + this.menuId;
-        var currentEditor = tinyMCE.editors[selector];
-
-        if (currentEditor) {
-          currentEditor.on('change', function () {
-            tinyMCE.triggerSave();
-          });
-        } else {
-          console.log('initializing'); // tinyMCE.init( {
-          // 	selector: '#' + selector
-          // } );
-
-          wp.editor.initialize(selector, {
-            quicktags: true,
-            tinymce: {
-              wpautop: true
-            }
-          });
-        }
-
-        console.log(tinyMCE.editors);
-      }
-
-      if ('undefined' !== typeof tinymce) {
-        var _selector = '#menu-item-custom-html-' + this.menuId; // tinymce.init( {
-        // 	selector: selector,
-        // 	plugins: 'code',
-        // 	height: '240',
-        // 	toolbar: "code,italic,bold,underline,strikethrough,justifyleft,justifycenter,justifyright,bullist,numlist,link,hr,sub,sup,blockquote",
-        // 	menubar: false,
-        // 	setup: ( editor ) => {
-        // 		editor.on( 'change', () => {
-        // 			tinymce.triggerSave();
-        // 		} );
-        // 	}
-        // } );
-
-      }
-    }
-    /**
-     * Open media library modal.
-     *
-     * @return {void}
-     */
-
-  }, {
-    key: "openMediaModal",
-    value: function openMediaModal() {
-      var config = {
-        title: wpMenuCustomFields.selectMediaText,
-        multiple: false,
-        library: {
-          type: ['image']
-        }
-      };
-      this.mediaModal = wp.media(config);
-      this.mediaModal.on('open', this.handleMediaModalOpen);
-      this.mediaModal.on('close', this.handleMediaModalClose);
-      this.mediaModal.open();
-    }
-    /**
-     * Handle media modal open.
-     *
-     * @return {void}
-     */
-
-  }, {
-    key: "handleMediaModalOpen",
-    value: function handleMediaModalOpen() {
-      var mediaId = jQuery('#menu-item-media-id-' + this.menuId).val();
-
-      if (!mediaId) {
-        return;
-      }
-
-      var attachment = wp.media.attachment(mediaId);
-
-      if (attachment) {
-        attachment.fetch();
-        this.mediaModal.state().get('selection').add(attachment ? [attachment] : []);
-      }
-    }
-    /**
-     * Handle media modal close.
-     *
-     * @return {void}
-     */
-
-  }, {
-    key: "handleMediaModalClose",
-    value: function handleMediaModalClose() {
-      var selection = this.mediaModal.state().get('selection');
-      var mediaId = false;
-      var mediaUrl = false;
-      var mediaType = false;
-
-      if (!selection.length) {
-        jQuery('#menu-item-media-id-' + this.menuId).val('');
-        jQuery('#menu-item-media-type-' + this.menuId).val('');
-        jQuery('#menu-item-selected-media-display-paragraph-' + this.menuId).html('');
-        return;
-      }
-
-      selection.each(function (attachment) {
-        mediaId = attachment.id;
-
-        if (attachment.attributes) {
-          mediaUrl = attachment.attributes.url;
-          mediaType = attachment.attributes.type;
-        }
-      });
-
-      if (!mediaId || !mediaUrl) {
-        return;
-      }
-
-      if ('image' === mediaType) {
-        jQuery('#menu-item-media-id-' + this.menuId).val(mediaId);
-        jQuery('#menu-item-media-type-' + this.menuId).val(mediaType);
-        jQuery('#menu-item-selected-media-display-paragraph-' + this.menuId).html('<img height="100" src="' + mediaUrl + '">');
-      }
-    }
-  }]);
-
-  return NavMenuItem;
-}();
-/**
- * Nav Menus.
- *
- * @type {Object}
- */
-
-
-var NavMenu = {
-  /**
-   * Initialized nav menu ids.
-   *
-   * @type {object}
-   */
-  initializedNavMenuIds: {},
-
-  /**
-   * Initialize.
-   *
-   * @return {void}
-   */
-  init: function init() {
-    var _this = this;
-
-    this.menuContainer = jQuery('#menu-to-edit');
-    this.menuContainer.on('click', '.item-edit', function (e) {
-      var menuId = _this.getMenuId(jQuery(e.target));
-
-      if ('undefined' === typeof _this.initializedNavMenuIds[menuId]) {
-        var menuLi = jQuery("#menu-item-".concat(menuId));
-        new NavMenuItem(menuLi, menuId);
-        _this.initializedNavMenuIds[menuId] = true;
-      }
-    });
-  },
-
-  /**
-   * Get menu id.
-   *
-   * @param {Element} element Element.
-   *
-   * @return {string}
-   */
-  getMenuId: function getMenuId(element) {
-    if (!element || !element.prop('id').length) {
-      return '';
-    }
-
-    return element.prop('id').replace(/[^\d.]/g, '');
-  }
-};
-NavMenu.init();
+$(document).ready(function () {
+  var wrappers = $('.sub-menu .rt-wp-menu-custom-fields-wrapper');
+  wrappers.closest('.sub-menu').css('min-width', '400px');
+  wrappers.find('.rt-wp-menu-custom-fields-shortcode').closest('.sub-menu').css('min-width', '600px');
+  var li = wrappers.closest('li.menu-item');
+  li.css({
+    display: 'flex',
+    paddingBottom: '0.5em'
+  });
+  var a = li.find('> a').css('width', 'auto');
+  wrappers.css({
+    paddingTop: a.css('padding-top'),
+    paddingRight: a.css('padding-left')
+  });
+});
 
 /***/ }),
 
-/***/ "./src/scss/main.scss":
+/***/ "./src/sass/main.scss":
 /*!****************************!*\
-  !*** ./src/scss/main.scss ***!
+  !*** ./src/sass/main.scss ***!
   \****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -448,4 +134,3 @@ NavMenu.init();
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.js.map
