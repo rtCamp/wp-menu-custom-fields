@@ -44,9 +44,13 @@ Below is the list of custom fields this plugin adds.
 3. Activate the WP Menu Custom Fields from your Plugins page.
 
 ### Screenshots ###
+
 Custom fields added on (Appearance -> Menus):
 
 ![Custom Fields](/screenshots/edit-menu-custom-field.gif?raw=true)
+
+Menu on frontend of your website:
+
 ![FrontEnd](/screenshots/frontend.png?raw=true)
 
 ## Contribute
