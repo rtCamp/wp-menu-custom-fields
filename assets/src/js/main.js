@@ -29,7 +29,6 @@ class NavMenuItem {
 	constructor( menuLi, menuId ) {
 		this.menuLi = menuLi;
 		this.menuId = menuId;
-		this.tinyMceSet = false;
 		this.mediaModal = {};
 
 		if ( ! menuLi.length ) {
@@ -37,7 +36,6 @@ class NavMenuItem {
 		}
 
 		this.destroy = this.destroy.bind( this );
-		this.initTinyMce = this.initTinyMce.bind( this );
 		this.handleRadioImage = this.handleRadioImage.bind( this );
 		this.handleRadioShortcode = this.handleRadioShortcode.bind( this );
 		this.handleRadioHtml = this.handleRadioHtml.bind( this );
@@ -45,7 +43,6 @@ class NavMenuItem {
 		this.handleMediaModalOpen = this.handleMediaModalOpen.bind( this );
 		this.handleMediaModalClose = this.handleMediaModalClose.bind( this );
 		this.setMediaUploader = this.setMediaUploader.bind( this );
-		this.setTinyMce = this.setTinyMce.bind( this );
 
 		this.radioImage = jQuery( '#menu-item-selected-feature-radio-image-' + this.menuId );
 		this.radioShortcode = jQuery( '#menu-item-selected-feature-radio-shortcode-' + this.menuId );
@@ -59,13 +56,13 @@ class NavMenuItem {
 
 		if ( this.radioImage.prop( 'checked' ) ) {
 			this.setMediaUploader();
-		} else if ( this.radioHtml.prop( 'checked' ) ) {
-			this.setTinyMce();
 		}
 
 		this.imageP = this.menuLi.find( '.menu-item-media-p-' + this.menuId );
 		this.shortcodeP = this.menuLi.find( '.menu-item-shortcode-p-' + this.menuId );
 		this.htmlP = this.menuLi.find( '.menu-item-html-p-' + this.menuId );
+
+		this.initTinyMce();
 	}
 
 	/**
@@ -77,18 +74,6 @@ class NavMenuItem {
 		if ( ! this.mediaUploaderButton ) {
 			this.mediaUploaderButton = jQuery( '#custom-field-select-image-' + this.menuId );
 			this.mediaUploaderButton.on( 'click', this.openMediaModal );
-		}
-	}
-
-	/**
-	 * Call Initiate tinymce and set tinymce set variable.
-	 *
-	 * @return {void}
-	 */
-	setTinyMce() {
-		if ( ! this.tinyMceSet ) {
-			this.initTinyMce();
-			this.tinyMceSet = true;
 		}
 	}
 
@@ -122,7 +107,7 @@ class NavMenuItem {
 	 * @return {void}
 	 */
 	handleRadioHtml() {
-		this.setTinyMce();
+		// this.setTinyMce();
 
 		this.imageP.addClass( 'menu-item-hidden' );
 		this.shortcodeP.addClass( 'menu-item-hidden' );
@@ -140,9 +125,8 @@ class NavMenuItem {
 			this.mediaModal = null;
 		}
 
-		if ( this.tinyMceSet && 'undefined' !== typeof tinymce ) {
-			const selector = '#menu-item-custom-html-' + this.menuId;
-			tinymce.remove( selector );
+		if ( 'undefined' !== typeof tinyMCE && tinyMCE ) {
+			tinyMCE.remove( '#menu-item-custom-html-' + this.menuId );
 		}
 
 		this.radioImage.off( 'click', this.handleRadioImage );
@@ -156,17 +140,42 @@ class NavMenuItem {
 	 * @return {void}
 	 */
 	initTinyMce() {
+		if ( 'undefined' !== typeof tinyMCE ) {
+			const selector = 'menu-item-custom-html-' + this.menuId;
+			const currentEditor = tinyMCE.editors[ selector ];
+			if ( currentEditor ) {
+				currentEditor.on( 'change', () => {
+					tinyMCE.triggerSave();
+				} );
+			} else {
+				console.log('initializing');
+				// tinyMCE.init( {
+				// 	selector: '#' + selector
+				// } );
+				wp.editor.initialize( selector, {
+					quicktags: true,
+					tinymce: {
+						wpautop: true
+					},
+				} );
+			}
+			console.log(tinyMCE.editors);
+		}
 		if ( 'undefined' !== typeof tinymce ) {
 			const selector = '#menu-item-custom-html-' + this.menuId;
 
-			tinymce.init( {
-				selector: selector,
-				setup: ( editor ) => {
-					editor.on( 'change', () => {
-						tinymce.triggerSave();
-					} );
-				}
-			} );
+			// tinymce.init( {
+			// 	selector: selector,
+			// 	plugins: 'code',
+			// 	height: '240',
+			// 	toolbar: "code,italic,bold,underline,strikethrough,justifyleft,justifycenter,justifyright,bullist,numlist,link,hr,sub,sup,blockquote",
+  			// 	menubar: false,
+			// 	setup: ( editor ) => {
+			// 		editor.on( 'change', () => {
+			// 			tinymce.triggerSave();
+			// 		} );
+			// 	}
+			// } );
 		}
 	}
 

@@ -56,10 +56,14 @@ class Assets {
 		if ( 'nav-menus.php' === $hook_suffix ) {
 			wp_enqueue_style( 'wp-menu-custom-fields-style', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/css/main.css', array(), time() );
 
+			wp_enqueue_editor();
 			wp_enqueue_script( 'jquery' );
 			wp_enqueue_script( 'wp-tinymce' );
 			wp_enqueue_media();
 			wp_enqueue_script( 'wp-menu-custom-fields-script', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/js/main.js', array( 'jquery', 'wp-tinymce', 'media-editor', 'media-views' ), time(), true );
+
+			// wp_enqueue_script( 'wp-menu-custom-fields-tinymce', 'https://cloud.tinymce.com/stable/tinymce.min.js', array(), time(), true );
+			// wp_enqueue_script( 'wp-menu-custom-fields-script', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/js/main.js', array( 'jquery', 'wp-menu-custom-fields-tinymce', 'media-editor', 'media-views' ), time(), true );
 
 			wp_localize_script(
 				'wp-menu-custom-fields-script',

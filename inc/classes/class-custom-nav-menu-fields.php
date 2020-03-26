@@ -236,15 +236,28 @@ class Custom_Nav_Menu_Fields {
 			</p>
 			<?php
 		} elseif ( 'html' === $feature ) {
+			$editor_content = ( isset( $data['custom-html'] ) ? $data['custom-html'] : '' );
+			$settings = array( 
+				'textarea_name' => esc_attr( $this->meta_key ) . '-custom-html[' . esc_attr( $id ) . ']',
+				'media_buttons' => false,
+				// 'tinymce' => false,
+			);
 			?>
-			<p class="description description-wide menu-item-html-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
-				<label for="menu-item-custom-html-<?php echo esc_attr( $id ); ?>">
-					<?php esc_html_e( 'Custom HTML', 'wp-menu-custom-fields' ); ?><br>
-					<textarea id="menu-item-custom-html-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php echo esc_attr( $this->meta_key ); ?>-custom-html[<?php echo esc_attr( $id ); ?>]"><?php echo ( isset( $data['custom-html'] ) ? wp_kses_post( $data['custom-html'] ) : '' ); ?></textarea>
-				</label>
-			</p>
+			<div class="description description-wide menu-item-html-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
+			<?php
+			// $this->get_textarea( $id, $editor_content );
+			error_log('calling wp-editor');
+			wp_editor( $editor_content, 'menu-item-custom-html-' . esc_attr( $id ), $settings );
+			?></div>
+			
 			<?php
 		}
+	}
+
+	private function get_textarea( $id, $editor_content ) {
+		?>
+		<textarea id="menu-item-custom-html-<?php echo esc_attr( $id ); ?>"><?php echo wp_kses_post( $editor_content ); ?></textarea>
+		<?php
 	}
 
 	/**

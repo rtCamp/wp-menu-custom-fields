@@ -136,7 +136,6 @@ function () {
 
     this.menuLi = menuLi;
     this.menuId = menuId;
-    this.tinyMceSet = false;
     this.mediaModal = {};
 
     if (!menuLi.length) {
@@ -144,7 +143,6 @@ function () {
     }
 
     this.destroy = this.destroy.bind(this);
-    this.initTinyMce = this.initTinyMce.bind(this);
     this.handleRadioImage = this.handleRadioImage.bind(this);
     this.handleRadioShortcode = this.handleRadioShortcode.bind(this);
     this.handleRadioHtml = this.handleRadioHtml.bind(this);
@@ -152,7 +150,6 @@ function () {
     this.handleMediaModalOpen = this.handleMediaModalOpen.bind(this);
     this.handleMediaModalClose = this.handleMediaModalClose.bind(this);
     this.setMediaUploader = this.setMediaUploader.bind(this);
-    this.setTinyMce = this.setTinyMce.bind(this);
     this.radioImage = jQuery('#menu-item-selected-feature-radio-image-' + this.menuId);
     this.radioShortcode = jQuery('#menu-item-selected-feature-radio-shortcode-' + this.menuId);
     this.radioHtml = jQuery('#menu-item-selected-feature-radio-html-' + this.menuId);
@@ -164,13 +161,12 @@ function () {
 
     if (this.radioImage.prop('checked')) {
       this.setMediaUploader();
-    } else if (this.radioHtml.prop('checked')) {
-      this.setTinyMce();
     }
 
     this.imageP = this.menuLi.find('.menu-item-media-p-' + this.menuId);
     this.shortcodeP = this.menuLi.find('.menu-item-shortcode-p-' + this.menuId);
     this.htmlP = this.menuLi.find('.menu-item-html-p-' + this.menuId);
+    this.initTinyMce();
   }
   /**
    * Set media uploader button and it's event.
@@ -185,20 +181,6 @@ function () {
       if (!this.mediaUploaderButton) {
         this.mediaUploaderButton = jQuery('#custom-field-select-image-' + this.menuId);
         this.mediaUploaderButton.on('click', this.openMediaModal);
-      }
-    }
-    /**
-     * Call Initiate tinymce and set tinymce set variable.
-     *
-     * @return {void}
-     */
-
-  }, {
-    key: "setTinyMce",
-    value: function setTinyMce() {
-      if (!this.tinyMceSet) {
-        this.initTinyMce();
-        this.tinyMceSet = true;
       }
     }
     /**
@@ -237,7 +219,7 @@ function () {
   }, {
     key: "handleRadioHtml",
     value: function handleRadioHtml() {
-      this.setTinyMce();
+      // this.setTinyMce();
       this.imageP.addClass('menu-item-hidden');
       this.shortcodeP.addClass('menu-item-hidden');
       this.htmlP.removeClass('menu-item-hidden');
@@ -256,9 +238,8 @@ function () {
         this.mediaModal = null;
       }
 
-      if (this.tinyMceSet && 'undefined' !== typeof tinymce) {
-        var selector = '#menu-item-custom-html-' + this.menuId;
-        tinymce.remove(selector);
+      if ('undefined' !== typeof tinyMCE && tinyMCE) {
+        tinyMCE.remove('#menu-item-custom-html-' + this.menuId);
       }
 
       this.radioImage.off('click', this.handleRadioImage);
@@ -274,16 +255,44 @@ function () {
   }, {
     key: "initTinyMce",
     value: function initTinyMce() {
+      if ('undefined' !== typeof tinyMCE) {
+        var selector = 'menu-item-custom-html-' + this.menuId;
+        var currentEditor = tinyMCE.editors[selector];
+
+        if (currentEditor) {
+          currentEditor.on('change', function () {
+            tinyMCE.triggerSave();
+          });
+        } else {
+          console.log('initializing'); // tinyMCE.init( {
+          // 	selector: '#' + selector
+          // } );
+
+          wp.editor.initialize(selector, {
+            quicktags: true,
+            tinymce: {
+              wpautop: true
+            }
+          });
+        }
+
+        console.log(tinyMCE.editors);
+      }
+
       if ('undefined' !== typeof tinymce) {
-        var selector = '#menu-item-custom-html-' + this.menuId;
-        tinymce.init({
-          selector: selector,
-          setup: function setup(editor) {
-            editor.on('change', function () {
-              tinymce.triggerSave();
-            });
-          }
-        });
+        var _selector = '#menu-item-custom-html-' + this.menuId; // tinymce.init( {
+        // 	selector: selector,
+        // 	plugins: 'code',
+        // 	height: '240',
+        // 	toolbar: "code,italic,bold,underline,strikethrough,justifyleft,justifycenter,justifyright,bullist,numlist,link,hr,sub,sup,blockquote",
+        // 	menubar: false,
+        // 	setup: ( editor ) => {
+        // 		editor.on( 'change', () => {
+        // 			tinymce.triggerSave();
+        // 		} );
+        // 	}
+        // } );
+
       }
     }
     /**
