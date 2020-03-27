@@ -52,7 +52,7 @@ Custom fields added on (Appearance -> Menus):
 
 Menu on frontend of your website:
 
-![FrontEnd](/screenshots/frontend.png?raw=true)
+![FrontEnd](/screenshots/screenshot-2.png?raw=true)
 
 ## Contribute
 
