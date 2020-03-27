@@ -224,7 +224,12 @@ class NavMenuItem {
 		if ( 'image' === mediaType ) {
 			$( '#menu-item-media-id-' + this.menuId ).val( mediaId );
 			$( '#menu-item-media-type-' + this.menuId ).val( mediaType );
-			$( '#menu-item-selected-media-display-paragraph-' + this.menuId ).html( '<img height="100" src="' + mediaUrl + '">' );
+
+			const img = $( '<img>', {
+				height: '100',
+				src: mediaUrl
+			} );
+			$( '#menu-item-selected-media-display-paragraph-' + this.menuId ).html( img );
 		}
 	}
 }

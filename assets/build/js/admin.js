@@ -217,7 +217,6 @@ var NavMenuItem = /*#__PURE__*/function () {
   }, {
     key: "handleRadioHtml",
     value: function handleRadioHtml() {
-      // this.setTinyMce();
       this.imageP.addClass('menu-item-hidden');
       this.shortcodeP.addClass('menu-item-hidden');
       this.htmlP.removeClass('menu-item-hidden');
@@ -347,7 +346,11 @@ var NavMenuItem = /*#__PURE__*/function () {
       if ('image' === mediaType) {
         $('#menu-item-media-id-' + this.menuId).val(mediaId);
         $('#menu-item-media-type-' + this.menuId).val(mediaType);
-        $('#menu-item-selected-media-display-paragraph-' + this.menuId).html('<img height="100" src="' + mediaUrl + '">');
+        var img = $('<img>', {
+          height: '100',
+          src: mediaUrl
+        });
+        $('#menu-item-selected-media-display-paragraph-' + this.menuId).html(img);
       }
     }
   }]);
