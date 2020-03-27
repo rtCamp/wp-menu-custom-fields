@@ -108,8 +108,6 @@ class NavMenuItem {
 	 */
 	handleRadioHtml() {
 
-		// this.setTinyMce();
-
 		this.imageP.addClass( 'menu-item-hidden' );
 		this.shortcodeP.addClass( 'menu-item-hidden' );
 		this.htmlP.removeClass( 'menu-item-hidden' );

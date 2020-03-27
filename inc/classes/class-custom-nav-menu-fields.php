@@ -362,56 +362,56 @@ class Custom_Nav_Menu_Fields {
 
 			if ( 'image' === $selected_feature && ! empty( $data['media-url'] ) ) {
 				if ( ! $div_set ) {
-					$html   .= '<div class="' . $this->meta_key . '-wrapper">';
+					$html   .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
 					$div_set = true;
 				}
 
-				$html .= '<div class="' . $this->meta_key . '-image-wrapper">';
+				$html .= '<div class="' . esc_attr( $this->meta_key ) . '-image-wrapper">';
 
 				if ( ! empty( $data['media-link'] ) ) {
 					$html .= '<a href="' . esc_url( $data['media-link'] ) . '">';
 				}
-				$html .= '<img class="' . $this->meta_key . '-image" src="' . esc_url( $data['media-url'] ) . '">';
+				$html .= '<img class="' . esc_attr( $this->meta_key ) . '-image" src="' . esc_url( $data['media-url'] ) . '">';
 				if ( ! empty( $data['media-link'] ) ) {
 					$html .= '</a>';
 				}
 
 				if ( ! empty( $data['media-caption'] ) ) {
-					$html .= '<span class="' . $this->meta_key . '-image-caption">' . esc_html( $data['media-caption'] ) . '</span>';
+					$html .= '<span class="' . esc_attr( $this->meta_key ) . '-image-caption">' . esc_html( $data['media-caption'] ) . '</span>';
 				}
 
 				$html .= '</div>';
 			} elseif ( 'shortcode' === $selected_feature && isset( $data['shortcode'] ) ) {
 				if ( ! $div_set ) {
-					$html   .= '<div class="' . $this->meta_key . '-wrapper">';
+					$html   .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
 					$div_set = true;
 				}
 
-				$html .= '<div class="' . $this->meta_key . '-shortcode-wrapper">';
-				$html .= '<div class="' . $this->meta_key . '-shortcode">' . do_shortcode( $data['shortcode'] ) . '</div>';
+				$html .= '<div class="' . esc_attr( $this->meta_key ) . '-shortcode-wrapper">';
+				$html .= '<div class="' . esc_attr( $this->meta_key ) . '-shortcode">' . do_shortcode( $data['shortcode'] ) . '</div>';
 
 				if ( isset( $data['shortcode-caption'] ) ) {
-					$html .= '<span class="' . $this->meta_key . '-shortcode-caption">' . esc_html( $data['shortcode-caption'] ) . '</span>';
+					$html .= '<span class="' . esc_attr( $this->meta_key ) . '-shortcode-caption">' . esc_html( $data['shortcode-caption'] ) . '</span>';
 				}
 
 				$html .= '</div>';
 			} elseif ( 'html' === $selected_feature && isset( $data['custom-html'] ) ) {
 				if ( ! $div_set ) {
-					$html   .= '<div class="' . $this->meta_key . '-wrapper">';
+					$html   .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
 					$div_set = true;
 				}
 
-				$html .= '<div class="' . $this->meta_key . '-custom-html">' . wp_kses_post( $data['custom-html'] ) . '</div>';
+				$html .= '<div class="' . esc_attr( $this->meta_key ) . '-custom-html">' . wp_kses_post( $data['custom-html'] ) . '</div>';
 			}
 		}
 
 		if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['custom-text'] ) ) {
 			if ( ! $div_set ) {
-				$html   .= '<div class="' . $this->meta_key . '-wrapper">';
+				$html   .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
 				$div_set = true;
 			}
 
-			$html .= '<span class="' . $this->meta_key . '-custom-text">' . esc_html( $nav_menu_custom_fields[ $item->ID ]['custom-text'] ) . '</span>';
+			$html .= '<span class="' . esc_attr( $this->meta_key ) . '-custom-text">' . esc_html( $nav_menu_custom_fields[ $item->ID ]['custom-text'] ) . '</span>';
 		}
 
 		if ( $div_set ) {
