@@ -41,3 +41,6 @@ assets/package-lock.json
 assets/package.json
 assets/postcss.config.js
 assets/webpack.config.js
+assets/style-guide
+assets/.editorconfig
+assets/test.setup.js

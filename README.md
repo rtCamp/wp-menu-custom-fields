@@ -5,7 +5,7 @@
 # WP Menu Custom Fields - v1.0
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
-This plugin adds custom fields on menu item's edit interface of wp-admin.
+This plugin adds custom fields on menu item's edit screen of wp-admin.
 
 **Author:** rtCamp
 
@@ -28,8 +28,9 @@ This plugin adds custom fields on menu item's edit interface of wp-admin.
 **Donate Link:** http://rtcamp.com/donate/
 
 ## Description ##
-This plugin adds custom fields on menu item's edit interface of wp-admin.
-Below is the list of custom fields this plugin adds.
+This plugin adds custom fields on menu item's edit screen of wp-admin (see [screenshots](#screenshots)).  
+It uses `wp_nav_menu_item_custom_fields` hook added in WordPress 5.4 release to add custom fields.  
+Below is the list of custom fields added by this plugin.
 - Custom text
 - Image selection with link and caption
 - Shortcode with caption
@@ -44,9 +45,14 @@ Below is the list of custom fields this plugin adds.
 3. Activate the WP Menu Custom Fields from your Plugins page.
 
 ### Screenshots ###
+
 Custom fields added on (Appearance -> Menus):
 
-![Custom Fields](/screenshots/screenshot-1.png?raw=true)
+![Custom Fields](/screenshots/edit-menu-custom-field.gif?raw=true)
+
+Menu on frontend of your website:
+
+![FrontEnd](/screenshots/screenshot-2.png?raw=true)
 
 ## Contribute
 

@@ -31,6 +31,7 @@ Below is the list of custom fields this plugin adds.
 == Screenshots ==
 
 1. Custom fields added on (Appearance -> Menus)
+2. Menu on frontend of the website.
 
 == Important Links ==
 
