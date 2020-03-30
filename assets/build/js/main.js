@@ -115,7 +115,11 @@ $(document).ready(function () {
     columnGap: '2%',
     paddingBottom: '0.5em'
   });
-  var a = li.find('> a').css('width', 'auto');
+  var a = li.find('> a').css({
+    width: 'auto',
+    wordBreak: 'break-all',
+    paddingRight: '0.5em'
+  });
   wrappers.css({
     paddingTop: a.css('padding-top'),
     paddingRight: a.css('padding-left')
