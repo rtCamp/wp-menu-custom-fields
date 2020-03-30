@@ -151,7 +151,8 @@ class NavMenuItem {
 		if ( ! currentEditor ) {
 			wp.editor.initialize( selector, {
 				tinymce: {
-					wpautop: true
+					wpautop: true,
+					height: '170px'
 				},
 				quicktags: true,
 				mediaButtons: false
