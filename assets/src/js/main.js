@@ -15,6 +15,6 @@ $( document ).ready( () => {
 
 	let li = wrappers.closest( 'li.menu-item' );
 	li.css( { display: 'grid', gridTemplateColumns: '23% 75%', columnGap: '2%', paddingBottom: '0.5em' } );
-	let a = li.find( '> a' ).css( 'width', 'auto' );
+	let a = li.find( '> a' ).css( { width: 'auto', wordBreak: 'break-all', paddingRight: '0.5em' } );
 	wrappers.css( { paddingTop: a.css( 'padding-top' ), paddingRight: a.css( 'padding-left' ) } );
 } );
