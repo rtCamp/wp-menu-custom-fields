@@ -159,12 +159,13 @@ var NavMenuItem = /*#__PURE__*/function () {
 
     if (this.radioImage.prop('checked')) {
       this.setMediaUploader();
+    } else if (this.radioHtml.prop('checked')) {
+      this.initTinyMce();
     }
 
     this.imageP = this.menuLi.find('.menu-item-media-p-' + this.menuId);
     this.shortcodeP = this.menuLi.find('.menu-item-shortcode-p-' + this.menuId);
     this.htmlP = this.menuLi.find('.menu-item-html-p-' + this.menuId);
-    this.initTinyMce();
   }
   /**
    * Set media uploader button and it's event.
@@ -217,6 +218,10 @@ var NavMenuItem = /*#__PURE__*/function () {
   }, {
     key: "handleRadioHtml",
     value: function handleRadioHtml() {
+      if ('undefined' !== typeof window.tinymce && !window.tinymce.get('menu-item-custom-html-' + this.menuId)) {
+        this.initTinyMce();
+      }
+
       this.imageP.addClass('menu-item-hidden');
       this.shortcodeP.addClass('menu-item-hidden');
       this.htmlP.removeClass('menu-item-hidden');
@@ -235,8 +240,8 @@ var NavMenuItem = /*#__PURE__*/function () {
         this.mediaModal = null;
       }
 
-      if ('undefined' !== typeof tinyMCE && tinyMCE) {
-        tinyMCE.remove('#menu-item-custom-html-' + this.menuId);
+      if ('undefined' !== typeof wp.editor) {
+        wp.editor.remove('menu-item-custom-html-' + this.menuId);
       }
 
       this.radioImage.off('click', this.handleRadioImage);
@@ -252,19 +257,28 @@ var NavMenuItem = /*#__PURE__*/function () {
   }, {
     key: "initTinyMce",
     value: function initTinyMce() {
-      if ('undefined' !== typeof tinyMCE) {
-        var selector = 'menu-item-custom-html-' + this.menuId;
-        var currentEditor = tinyMCE.editors[selector];
-
-        if (!currentEditor) {
-          wp.editor.initialize(selector);
-          currentEditor = tinyMCE.editors[selector];
-        }
-
-        currentEditor.on('change', function () {
-          tinyMCE.triggerSave();
-        });
+      if ('undefined' === typeof window.tinymce) {
+        return;
       }
+
+      var selector = 'menu-item-custom-html-' + this.menuId;
+      var currentEditor = window.tinymce.get(selector);
+
+      if (!currentEditor) {
+        wp.editor.initialize(selector, {
+          tinymce: {
+            wpautop: true,
+            height: '170px'
+          },
+          quicktags: true,
+          mediaButtons: false
+        });
+        currentEditor = window.tinymce.get(selector);
+      }
+
+      currentEditor.on('change', function () {
+        window.tinymce.triggerSave();
+      });
     }
     /**
      * Open media library modal.
@@ -407,14 +421,8 @@ var NavMenu = {
     return element.prop('id').replace(/[^\d.]/g, '');
   }
 };
-/**
- * To avoid breaking icons when wp_editor is removed.
- */
-
 $(document).ready(function () {
   NavMenu.init();
-  var dashicons = $('#dashicons-css').clone();
-  $('body').append(dashicons);
 });
 
 /***/ }),

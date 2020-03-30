@@ -56,13 +56,13 @@ class NavMenuItem {
 
 		if ( this.radioImage.prop( 'checked' ) ) {
 			this.setMediaUploader();
+		} else if ( this.radioHtml.prop( 'checked' ) ) {
+			this.initTinyMce();
 		}
 
 		this.imageP = this.menuLi.find( '.menu-item-media-p-' + this.menuId );
 		this.shortcodeP = this.menuLi.find( '.menu-item-shortcode-p-' + this.menuId );
 		this.htmlP = this.menuLi.find( '.menu-item-html-p-' + this.menuId );
-
-		this.initTinyMce();
 	}
 
 	/**
@@ -107,6 +107,9 @@ class NavMenuItem {
 	 * @return {void}
 	 */
 	handleRadioHtml() {
+		if ( 'undefined' !== typeof window.tinymce && ! window.tinymce.get( 'menu-item-custom-html-' + this.menuId ) ) {
+			this.initTinyMce();
+		}
 
 		this.imageP.addClass( 'menu-item-hidden' );
 		this.shortcodeP.addClass( 'menu-item-hidden' );
@@ -124,8 +127,8 @@ class NavMenuItem {
 			this.mediaModal = null;
 		}
 
-		if ( 'undefined' !== typeof tinyMCE && tinyMCE ) {
-			tinyMCE.remove( '#menu-item-custom-html-' + this.menuId );
+		if ( 'undefined' !== typeof wp.editor ) {
+			wp.editor.remove( 'menu-item-custom-html-' + this.menuId );
 		}
 
 		this.radioImage.off( 'click', this.handleRadioImage );
@@ -139,17 +142,27 @@ class NavMenuItem {
 	 * @return {void}
 	 */
 	initTinyMce() {
-		if ( 'undefined' !== typeof tinyMCE ) {
-			const selector = 'menu-item-custom-html-' + this.menuId;
-			let currentEditor = tinyMCE.editors[ selector ];
-			if ( ! currentEditor ) {
-				wp.editor.initialize( selector );
-				currentEditor = tinyMCE.editors[ selector ];
-			}
-			currentEditor.on( 'change', () => {
-				tinyMCE.triggerSave();
-			} );
+		if ( 'undefined' === typeof window.tinymce ) {
+			return;
 		}
+
+		const selector = 'menu-item-custom-html-' + this.menuId;
+		let currentEditor = window.tinymce.get( selector );
+		if ( ! currentEditor ) {
+			wp.editor.initialize( selector, {
+				tinymce: {
+					wpautop: true,
+					height: '170px'
+				},
+				quicktags: true,
+				mediaButtons: false
+			} );
+			currentEditor = window.tinymce.get( selector );
+		}
+
+		currentEditor.on( 'change', () => {
+			window.tinymce.triggerSave();
+		} );
 	}
 
 	/**
@@ -283,11 +296,6 @@ const NavMenu = {
 	}
 };
 
-/**
- * To avoid breaking icons when wp_editor is removed.
- */
 $( document ).ready( () => {
 	NavMenu.init();
-	const dashicons = $( '#dashicons-css' ).clone();
-	$( 'body' ).append( dashicons );
 } );
