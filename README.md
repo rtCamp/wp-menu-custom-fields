@@ -25,8 +25,6 @@ This plugin adds custom fields on menu item's edit screen of wp-admin.
 
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
-**Donate Link:** http://rtcamp.com/donate/
-
 ## Description ##
 This plugin adds custom fields on menu item's edit screen of wp-admin (see [screenshots](#screenshots)).  
 It uses `wp_nav_menu_item_custom_fields` hook added in WordPress 5.4 release to add custom fields.  
@@ -34,7 +32,7 @@ Below is the list of custom fields added by this plugin.
 - Custom text
 - Image selection with link and caption
 - Shortcode with caption
-- Custom HTML with [tinyMCE](https://www.tiny.cloud/) editor
+- Custom HTML with tinyMCE editor
 
 **Note:** You'll need to add stylings to properly show these custom fields on the frontend.
 
@@ -80,10 +78,6 @@ Once you're ready to send a pull request, please run through the following check
 
 1. Once your pull request has passed final code review and tests, it will be merged into `develop` and be in the pipeline for the next release. Props to you! 🎉
 
-
-### Need help? ###
-
-Drop by [our free support forum](http://community.rtcamp.com). We're a friendly bunch.
 
 # BTW, We're Hiring!
 

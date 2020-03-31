@@ -1,6 +1,5 @@
 === WP Menu Custom Fields ===
 Contributors: sid177, kiranpotphode, devikvekariya
-Donate Link: http://rtcamp.com/donate/
 Tags: Navigation Menu, Navigation Menu Custom Fields
 Requires at least: 5.4-RC2-47447
 Tested up to: 5.4-RC2-47447
