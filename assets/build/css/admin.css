@@ -4,6 +4,9 @@ p.feature-list-label-p {
 .menu-item-hidden {
   display: none; }
 
+#menu-to-edit .custom-field-select-image {
+  margin-left: 0; }
+
 div.menu-item-select-feature-list-wrapper {
   margin-bottom: 0.7em; }
   div.menu-item-select-feature-list-wrapper ul.menu-item-select-feature-list {
