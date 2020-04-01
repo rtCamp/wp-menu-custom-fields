@@ -32,8 +32,5 @@
  
 # Links #
 
-[New hooks let you add custom fields to menu items](https://make.wordpress.org/core/2020/02/25/wordpress-5-4-introduces-new-hooks-to-add-custom-fields-to-menu-items/)
-
-[WordPress Core ticket for `wp_nav_menu_item_custom_fields`](https://core.trac.wordpress.org/ticket/47056)
-
-[Reference Menu](https://www.videojet.com/us/homepage.html)
+- [New hooks let you add custom fields to menu items](https://make.wordpress.org/core/2020/02/25/wordpress-5-4-introduces-new-hooks-to-add-custom-fields-to-menu-items/)
+- [WordPress Core ticket for `wp_nav_menu_item_custom_fields`](https://core.trac.wordpress.org/ticket/47056)
