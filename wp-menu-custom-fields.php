@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: WP Menu Custom Fields
- * Description: Adds custom fields on nav menu edit screen and shows it on site menu.
+ * Description: Adds custom fields on menu items on Appearance -> Menus and shows it on front-end.
  * Plugin URI:  https://rtcamp.com
  * Author:      rtCamp
  * Author URI:  https://rtcamp.com

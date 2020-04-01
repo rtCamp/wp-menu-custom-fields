@@ -189,7 +189,7 @@ class Custom_Nav_Menu_Fields {
 			<p class="description description-wide menu-item-media-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
 				<label for="menu-item-media-id-<?php echo esc_attr( $id ); ?>">
 
-					<button type="button" class="custom-field-select-image" id="custom-field-select-image-<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Image', 'wp-menu-custom-fields' ); ?></button>
+					<button type="button" class="custom-field-select-image page-title-action" id="custom-field-select-image-<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Image', 'wp-menu-custom-fields' ); ?></button>
 
 					<input type="hidden" value="<?php echo ( isset( $data['media-id'] ) ? esc_attr( $data['media-id'] ) : '' ); ?>" id="menu-item-media-id-<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $this->meta_key ); ?>-media-id[<?php echo esc_attr( $id ); ?>]">
 
@@ -344,69 +344,144 @@ class Custom_Nav_Menu_Fields {
 
 		$div_set = false;
 
+		$field_html = '';
+
 		if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['selected-feature'] ) ) {
 			$selected_feature = $nav_menu_custom_fields[ $item->ID ]['selected-feature'];
 			$data             = $nav_menu_custom_fields[ $item->ID ][ $selected_feature ];
 
 			if ( 'image' === $selected_feature && ! empty( $data['media-url'] ) ) {
 				if ( ! $div_set ) {
-					$html   .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
-					$div_set = true;
+					$field_html .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
+					$div_set     = true;
 				}
 
-				$html .= '<div class="' . esc_attr( $this->meta_key ) . '-image-wrapper">';
+				$image_html = '<div class="' . esc_attr( $this->meta_key ) . '-image-wrapper">';
 
 				if ( ! empty( $data['media-link'] ) ) {
-					$html .= '<a href="' . esc_url( $data['media-link'] ) . '">';
+					$image_html .= '<a href="' . esc_url( $data['media-link'] ) . '">';
 				}
-				$html .= '<img class="' . esc_attr( $this->meta_key ) . '-image" src="' . esc_url( $data['media-url'] ) . '">';
+				$image_html .= '<img class="' . esc_attr( $this->meta_key ) . '-image" src="' . esc_url( $data['media-url'] ) . '">';
 				if ( ! empty( $data['media-link'] ) ) {
-					$html .= '</a>';
+					$image_html .= '</a>';
 				}
 
 				if ( ! empty( $data['media-caption'] ) ) {
-					$html .= '<span class="' . esc_attr( $this->meta_key ) . '-image-caption">' . esc_html( $data['media-caption'] ) . '</span>';
+					$image_html .= '<span class="' . esc_attr( $this->meta_key ) . '-image-caption">' . esc_html( $data['media-caption'] ) . '</span>';
 				}
 
-				$html .= '</div>';
+				$image_html .= '</div>';
+
+				/**
+				 * Hook to filter image HTML.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param string $image_html Current image HTML.
+				 * @param array $nav_menu_custom_fields[ $item->ID ] Menu item's custom fields data.
+				 * @param int $item->ID Menu item's ID.
+				 *
+				 * @return string Image HTML.
+				 */
+				$image_html = apply_filters( 'wp_menu_custom_fields_image_html', $image_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+
+				$field_html .= $image_html;
 			} elseif ( 'shortcode' === $selected_feature && ! empty( $data['shortcode'] ) ) {
 				if ( ! $div_set ) {
-					$html   .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
-					$div_set = true;
+					$field_html .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
+					$div_set     = true;
 				}
 
-				$html .= '<div class="' . esc_attr( $this->meta_key ) . '-shortcode-wrapper">';
-				$html .= '<div class="' . esc_attr( $this->meta_key ) . '-shortcode">' . do_shortcode( $data['shortcode'] ) . '</div>';
+				$shortcode_html  = '<div class="' . esc_attr( $this->meta_key ) . '-shortcode-wrapper">';
+				$shortcode_html .= '<div class="' . esc_attr( $this->meta_key ) . '-shortcode">' . do_shortcode( $data['shortcode'] ) . '</div>';
 
 				if ( ! empty( $data['shortcode-caption'] ) ) {
-					$html .= '<span class="' . esc_attr( $this->meta_key ) . '-shortcode-caption">' . esc_html( $data['shortcode-caption'] ) . '</span>';
+					$shortcode_html .= '<span class="' . esc_attr( $this->meta_key ) . '-shortcode-caption">' . esc_html( $data['shortcode-caption'] ) . '</span>';
 				}
 
-				$html .= '</div>';
+				$shortcode_html .= '</div>';
+
+				/**
+				 * Hook to filter shortcode HTML.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param string $shortcode_html Current shortcode HTML.
+				 * @param array $nav_menu_custom_fields[ $item->ID ] Menu item's custom fields data.
+				 * @param int $item->ID Menu item's ID.
+				 *
+				 * @return string Shortcode HTML.
+				 */
+				$shortcode_html = apply_filters( 'wp_menu_custom_fields_shortcode_html', $shortcode_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+
+				$field_html .= $shortcode_html;
 			} elseif ( 'html' === $selected_feature && ! empty( $data['custom-html'] ) ) {
 				if ( ! $div_set ) {
-					$html   .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
-					$div_set = true;
+					$field_html .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
+					$div_set     = true;
 				}
 
-				$html .= '<div class="' . esc_attr( $this->meta_key ) . '-custom-html">' . wp_kses_post( $data['custom-html'] ) . '</div>';
+				$custom_html = '<div class="' . esc_attr( $this->meta_key ) . '-custom-html">' . wp_kses_post( $data['custom-html'] ) . '</div>';
+
+				/**
+				 * Hook to filter custom html's HTML.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param string $shortcode_html Current custom html's HTML.
+				 * @param array $nav_menu_custom_fields[ $item->ID ] Menu item's custom fields data.
+				 * @param int $item->ID Menu item's ID.
+				 *
+				 * @return string Custom html's HTML.
+				 */
+				$custom_html = apply_filters( 'wp_menu_custom_fields_custom_markup_html', $custom_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+
+				$field_html .= $custom_html;
 			}
 		}
 
 		if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['custom-text'] ) ) {
 			if ( ! $div_set ) {
-				$html   .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
-				$div_set = true;
+				$field_html .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
+				$div_set     = true;
 			}
 
-			$html .= '<span class="' . esc_attr( $this->meta_key ) . '-custom-text">' . esc_html( $nav_menu_custom_fields[ $item->ID ]['custom-text'] ) . '</span>';
+			$custom_text_html = '<span class="' . esc_attr( $this->meta_key ) . '-custom-text">' . esc_html( $nav_menu_custom_fields[ $item->ID ]['custom-text'] ) . '</span>';
+
+			/**
+			 * Hook to filter custom text HTML.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $custom_text Current custom text HTML.
+			 * @param array $nav_menu_custom_fields[ $item->ID ] Menu item's custom fields data.
+			 * @param int $item->ID Menu item's ID.
+			 *
+			 * @return string Custom text HTML.
+			 */
+			$custom_text_html = apply_filters( 'wp_menu_custom_fields_custom_text_html', $custom_text_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+
+			$field_html .= $custom_text_html;
 		}
 
 		if ( $div_set ) {
-			$html .= '</div>';
+			$field_html .= '</div>';
 		}
 
-		return $html;
+		/**
+		 * Hook to filter final custom field HTML.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $field_html Current custom field HTML.
+		 * @param array $nav_menu_custom_fields[ $item->ID ] Menu item's custom fields data.
+		 * @param int $item->ID Menu item's ID.
+		 *
+		 * @return string Final custom field HTML.
+		 */
+		$field_html = apply_filters( 'wp_menu_custom_fields_fields_html', $field_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+
+		return $html . $field_html;
 	}
 
 	/**
