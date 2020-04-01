@@ -104,7 +104,7 @@ Below is the list of custom fields this plugin adds.
         [custom-text] => This is a custom text
         </code></pre>
 
-#### `wp_mega_menu_front_custom_text_html` Filter ####
+#### `wp_mega_menu_front_html` Filter ####
     - Allows to change the final custom field's HTML generated for a particular menu item.
     - Parameters are same as `wp_mega_menu_front_image_html`.
     - Sample $data

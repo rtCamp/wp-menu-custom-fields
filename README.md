@@ -73,7 +73,7 @@ Menu on front-end of your website:
 ![Front-End](/screenshots/screenshot-2.png?raw=true)
 
 ## Hooks ##
-#### `wp_menu_custom_field_front_image_html` [Filter](https://developer.wordpress.org/plugins/hooks/filters/) ####
+#### `wp_mega_menu_front_image_html` [Filter](https://developer.wordpress.org/plugins/hooks/filters/) ####
 - Allows to change HTML generated for image feature.
 - There are 3 parameters. $html (Generated HTML), $data (Custom fields data), $item_id (Menu item ID).
 - Sample $data
@@ -89,7 +89,7 @@ Menu on front-end of your website:
     )
 ```
 
-#### `wp_menu_custom_field_front_shortcode_html` Filter ####
+#### `wp_mega_menu_front_shortcode_html` Filter ####
 - Allows to change HTML generated for shortcode feature.
 - Parameters are same as `wp_mega_menu_front_image_html`.
 - Sample $data
@@ -102,7 +102,7 @@ Menu on front-end of your website:
     )
 ```
 
-#### `wp_menu_custom_field_front_custom_html_html` Filter ####
+#### `wp_mega_menu_front_custom_html_html` Filter ####
 - Allows to change HTML generated for custom HTML feature.
 - Parameters are same as `wp_mega_menu_front_image_html`.
 - Sample $data
@@ -114,7 +114,7 @@ Menu on front-end of your website:
     )
 ```
 
-#### `wp_menu_custom_field_front_custom_text_html` Filter ####
+#### `wp_mega_menu_front_custom_text_html` Filter ####
 - Allows to change HTML generated for custom text field.
 - Parameters are same as `wp_mega_menu_front_image_html`.
 - Sample $data
@@ -122,7 +122,7 @@ Menu on front-end of your website:
 [custom-text] => This is a custom text
 ```
 
-#### `wp_menu_custom_field_front_custom_text_html` Filter ####
+#### `wp_mega_menu_front_html` Filter ####
 - Allows to change the final custom field's HTML generated for a particular menu item.
 - Parameters are same as `wp_mega_menu_front_image_html`.
 - Sample $data
