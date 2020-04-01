@@ -383,7 +383,7 @@ class Custom_Nav_Menu_Fields {
 				 *
 				 * @return string Image HTML.
 				 */
-				$image_html = apply_filters( 'wp_mega_menu_front_image_html', $image_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+				$image_html = apply_filters( 'wp_mega_menu_image_html', $image_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
 
 				$field_html .= $image_html;
 			} elseif ( 'shortcode' === $selected_feature && ! empty( $data['shortcode'] ) ) {
@@ -412,7 +412,7 @@ class Custom_Nav_Menu_Fields {
 				 *
 				 * @return string Shortcode HTML.
 				 */
-				$shortcode_html = apply_filters( 'wp_mega_menu_front_shortcode_html', $shortcode_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+				$shortcode_html = apply_filters( 'wp_mega_menu_shortcode_html', $shortcode_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
 
 				$field_html .= $shortcode_html;
 			} elseif ( 'html' === $selected_feature && ! empty( $data['custom-html'] ) ) {
@@ -434,7 +434,7 @@ class Custom_Nav_Menu_Fields {
 				 *
 				 * @return string Custom html's HTML.
 				 */
-				$custom_html = apply_filters( 'wp_mega_menu_front_custom_html_html', $custom_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+				$custom_html = apply_filters( 'wp_mega_menu_custom_markup_html', $custom_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
 
 				$field_html .= $custom_html;
 			}
@@ -459,7 +459,7 @@ class Custom_Nav_Menu_Fields {
 			 *
 			 * @return string Custom text HTML.
 			 */
-			$custom_text_html = apply_filters( 'wp_mega_menu_front_custom_text_html', $custom_text_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+			$custom_text_html = apply_filters( 'wp_mega_menu_custom_text_html', $custom_text_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
 
 			$field_html .= $custom_text_html;
 		}
@@ -479,7 +479,7 @@ class Custom_Nav_Menu_Fields {
 		 *
 		 * @return string Final custom field HTML.
 		 */
-		$field_html = apply_filters( 'wp_mega_menu_front_html', $field_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+		$field_html = apply_filters( 'wp_mega_menu_fields_html', $field_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
 
 		return $html . $field_html;
 	}

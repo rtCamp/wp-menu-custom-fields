@@ -55,7 +55,7 @@ Below is the list of custom fields this plugin adds.
 2. Menu on front-end of the website.
 
 ## Hooks ##
-#### `wp_mega_menu_front_image_html` [Filter](https://developer.wordpress.org/plugins/hooks/filters/) ####
+#### `wp_mega_menu_image_html` [Filter](https://developer.wordpress.org/plugins/hooks/filters/) ####
     - Allows to change HTML generated for image feature.
     - There are 3 parameters. $html (Generated HTML), $data (Custom fields data), $item_id (Menu item ID).
     - Sample $data
@@ -71,9 +71,9 @@ Below is the list of custom fields this plugin adds.
             )
         </code></pre>
 
-#### `wp_mega_menu_front_shortcode_html` Filter ####
+#### `wp_mega_menu_shortcode_html` Filter ####
     - Allows to change HTML generated for shortcode feature.
-    - Parameters are same as `wp_mega_menu_front_image_html`.
+    - Parameters are same as `wp_mega_menu_image_html`.
     - Sample $data
         <pre><code>
         [selected-feature] => shortcode
@@ -84,9 +84,9 @@ Below is the list of custom fields this plugin adds.
             )
         </code></pre>
 
-#### `wp_mega_menu_front_custom_html_html` Filter ####
+#### `wp_mega_menu_custom_markup_html` Filter ####
     - Allows to change HTML generated for custom HTML feature.
-    - Parameters are same as `wp_mega_menu_front_image_html`.
+    - Parameters are same as `wp_mega_menu_image_html`.
     - Sample $data
         <pre><code>
         [selected-feature] => html
@@ -96,17 +96,17 @@ Below is the list of custom fields this plugin adds.
             )
         </code></pre>
 
-#### `wp_mega_menu_front_custom_text_html` Filter ####
+#### `wp_mega_menu_custom_text_html` Filter ####
     - Allows to change HTML generated for custom text field.
-    - Parameters are same as `wp_mega_menu_front_image_html`.
+    - Parameters are same as `wp_mega_menu_image_html`.
     - Sample $data
         <pre><code>
         [custom-text] => This is a custom text
         </code></pre>
 
-#### `wp_mega_menu_front_html` Filter ####
+#### `wp_mega_menu_fields_html` Filter ####
     - Allows to change the final custom field's HTML generated for a particular menu item.
-    - Parameters are same as `wp_mega_menu_front_image_html`.
+    - Parameters are same as `wp_mega_menu_image_html`.
     - Sample $data
         <pre><code>
         Array
