@@ -106,7 +106,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 /**
  * Main scripts, loaded on all pages.
  *
- * @package wp-mega-menu
+ * @package wp-menu-custom-fields
  */
 
 /**
@@ -290,7 +290,7 @@ var NavMenuItem = /*#__PURE__*/function () {
     key: "openMediaModal",
     value: function openMediaModal() {
       var config = {
-        title: wpMegaMenu.selectMediaText,
+        title: wpMenuCustomFields.selectMediaText,
         multiple: false,
         library: {
           type: ['image']

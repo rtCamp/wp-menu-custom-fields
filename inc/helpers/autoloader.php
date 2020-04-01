@@ -5,7 +5,7 @@
  * @package project-name-featuers
  */
 
-namespace WP_Mega_menu\Inc\Helpers;
+namespace WP_Menu_Custom_Fields\Inc\Helpers;
 
 /**
  * Auto loader function.
@@ -17,7 +17,7 @@ namespace WP_Mega_menu\Inc\Helpers;
 function autoloader( $resource = '' ) {
 
 	$resource_path  = false;
-	$namespace_root = 'WP_Mega_menu\\';
+	$namespace_root = 'WP_Menu_Custom_Fields\\';
 	$resource       = trim( $resource, '\\' );
 
 	if ( empty( $resource ) || strpos( $resource, '\\' ) === false || strpos( $resource, $namespace_root ) !== 0 ) {
@@ -73,7 +73,7 @@ function autoloader( $resource = '' ) {
 				break;
 		}
 
-		$resource_path = sprintf( '%s/inc/%s/%s.php', untrailingslashit( WP_MEGA_MENU_PATH ), $directory, $file_name );
+		$resource_path = sprintf( '%s/inc/%s/%s.php', untrailingslashit( WP_MENU_CUSTOM_FIELDS_PATH ), $directory, $file_name );
 
 	}
 
@@ -84,4 +84,4 @@ function autoloader( $resource = '' ) {
 
 }
 
-spl_autoload_register( '\WP_Mega_menu\Inc\Helpers\autoloader' );
+spl_autoload_register( '\WP_Menu_Custom_Fields\Inc\Helpers\autoloader' );

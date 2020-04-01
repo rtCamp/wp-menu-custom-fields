@@ -9,9 +9,9 @@ import '../sass/main.scss';
 window.$ = window.$ || jQuery;
 
 $( document ).ready( () => {
-	let wrappers = $( '.sub-menu .rt-wp-mega-menu-wrapper' );
+	let wrappers = $( '.sub-menu .rt-wp-menu-custom-fields-wrapper' );
 	wrappers.closest( '.sub-menu' ).css( 'min-width', '400px' );
-	wrappers.find( '.rt-wp-mega-menu-shortcode' ).closest( '.sub-menu' ).css( 'min-width', '600px' );
+	wrappers.find( '.rt-wp-menu-custom-fields-shortcode' ).closest( '.sub-menu' ).css( 'min-width', '600px' );
 
 	let li = wrappers.closest( 'li.menu-item' );
 	li.css( { display: 'grid', gridTemplateColumns: '23% 75%', columnGap: '2%', paddingBottom: '0.5em' } );

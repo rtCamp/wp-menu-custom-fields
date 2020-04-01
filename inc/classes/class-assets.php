@@ -2,12 +2,12 @@
 /**
  * Assets class.
  *
- * @package wp-mega-menu
+ * @package wp-menu-custom-fields
  */
 
-namespace WP_Mega_menu\Inc;
+namespace WP_Menu_Custom_Fields\Inc;
 
-use WP_Mega_menu\Inc\Traits\Singleton;
+use WP_Menu_Custom_Fields\Inc\Traits\Singleton;
 
 /**
  * Class Assets
@@ -44,10 +44,10 @@ class Assets {
 	 * @return void
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_style( 'wp-mega-menu-style', WP_MEGA_MENU_URL . '/assets/build/css/main.css', array(), time() );
+		wp_enqueue_style( 'wp-menu-custom-fields-style', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/css/main.css', array(), time() );
 
 		wp_enqueue_script( 'jquery' );
-		wp_enqueue_script( 'wp-mega-menu-script', WP_MEGA_MENU_URL . '/assets/build/js/main.js', array( 'jquery' ), time(), true );
+		wp_enqueue_script( 'wp-menu-custom-fields-script', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/js/main.js', array( 'jquery' ), time(), true );
 	}
 
 	/**
@@ -59,20 +59,20 @@ class Assets {
 	 */
 	public function admin_enqueue_scripts( $hook_suffix ) {
 		if ( 'nav-menus.php' === $hook_suffix ) {
-			wp_enqueue_style( 'wp-mega-menu-admin-style', WP_MEGA_MENU_URL . '/assets/build/css/admin.css', array(), time() );
+			wp_enqueue_style( 'wp-menu-custom-fields-admin-style', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/css/admin.css', array(), time() );
 			wp_enqueue_style( 'dashicons' );
 
 			wp_enqueue_editor();
 			wp_enqueue_script( 'jquery' );
 			wp_enqueue_script( 'wp-tinymce' );
 			wp_enqueue_media();
-			wp_enqueue_script( 'wp-mega-menu-admin-script', WP_MEGA_MENU_URL . '/assets/build/js/admin.js', array( 'jquery', 'wp-tinymce', 'media-editor', 'media-views' ), time(), true );
+			wp_enqueue_script( 'wp-menu-custom-fields-admin-script', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/js/admin.js', array( 'jquery', 'wp-tinymce', 'media-editor', 'media-views' ), time(), true );
 
 			wp_localize_script(
-				'wp-mega-menu-admin-script',
-				'wpMegaMenu',
+				'wp-menu-custom-fields-admin-script',
+				'wpMenuCustomFields',
 				array(
-					'selectMediaText' => esc_html__( 'Select Image', 'wp-mega-menu' ),
+					'selectMediaText' => esc_html__( 'Select Image', 'wp-menu-custom-fields' ),
 				)
 			);
 		}

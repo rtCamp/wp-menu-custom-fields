@@ -22,10 +22,10 @@
  *
  * If you specifically need multiple objects, then use a normal class.
  *
- * @package wp-mega-menu
+ * @package wp-menu-custom-fields
  */
 
-namespace WP_Mega_menu\Inc\Traits;
+namespace WP_Menu_Custom_Fields\Inc\Traits;
 
 trait Singleton {
 
@@ -76,9 +76,9 @@ trait Singleton {
 			$instance[ $called_class ] = new $called_class();
 
 			/**
-			 * Dependent items can use the wp_mega_menu_singleton_init_{$called_class} hook to execute code
+			 * Dependent items can use the wp_menu_custom_fields_singleton_init_{$called_class} hook to execute code
 			 */
-			do_action( sprintf( 'wp_mega_menu_singleton_init_%s', $called_class ) ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+			do_action( sprintf( 'wp_menu_custom_fields_singleton_init_%s', $called_class ) ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
 
 		}
 

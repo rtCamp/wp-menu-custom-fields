@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="wp-mega-menu">
+<ruleset name="wp-menu-custom-fields">
 	<description>WordPress and VIP Go Coding Standards</description>
 
 	<rule ref="WordPress">

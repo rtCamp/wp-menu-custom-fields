@@ -2,12 +2,12 @@
 /**
  * Plugin manifest class.
  *
- * @package wp-mega-menu
+ * @package wp-menu-custom-fields
  */
 
-namespace WP_Mega_menu\Inc;
+namespace WP_Menu_Custom_Fields\Inc;
 
-use \WP_Mega_menu\Inc\Traits\Singleton;
+use \WP_Menu_Custom_Fields\Inc\Traits\Singleton;
 
 /**
  * Class Plugin

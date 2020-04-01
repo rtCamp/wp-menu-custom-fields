@@ -1,5 +1,5 @@
 {
-	"name": "wp-mega-menu",
+	"name": "wp-menu-custom-fields",
 	"version": "1.0.0",
 	"description": "Adds custom fields on nav menu edit screen and shows it on site menu.",
 	"author": "rtCamp",
