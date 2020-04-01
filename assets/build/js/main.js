@@ -105,9 +105,9 @@ __webpack_require__.r(__webpack_exports__);
 
 window.$ = window.$ || jQuery;
 $(document).ready(function () {
-  var wrappers = $('.sub-menu .rt-wp-menu-custom-fields-wrapper');
+  var wrappers = $('.sub-menu .rt-wp-mega-menu-wrapper');
   wrappers.closest('.sub-menu').css('min-width', '400px');
-  wrappers.find('.rt-wp-menu-custom-fields-shortcode').closest('.sub-menu').css('min-width', '600px');
+  wrappers.find('.rt-wp-mega-menu-shortcode').closest('.sub-menu').css('min-width', '600px');
   var li = wrappers.closest('li.menu-item');
   li.css({
     display: 'grid',

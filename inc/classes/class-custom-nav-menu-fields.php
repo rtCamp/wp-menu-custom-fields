@@ -2,15 +2,15 @@
 /**
  * Custom Nav Menu Fields class definition.
  *
- * @package wp-menu-custom-fields
+ * @package wp-mega-menu
  */
 
-namespace WP_Menu_Custom_Fields\Inc;
+namespace WP_Mega_menu\Inc;
 
-use WP_Menu_Custom_Fields\Inc\Traits\Singleton;
+use WP_Mega_menu\Inc\Traits\Singleton;
 
 /**
- * Class WP_Menu_Custom_Fields
+ * Class WP_Mega_menu
  * Adds custom fields on nav menu edit screen and stores it, shows custom fields on frontend.
  * Enqueues necessary scripts on admin side.
  */
@@ -44,7 +44,7 @@ class Custom_Nav_Menu_Fields {
 	 *
 	 * @var string
 	 */
-	private $meta_key = 'rt-wp-menu-custom-fields';
+	private $meta_key = 'rt-wp-mega-menu';
 
 	/**
 	 * Construct method.
@@ -116,9 +116,9 @@ class Custom_Nav_Menu_Fields {
 		$data = $this->get_nav_menu_meta_data( $id, false );
 
 		$features         = array(
-			'image'     => __( 'Image', 'wp-menu-custom-fields' ),
-			'shortcode' => __( 'Shortcode', 'wp-menu-custom-fields' ),
-			'html'      => __( 'Custom HTML', 'wp-menu-custom-fields' ),
+			'image'     => __( 'Image', 'wp-mega-menu' ),
+			'shortcode' => __( 'Shortcode', 'wp-mega-menu' ),
+			'html'      => __( 'Custom HTML', 'wp-mega-menu' ),
 		);
 		$selected_feature = 'image';
 
@@ -131,14 +131,14 @@ class Custom_Nav_Menu_Fields {
 		?>
 		<p class="description description-wide">
 			<label for="menu-item-custom-text-<?php echo esc_attr( $id ); ?>">
-				<?php esc_html_e( 'Custom Text', 'wp-menu-custom-fields' ); ?><br>
+				<?php esc_html_e( 'Custom Text', 'wp-mega-menu' ); ?><br>
 				<textarea id="menu-item-custom-text-<?php echo esc_attr( $id ); ?>" class="widefat menu-item-custom-text-<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $this->meta_key ); ?>-custom-text[<?php echo esc_attr( $id ); ?>]"><?php echo ( ! empty( $data['custom-text'] ) ? esc_html( $data['custom-text'] ) : '' ); ?></textarea>
 			</label>
 		</p>
 
 		<p class="description description-wide feature-list-label-p">
 			<label for="menu-item-select-feature-list-<?php echo esc_attr( $id ); ?>">
-			<?php esc_html_e( 'Select Feature', 'wp-menu-custom-fields' ); ?>
+			<?php esc_html_e( 'Select Feature', 'wp-mega-menu' ); ?>
 			</label>
 		</p>
 		<div class="menu-item-select-feature-list-wrapper description description-wide" id="menu-item-select-feature-list-wrapper-<?php echo esc_attr( $id ); ?>">
@@ -189,7 +189,7 @@ class Custom_Nav_Menu_Fields {
 			<p class="description description-wide menu-item-media-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
 				<label for="menu-item-media-id-<?php echo esc_attr( $id ); ?>">
 
-					<button type="button" class="custom-field-select-image page-title-action" id="custom-field-select-image-<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Image', 'wp-menu-custom-fields' ); ?></button>
+					<button type="button" class="custom-field-select-image page-title-action" id="custom-field-select-image-<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Image', 'wp-mega-menu' ); ?></button>
 
 					<input type="hidden" value="<?php echo ( isset( $data['media-id'] ) ? esc_attr( $data['media-id'] ) : '' ); ?>" id="menu-item-media-id-<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $this->meta_key ); ?>-media-id[<?php echo esc_attr( $id ); ?>]">
 
@@ -208,13 +208,13 @@ class Custom_Nav_Menu_Fields {
 			</p>
 			<p class="description description-wide menu-item-media-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
 				<label for="menu-item-media-link-<?php echo esc_attr( $id ); ?>">
-					<?php esc_html_e( 'Image Link', 'wp-menu-custom-fields' ); ?><br>
+					<?php esc_html_e( 'Image Link', 'wp-mega-menu' ); ?><br>
 					<input type="text" id="menu-item-media-link-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php echo esc_attr( $this->meta_key ); ?>-media-link[<?php echo esc_attr( $id ); ?>]" value="<?php echo ( isset( $data['media-link'] ) ? esc_url( $data['media-link'] ) : '' ); ?>">
 				</label>
 			</p>
 			<p class="description description-wide menu-item-media-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
 				<label for="menu-item-media-caption-<?php echo esc_attr( $id ); ?>">
-					<?php esc_html_e( 'Image Caption', 'wp-menu-custom-fields' ); ?><br>
+					<?php esc_html_e( 'Image Caption', 'wp-mega-menu' ); ?><br>
 					<textarea id="menu-item-media-caption-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php echo esc_attr( $this->meta_key ); ?>-media-caption[<?php echo esc_attr( $id ); ?>]"><?php echo ( isset( $data['media-caption'] ) ? esc_html( $data['media-caption'] ) : '' ); ?></textarea>
 				</label>
 			</p>
@@ -223,13 +223,13 @@ class Custom_Nav_Menu_Fields {
 			?>
 			<p class="description description-wide menu-item-shortcode-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
 				<label for="menu-item-shortcode-<?php echo esc_attr( $id ); ?>">
-					<?php esc_html_e( 'Shortcode', 'wp-menu-custom-fields' ); ?><br>
+					<?php esc_html_e( 'Shortcode', 'wp-mega-menu' ); ?><br>
 					<input type="text" id="menu-item-shortcode-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php echo esc_attr( $this->meta_key ); ?>-shortcode[<?php echo esc_attr( $id ); ?>]" value="<?php echo ( isset( $data['shortcode'] ) ? esc_attr( $data['shortcode'] ) : '' ); ?>">
 				</label>
 			</p>
 			<p class="description description-wide menu-item-shortcode-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
 				<label for="menu-item-shortcode-caption-<?php echo esc_attr( $id ); ?>">
-					<?php esc_html_e( 'Shortcode Caption', 'wp-menu-custom-fields' ); ?><br>
+					<?php esc_html_e( 'Shortcode Caption', 'wp-mega-menu' ); ?><br>
 					<textarea id="menu-item-shortcode-caption-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php echo esc_attr( $this->meta_key ); ?>-shortcode-caption[<?php echo esc_attr( $id ); ?>]"><?php echo ( isset( $data['shortcode-caption'] ) ? esc_html( $data['shortcode-caption'] ) : '' ); ?></textarea>
 				</label>
 			</p>
@@ -383,7 +383,7 @@ class Custom_Nav_Menu_Fields {
 				 *
 				 * @return string Image HTML.
 				 */
-				$image_html = apply_filters( 'wp_menu_custom_field_front_image_html', $image_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+				$image_html = apply_filters( 'wp_mega_menu_front_image_html', $image_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
 
 				$field_html .= $image_html;
 			} elseif ( 'shortcode' === $selected_feature && ! empty( $data['shortcode'] ) ) {
@@ -412,7 +412,7 @@ class Custom_Nav_Menu_Fields {
 				 *
 				 * @return string Shortcode HTML.
 				 */
-				$shortcode_html = apply_filters( 'wp_menu_custom_field_front_shortcode_html', $shortcode_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+				$shortcode_html = apply_filters( 'wp_mega_menu_front_shortcode_html', $shortcode_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
 
 				$field_html .= $shortcode_html;
 			} elseif ( 'html' === $selected_feature && ! empty( $data['custom-html'] ) ) {
@@ -434,7 +434,7 @@ class Custom_Nav_Menu_Fields {
 				 *
 				 * @return string Custom html's HTML.
 				 */
-				$custom_html = apply_filters( 'wp_menu_custom_field_front_custom_html_html', $custom_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+				$custom_html = apply_filters( 'wp_mega_menu_front_custom_html_html', $custom_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
 
 				$field_html .= $custom_html;
 			}
@@ -459,7 +459,7 @@ class Custom_Nav_Menu_Fields {
 			 *
 			 * @return string Custom text HTML.
 			 */
-			$custom_text_html = apply_filters( 'wp_menu_custom_field_front_custom_text_html', $custom_text_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+			$custom_text_html = apply_filters( 'wp_mega_menu_front_custom_text_html', $custom_text_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
 
 			$field_html .= $custom_text_html;
 		}
@@ -479,7 +479,7 @@ class Custom_Nav_Menu_Fields {
 		 *
 		 * @return string Final custom field HTML.
 		 */
-		$field_html = apply_filters( 'wp_menu_custom_field_front_html', $field_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+		$field_html = apply_filters( 'wp_mega_menu_front_html', $field_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
 
 		return $html . $field_html;
 	}

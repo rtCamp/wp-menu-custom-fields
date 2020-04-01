@@ -1,4 +1,4 @@
-=== WP Menu Custom Fields ===
+=== WP Mega Menu ===
 Contributors: sid177, kiranpotphode, devikvekariya
 Tags: Navigation Menu, Navigation Menu Custom Fields
 Requires at least: 5.4-RC2-47447
@@ -14,10 +14,10 @@ This plugin adds custom fields on menu item's edit interface of wp-admin.
 
 This plugin adds custom fields on menu item's edit interface of wp-admin.
 Below is the list of custom fields this plugin adds.
--   Custom text
--   Image selection with link and caption
--   Shortcode with caption
--   Custom HTML with [tinyMCE](https://www.tiny.cloud/) editor
+- Custom text
+- Image selection with link and caption
+- Shortcode with caption
+- Custom HTML with [tinyMCE](https://www.tiny.cloud/) editor
 
 **Note:** You'll need to add stylings to properly show these custom fields on the front-end.
 
@@ -25,7 +25,7 @@ Below is the list of custom fields this plugin adds.
 
 1.  Extract the zip file.
 2.  Upload it to the `/wp-content/plugins/` directory in your WordPress installation.
-3.  Activate the WP Menu Custom Fields from your Plugins page.
+3.  Activate the WP Mega Menu from your Plugins page.
 
 == Usage ==
 1. After installing and activating this plugin, goto Appearance -> Menus of your WordPress admin. Create a menu if you haven't already and add menu items according to your need.
@@ -55,7 +55,7 @@ Below is the list of custom fields this plugin adds.
 2. Menu on front-end of the website.
 
 ## Hooks ##
-1. `wp_menu_custom_field_front_image_html` [Filter](https://developer.wordpress.org/plugins/hooks/filters/).
+1. `wp_mega_menu_front_image_html` [Filter](https://developer.wordpress.org/plugins/hooks/filters/).
     - Allows to change HTML generated for image feature.
     - There are 3 parameters. $html (Generated HTML), $data (Custom fields data), $item_id (Menu item ID).
     - Sample $data
@@ -71,9 +71,9 @@ Below is the list of custom fields this plugin adds.
             )
         </code></pre>
 
-2. `wp_menu_custom_field_front_shortcode_html` Filter.
+2. `wp_mega_menu_front_shortcode_html` Filter.
     - Allows to change HTML generated for shortcode feature.
-    - Parameters are same as `wp_menu_custom_field_front_image_html`.
+    - Parameters are same as `wp_mega_menu_front_image_html`.
     - Sample $data
         <pre><code>
         [selected-feature] => shortcode
@@ -84,9 +84,9 @@ Below is the list of custom fields this plugin adds.
             )
         </code></pre>
 
-3. `wp_menu_custom_field_front_custom_html_html` Filter.
+3. `wp_mega_menu_front_custom_html_html` Filter.
     - Allows to change HTML generated for custom HTML feature.
-    - Parameters are same as `wp_menu_custom_field_front_image_html`.
+    - Parameters are same as `wp_mega_menu_front_image_html`.
     - Sample $data
         <pre><code>
         [selected-feature] => html
@@ -96,17 +96,17 @@ Below is the list of custom fields this plugin adds.
             )
         </code></pre>
 
-4. `wp_menu_custom_field_front_custom_text_html` Filter.
+4. `wp_mega_menu_front_custom_text_html` Filter.
     - Allows to change HTML generated for custom text field.
-    - Parameters are same as `wp_menu_custom_field_front_image_html`.
+    - Parameters are same as `wp_mega_menu_front_image_html`.
     - Sample $data
         <pre><code>
         [custom-text] => This is a custom text
         </code></pre>
 
-5. `wp_menu_custom_field_front_custom_text_html` Filter.
+5. `wp_mega_menu_front_custom_text_html` Filter.
     - Allows to change the final custom field's HTML generated for a particular menu item.
-    - Parameters are same as `wp_menu_custom_field_front_image_html`.
+    - Parameters are same as `wp_mega_menu_front_image_html`.
     - Sample $data
         <pre><code>
         Array
@@ -125,9 +125,42 @@ Below is the list of custom fields this plugin adds.
         )
         </code></pre>
 
+## Styling mega menu ##
+A theme developer can add stylings for the custom fields added by this plugin by referring to the below sample HTML code.
+- Image & Custom text
+    - Sample HTML code
+    <pre><code>
+        <div class="rt-wp-mega-menu-wrapper" style="padding-top: 10px; padding-right: 20px;">
+            <div class="rt-wp-mega-menu-image-wrapper">
+                <a href="https://google.com">
+                    <img class="rt-wp-mega-menu-image" src="http://localhost/wp-content/uploads/2020/03/92d43b978cbcdc7b33e3596d131d5256.jpg">
+                </a>
+                <span class="rt-wp-mega-menu-image-caption">This is an image caption</span>
+            </div>
+            <span class="rt-wp-mega-menu-custom-text">This is a custom text</span>
+        </div>
+    </code></pre>
+    - If **Image Link** is entered, then `img` tag will be wrapped inside `a`.
+    - Custom text will be displayed below the feature's HTML.
+
+- Shortcode
+    <pre><code>
+        <div class="rt-wp-mega-menu-shortcode-wrapper">
+            <div class="rt-wp-mega-menu-shortcode">
+                <!-- shortcode HTML will be here -->
+            </div>
+            <span class="rt-wp-mega-menu-shortcode-caption">This is shortcode caption!</span>
+        </div>
+    </code></pre>
+
+- Custom HTML
+    <pre><code>
+        <div class="rt-wp-mega-menu-custom-html">Welcome to <strong>WordPress</strong>. This is your first post. Edit or delete it, then start <em>writing</em>!</div>
+    </code></pre>
+
 == Important Links ==
 
-* [GitHub](https://github.com/rtCamp/wp-menu-custom-fields) - Please mention your wordpress.org username when sending pull requests.
+* [GitHub](https://github.com/rtCamp/wp-mega-menu) - Please mention your wordpress.org username when sending pull requests.
 
 == License ==
 
@@ -137,5 +170,5 @@ Same [GPL] (http://www.gnu.org/licenses/gpl-2.0.txt) that WordPress uses!
 
 Great! There are several ways you can get involved to help make this plugin better:
 
-1. **Report Bugs:** If you find a bug, error or other problem, please report it! You can do this by [creating a new topic](https://github.com/rtCamp/wp-menu-custom-fields/issues) in the issue tracker.
-2. **Suggest New Features:** Have an awesome idea? Please share it! Simply [create a new topic](https://github.com/rtCamp/wp-menu-custom-fields/issues) in the issure tracker to express your thoughts on why the feature should be included and get a discussion going around your idea.
+1. **Report Bugs:** If you find a bug, error or other problem, please report it! You can do this by [creating a new topic](https://github.com/rtCamp/wp-mega-menu/issues) in the issue tracker.
+2. **Suggest New Features:** Have an awesome idea? Please share it! Simply [create a new topic](https://github.com/rtCamp/wp-mega-menu/issues) in the issure tracker to express your thoughts on why the feature should be included and get a discussion going around your idea.

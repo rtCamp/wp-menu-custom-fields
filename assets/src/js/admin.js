@@ -1,7 +1,7 @@
 /**
  * Main scripts, loaded on all pages.
  *
- * @package wp-menu-custom-fields
+ * @package wp-mega-menu
  */
 
 /**
@@ -172,7 +172,7 @@ class NavMenuItem {
 	 */
 	openMediaModal() {
 		const config = {
-			title: wpMenuCustomFields.selectMediaText,
+			title: wpMegaMenu.selectMediaText,
 			multiple: false,
 			library: {
 				type: [ 'image' ]

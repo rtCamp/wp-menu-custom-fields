@@ -1,8 +1,8 @@
 <p align="center">
-<a href="https://rtcamp.com/?ref=wp-menu-custom-fields-repo" target="_blank"><img width="200"src="https://rtcamp.com/wp-content/themes/rtcamp-v9/assets/img/site-logo-black.svg"></a>
+<a href="https://rtcamp.com/?ref=wp-mega-menu-repo" target="_blank"><img width="200"src="https://rtcamp.com/wp-content/themes/rtcamp-v9/assets/img/site-logo-black.svg"></a>
 </p>
 
-# WP Menu Custom Fields - v1.0
+# WP Mega Menu - v1.0
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 This plugin adds custom fields on menu item's edit screen of wp-admin.
@@ -38,7 +38,7 @@ Below is the list of custom fields added by this plugin.
 
 1. Extract the zip file.
 2. Upload it to the `/wp-content/plugins/` directory in your WordPress installation.
-3. Activate the WP Menu Custom Fields from your Plugins page.
+3. Activate the WP Mega Menu from your Plugins page.
 
 ## Usage ##
 1. After installing and activating this plugin, goto Appearance -> Menus of your WordPress admin. Create a menu if you haven't already and add menu items according to your need.
@@ -73,7 +73,7 @@ Menu on front-end of your website:
 ![Front-End](/screenshots/screenshot-2.png?raw=true)
 
 ## Hooks ##
-1. `wp_menu_custom_field_front_image_html` [Filter](https://developer.wordpress.org/plugins/hooks/filters/).
+1. `wp_mega_menu_front_image_html` [Filter](https://developer.wordpress.org/plugins/hooks/filters/).
 - Allows to change HTML generated for image feature.
 - There are 3 parameters. $html (Generated HTML), $data (Custom fields data), $item_id (Menu item ID).
 - Sample $data
@@ -89,9 +89,9 @@ Menu on front-end of your website:
     )
 ```
 
-2. `wp_menu_custom_field_front_shortcode_html` Filter.
+2. `wp_mega_menu_front_shortcode_html` Filter.
 - Allows to change HTML generated for shortcode feature.
-- Parameters are same as `wp_menu_custom_field_front_image_html`.
+- Parameters are same as `wp_mega_menu_front_image_html`.
 - Sample $data
 ```
 [selected-feature] => shortcode
@@ -102,9 +102,9 @@ Menu on front-end of your website:
     )
 ```
 
-3. `wp_menu_custom_field_front_custom_html_html` Filter.
+3. `wp_mega_menu_front_custom_html_html` Filter.
 - Allows to change HTML generated for custom HTML feature.
-- Parameters are same as `wp_menu_custom_field_front_image_html`.
+- Parameters are same as `wp_mega_menu_front_image_html`.
 - Sample $data
 ```
 [selected-feature] => html
@@ -114,17 +114,17 @@ Menu on front-end of your website:
     )
 ```
 
-4. `wp_menu_custom_field_front_custom_text_html` Filter.
+4. `wp_mega_menu_front_custom_text_html` Filter.
 - Allows to change HTML generated for custom text field.
-- Parameters are same as `wp_menu_custom_field_front_image_html`.
+- Parameters are same as `wp_mega_menu_front_image_html`.
 - Sample $data
 ```
 [custom-text] => This is a custom text
 ```
 
-5. `wp_menu_custom_field_front_custom_text_html` Filter.
+5. `wp_mega_menu_front_custom_text_html` Filter.
 - Allows to change the final custom field's HTML generated for a particular menu item.
-- Parameters are same as `wp_menu_custom_field_front_image_html`.
+- Parameters are same as `wp_mega_menu_front_image_html`.
 - Sample $data
 ```
 Array
@@ -143,21 +143,52 @@ Array
 )
 ```
 
+## Styling mega menu ##
+A theme developer can add stylings for the custom fields added by this plugin by referring to the below sample HTML code.
+- Image & Custom text
+    - Sample HTML code
+    ```
+    <div class="rt-wp-mega-menu-wrapper" style="padding-top: 10px; padding-right: 20px; /* Dynamic stylings added via JavaScript. */">
+        <div class="rt-wp-mega-menu-image-wrapper">
+            <a href="{ Image Link }">
+                <img class="rt-wp-mega-menu-image" src="{ Selected Image }">
+            </a>
+            <span class="rt-wp-mega-menu-image-caption">{ Image Caption }</span>
+        </div>
+        <span class="rt-wp-mega-menu-custom-text">{ Custom Text }</span>
+    </div>
+    ```
+    - If **Image Link** is entered, then `img` tag will be wrapped inside `a`.
+    - Custom text will be displayed below the feature's HTML.
+- Shortcode
+    ```
+    <div class="rt-wp-mega-menu-shortcode-wrapper">
+        <div class="rt-wp-mega-menu-shortcode">
+            { Shortcode }
+        </div>
+        <span class="rt-wp-mega-menu-shortcode-caption">{ Shortcode Caption }</span>
+    </div>
+    ```
+- Custom HTML
+    ```
+    <div class="rt-wp-mega-menu-custom-html">{ Custom HTML }</div>
+    ```
+
 ## Contribute
 
 ### Reporting a bug 🐞
 
-Before creating a new issue, do browse through the [existing issues](https://github.com/rtCamp/wp-menu-custom-fields/issues) for resolution or upcoming fixes. 
+Before creating a new issue, do browse through the [existing issues](https://github.com/rtCamp/wp-mega-menu/issues) for resolution or upcoming fixes. 
 
-If you still need to [log an issue](https://github.com/rtCamp/wp-menu-custom-fields/issues/new), making sure to include as much detail as you can, including clear steps to reproduce your issue if possible.
+If you still need to [log an issue](https://github.com/rtCamp/wp-mega-menu/issues/new), making sure to include as much detail as you can, including clear steps to reproduce your issue if possible.
 
 ### Creating a pull request
 
-Want to contribute a new feature? Start a conversation by logging an [issue](https://github.com/rtCamp/wp-menu-custom-fields/issues).
+Want to contribute a new feature? Start a conversation by logging an [issue](https://github.com/rtCamp/wp-mega-menu/issues).
 
 Once you're ready to send a pull request, please run through the following checklist: 
 
-1. Browse through the [existing issues](https://github.com/rtCamp/wp-menu-custom-fields/issues) for anything related to what you want to work on. If you don't find any related issues, open a new one.
+1. Browse through the [existing issues](https://github.com/rtCamp/wp-mega-menu/issues) for anything related to what you want to work on. If you don't find any related issues, open a new one.
 
 1. Fork this repository.
 
