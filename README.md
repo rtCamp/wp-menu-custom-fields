@@ -62,6 +62,16 @@ Below is the list of custom fields added by this plugin.
 - From the **Visual** tab, you can enter text and format it using tools given in toolbar.
 - You can switch to **Text** tab to see/change HTML code of the text you entered.
 
+### Screenshots ###
+
+Custom fields added on (Appearance -> Menus):
+
+![Custom Fields](/screenshots/edit-menu-custom-field.gif?raw=true)
+
+Menu on front-end of your website:
+
+![Front-End](/screenshots/screenshot-2.png?raw=true)
+
 ## Hooks ##
 1. `wp_menu_custom_field_front_image_html` [Filter](https://developer.wordpress.org/plugins/hooks/filters/).
 - Allows to change HTML generated for image feature.
@@ -132,17 +142,6 @@ Array
 
 )
 ```
-
-
-### Screenshots ###
-
-Custom fields added on (Appearance -> Menus):
-
-![Custom Fields](/screenshots/edit-menu-custom-field.gif?raw=true)
-
-Menu on front-end of your website:
-
-![Front-End](/screenshots/screenshot-2.png?raw=true)
 
 ## Contribute
 
