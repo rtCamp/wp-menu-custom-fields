@@ -189,7 +189,7 @@ class Custom_Nav_Menu_Fields {
 			<p class="description description-wide menu-item-media-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
 				<label for="menu-item-media-id-<?php echo esc_attr( $id ); ?>">
 
-					<button type="button" class="custom-field-select-image" id="custom-field-select-image-<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Image', 'wp-menu-custom-fields' ); ?></button>
+					<button type="button" class="custom-field-select-image button" id="custom-field-select-image-<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Image', 'wp-menu-custom-fields' ); ?></button>
 
 					<input type="hidden" value="<?php echo ( isset( $data['media-id'] ) ? esc_attr( $data['media-id'] ) : '' ); ?>" id="menu-item-media-id-<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $this->meta_key ); ?>-media-id[<?php echo esc_attr( $id ); ?>]">
 
