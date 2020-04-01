@@ -2,7 +2,7 @@
 Contributors: sid177, kiranpotphode, devikvekariya
 Tags: Navigation Menu, Navigation Menu Custom Fields
 Requires at least: 5.4-RC2-47447
-Tested up to: 5.4-RC2-47447
+Tested up to: 5.4
 Requires PHP: 7.0 or above.
 Stable tag: 1.0
 License: GPLv2 or later (of course!)
