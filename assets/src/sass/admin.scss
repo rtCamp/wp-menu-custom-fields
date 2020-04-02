@@ -1,0 +1,26 @@
+p.feature-list-label-p {
+	margin-bottom: 0;
+}
+
+.menu-item-hidden {
+	display: none;
+}
+
+#menu-to-edit .custom-field-select-image {
+	margin-left: 0;
+}
+
+div.menu-item-select-feature-list-wrapper {
+	margin-bottom: 0.7em;
+
+	ul.menu-item-select-feature-list {
+		display: flex;
+		justify-content: space-between;
+	}
+}
+
+textarea.menu-item-html-editor {
+	width: 100%;
+	border: none;
+	box-shadow: none;
+}
