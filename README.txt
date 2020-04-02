@@ -19,7 +19,7 @@ Below is the list of custom fields this plugin adds.
 - Shortcode with caption
 - Custom HTML with TinyMCE editor
 
-**Note:** You'll need to add stylings to properly show these custom fields on the front-end.
+**Note:** This plugin works with default themes. In order to use it with custom themes, please add the necessary styling.
 
 == Installation ==
 
@@ -54,8 +54,10 @@ Below is the list of custom fields this plugin adds.
 - You can switch to **Text** tab to see/change HTML code of the text you entered.
 
 == Screenshots ==
-1. Custom fields added on (Appearance -> Menus)
-2. Menu on front-end of the website.
+1. Custom fields added under Appearance -> Menus
+2. Custom HTML
+3. Image with custom text
+4. Video via shortcode
 
 ## Hooks ##
 #### `wp_menu_custom_fields_image_html` [Filter](https://developer.wordpress.org/plugins/hooks/filters/) ####
