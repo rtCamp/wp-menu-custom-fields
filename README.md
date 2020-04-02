@@ -68,11 +68,11 @@ Below is the list of custom fields added by this plugin.
 
 Custom fields added under Appearance -> Menus:
 
-![Custom Fields](/screenshots/edit-menu-custom-field.gif?raw=true)
+![Custom fields added under Appearance -> Menus](/screenshots/backend-gif.gif?raw=true)
 
-Menu on front-end of your website:
+Menu on frontend of your website:
 
-![Front-End](/screenshots/screenshot-2.png?raw=true)
+![Menu on frontend of your website](/screenshots/frontend-gif.gif?raw=true)
 
 ## Hooks ##
 #### `wp_menu_custom_fields_image_html` [Filter](https://developer.wordpress.org/plugins/hooks/filters/) ####
