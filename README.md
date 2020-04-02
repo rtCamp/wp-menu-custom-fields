@@ -13,7 +13,7 @@ This plugin adds custom fields on menu item's edit screen of wp-admin.
 
 **Tags:** Navigation Menu, Navigation Menu Custom Fields
 
-**Requires at least:** 5.4-RC2-47447
+**Requires at least:** 5.4
 
 **Tested up to:** 5.4
 
@@ -85,7 +85,7 @@ Menu on front-end of your website:
         [media-type] => image
         [media-link] => https://google.com/
         [media-caption] => This is image caption
-        [media-url] => http://localhost/wp-content/uploads/2020/03/92d43b978cbcdc7b33e3596d131d5256.jpg
+        [media-url] => http://example.com/wp-content/uploads/2020/03/92d43b978cbcdc7b33e3596d131d5256.jpg
     )
 ```
 
@@ -97,7 +97,7 @@ Menu on front-end of your website:
 [selected-feature] => shortcode
 [shortcode] => Array
     (
-        [shortcode] => [video src="http://localhost:10015/wp-content/uploads/2020/03/SampleVideo_1280x720_1mb.mp4"]
+        [shortcode] => [video src="https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_480_1_5MG.mp4"]
         [shortcode-caption] => This is a shortcode caption
     )
 ```
@@ -137,7 +137,7 @@ Array
             [media-type] => image
             [media-link] => https://google.com
             [media-caption] => This is image caption
-            [media-url] => http://localhost/wp-content/uploads/2020/03/92d43b978cbcdc7b33e3596d131d5256.jpg
+            [media-url] => http://example.com/wp-content/uploads/2020/03/92d43b978cbcdc7b33e3596d131d5256.jpg
         )
 
 )
