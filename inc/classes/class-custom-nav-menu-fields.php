@@ -191,9 +191,9 @@ class Custom_Nav_Menu_Fields {
 
 					<button type="button" class="custom-field-select-image page-title-action" id="custom-field-select-image-<?php echo esc_attr( $id ); ?>"><?php esc_html_e( 'Select Image', 'wp-menu-custom-fields' ); ?></button>
 
-					<input type="hidden" value="<?php echo ( isset( $data['media-id'] ) ? esc_attr( $data['media-id'] ) : '' ); ?>" id="menu-item-media-id-<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $this->meta_key ); ?>-media-id[<?php echo esc_attr( $id ); ?>]">
+					<input type="hidden" value="<?php echo ( isset( $data['media-id'] ) ? esc_attr( $data['media-id'] ) : '' ); ?>" id="menu-item-media-id-<?php echo esc_attr( $id ); ?>" name="<?php printf( '%s-media-id[%s]', esc_attr( $this->meta_key ), esc_attr( $id ) ); ?>">
 
-					<input type="hidden" value="<?php echo ( isset( $data['media-type'] ) ? esc_attr( $data['media-type'] ) : '' ); ?>" id="menu-item-media-type-<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $this->meta_key ); ?>-media-type[<?php echo esc_attr( $id ); ?>]">
+					<input type="hidden" value="<?php echo ( isset( $data['media-type'] ) ? esc_attr( $data['media-type'] ) : '' ); ?>" id="menu-item-media-type-<?php echo esc_attr( $id ); ?>" name="<?php printf( '%s-media-type[%s]', esc_attr( $this->meta_key ), esc_attr( $id ) ); ?>">
 
 				</label>
 			</p>
@@ -201,7 +201,7 @@ class Custom_Nav_Menu_Fields {
 				<?php
 				if ( isset( $data['media-url'] ) && isset( $data['media-type'] ) ) {
 					if ( 'image' === $data['media-type'] ) {
-						echo '<img src="' . esc_url( $data['media-url'] ) . '" height="100">';
+						printf( '<img src="%s" height="100">', esc_url( $data['media-url'] ) );
 					}
 				}
 				?>
@@ -209,13 +209,13 @@ class Custom_Nav_Menu_Fields {
 			<p class="description description-wide menu-item-media-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
 				<label for="menu-item-media-link-<?php echo esc_attr( $id ); ?>">
 					<?php esc_html_e( 'Image Link', 'wp-menu-custom-fields' ); ?><br>
-					<input type="text" id="menu-item-media-link-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php echo esc_attr( $this->meta_key ); ?>-media-link[<?php echo esc_attr( $id ); ?>]" value="<?php echo ( isset( $data['media-link'] ) ? esc_url( $data['media-link'] ) : '' ); ?>">
+					<input type="text" id="menu-item-media-link-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php printf( '%s-media-link[%s]', esc_attr( $this->meta_key ), esc_attr( $id ) ); ?>" value="<?php echo ( isset( $data['media-link'] ) ? esc_url( $data['media-link'] ) : '' ); ?>">
 				</label>
 			</p>
 			<p class="description description-wide menu-item-media-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
 				<label for="menu-item-media-caption-<?php echo esc_attr( $id ); ?>">
 					<?php esc_html_e( 'Image Caption', 'wp-menu-custom-fields' ); ?><br>
-					<textarea id="menu-item-media-caption-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php echo esc_attr( $this->meta_key ); ?>-media-caption[<?php echo esc_attr( $id ); ?>]"><?php echo ( isset( $data['media-caption'] ) ? esc_html( $data['media-caption'] ) : '' ); ?></textarea>
+					<textarea id="menu-item-media-caption-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php printf( '%s-media-caption[%s]', esc_attr( $this->meta_key ), esc_attr( $id ) ); ?>"><?php echo ( isset( $data['media-caption'] ) ? esc_html( $data['media-caption'] ) : '' ); ?></textarea>
 				</label>
 			</p>
 			<?php
@@ -224,13 +224,13 @@ class Custom_Nav_Menu_Fields {
 			<p class="description description-wide menu-item-shortcode-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
 				<label for="menu-item-shortcode-<?php echo esc_attr( $id ); ?>">
 					<?php esc_html_e( 'Shortcode', 'wp-menu-custom-fields' ); ?><br>
-					<input type="text" id="menu-item-shortcode-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php echo esc_attr( $this->meta_key ); ?>-shortcode[<?php echo esc_attr( $id ); ?>]" value="<?php echo ( isset( $data['shortcode'] ) ? esc_attr( $data['shortcode'] ) : '' ); ?>">
+					<input type="text" id="menu-item-shortcode-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php printf( '%s-shortcode[%s]', esc_attr( $this->meta_key ), esc_attr( $id ) ); ?>" value="<?php echo ( isset( $data['shortcode'] ) ? esc_attr( $data['shortcode'] ) : '' ); ?>">
 				</label>
 			</p>
 			<p class="description description-wide menu-item-shortcode-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
 				<label for="menu-item-shortcode-caption-<?php echo esc_attr( $id ); ?>">
 					<?php esc_html_e( 'Shortcode Caption', 'wp-menu-custom-fields' ); ?><br>
-					<textarea id="menu-item-shortcode-caption-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php echo esc_attr( $this->meta_key ); ?>-shortcode-caption[<?php echo esc_attr( $id ); ?>]"><?php echo ( isset( $data['shortcode-caption'] ) ? esc_html( $data['shortcode-caption'] ) : '' ); ?></textarea>
+					<textarea id="menu-item-shortcode-caption-<?php echo esc_attr( $id ); ?>" class="widefat" name="<?php printf( '%s-shortcode-caption[%s]', esc_attr( $this->meta_key ), esc_attr( $id ) ); ?>"><?php echo ( isset( $data['shortcode-caption'] ) ? esc_html( $data['shortcode-caption'] ) : '' ); ?></textarea>
 				</label>
 			</p>
 			<?php
@@ -238,7 +238,7 @@ class Custom_Nav_Menu_Fields {
 			$editor_content = ( isset( $data['custom-html'] ) ? $data['custom-html'] : '' );
 			?>
 			<div class="description description-wide menu-item-html-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
-				<textarea class="menu-item-html-editor" name="<?php echo esc_attr( $this->meta_key ) . '-custom-html[' . esc_attr( $id ) . ']'; ?>" id="menu-item-custom-html-<?php echo esc_attr( $id ); ?>"><?php echo wp_kses_post( $editor_content ); ?></textarea>
+				<textarea class="menu-item-html-editor" name="<?php printf( '%s-custom-html[%s]', esc_attr( $this->meta_key ), esc_attr( $id ) ); ?>" id="menu-item-custom-html-<?php echo esc_attr( $id ); ?>"><?php echo wp_kses_post( $editor_content ); ?></textarea>
 			</div>
 			<?php
 		}
