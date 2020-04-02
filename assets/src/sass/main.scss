@@ -1,4 +1,4 @@
-$captionFontSize: 0.9em;
+@import './variables';
 
 .rt-wp-menu-custom-fields-wrapper {
 	width: 100%;
@@ -13,7 +13,7 @@ $captionFontSize: 0.9em;
 
 		.rt-wp-menu-custom-fields-image {
 			max-height: 200px;
-			display: block;   
+			display: block;
 		}
 
 		.rt-wp-menu-custom-fields-image-caption {

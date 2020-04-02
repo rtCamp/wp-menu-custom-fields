@@ -6,7 +6,7 @@
 	"license": "MIT",
 	"private": true,
 	"scripts": {
-		"prod": "cross-env NODE_ENV=production webpack --mode production --progress && npm run pot",
+		"prod": "cross-env NODE_ENV=production webpack --mode production --progress",
 		"dev": "cross-env NODE_ENV=development webpack --watch --mode development --progress",
 		"clean": "rm -rf build/*",
 		"lint-css": "npx stylelint src/sass/**/*.scss --syntax scss",
