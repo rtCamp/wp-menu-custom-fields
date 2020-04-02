@@ -26,24 +26,8 @@
 	.rt-wp-menu-custom-fields-custom-text {
 		display: block;
 		font-size: $captionFontSize;
-		padding-top: 1em;
-		border-top: 1px solid red;
 		margin-top: 1em;
 	}
-}
-
-.rt-wp-menu-custom-fields-shortcode-wrapper .rt-wp-menu-custom-fields-shortcode {
-
-	/* stylelint-disable declaration-no-important */
-	.wp-video {
-		width: auto !important;
-	}
-    
-	.mejs-container {
-		width: auto !important;
-		min-width: auto !important;
-	}
-	/* stylelint-enable declaration-no-important */
 }
 
 .rt-wp-menu-custom-fields-shortcode-wrapper .rt-wp-menu-custom-fields-shortcode-caption {
