@@ -44,7 +44,7 @@ class Assets {
 	 * @return void
 	 */
 	public function enqueue_scripts() {
-		$file_path = plugin_dir_path( __FILE__ ) . '../../assets/build/css/main.css';
+		$file_path = WP_MENU_CUSTOM_FIELDS_PATH . '/assets/build/css/main.css';
 		$time      = time();
 		if ( file_exists( $file_path ) ) {
 			$time = filemtime( $file_path );
@@ -53,7 +53,7 @@ class Assets {
 		wp_enqueue_style( 'wp-menu-custom-fields-style', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/css/main.css', array(), $time );
 
 		wp_enqueue_script( 'jquery' );
-		$file_path = plugin_dir_path( __FILE__ ) . '../../assets/build/js/main.js';
+		$file_path = WP_MENU_CUSTOM_FIELDS_PATH . '/assets/build/js/main.js';
 		$time      = time();
 		if ( file_exists( $file_path ) ) {
 			$time = filemtime( $file_path );
@@ -71,7 +71,7 @@ class Assets {
 	 */
 	public function admin_enqueue_scripts( $hook_suffix ) {
 		if ( 'nav-menus.php' === $hook_suffix ) {
-			$file_path = plugin_dir_path( __FILE__ ) . '../../assets/build/css/admin.css';
+			$file_path = WP_MENU_CUSTOM_FIELDS_PATH . '/assets/build/css/admin.css';
 			$time      = time();
 			if ( file_exists( $file_path ) ) {
 				$time = filemtime( $file_path );
@@ -85,7 +85,7 @@ class Assets {
 			wp_enqueue_script( 'wp-tinymce' );
 			wp_enqueue_media();
 
-			$file_path = plugin_dir_path( __FILE__ ) . '../../assets/build/js/admin.js';
+			$file_path = WP_MENU_CUSTOM_FIELDS_PATH . '/assets/build/js/admin.js';
 			$time      = time();
 			if ( file_exists( $file_path ) ) {
 				$time = filemtime( $file_path );
