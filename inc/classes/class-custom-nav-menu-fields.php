@@ -238,7 +238,7 @@ class Custom_Nav_Menu_Fields {
 			$editor_content = ( isset( $data['custom-html'] ) ? $data['custom-html'] : '' );
 			?>
 			<div class="description description-wide menu-item-html-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
-				<textarea class="menu-item-html-editor" name="<?php echo esc_attr( $this->meta_key ) . '-custom-html[' . esc_attr( $id ) . ']'; ?>" id="<?php echo 'menu-item-custom-html-' . esc_attr( $id ); ?>"><?php echo wp_kses_post( $editor_content ); ?></textarea>
+				<textarea class="menu-item-html-editor" name="<?php echo esc_attr( $this->meta_key ) . '-custom-html[' . esc_attr( $id ) . ']'; ?>" id="menu-item-custom-html-<?php echo esc_attr( $id ); ?>"><?php echo wp_kses_post( $editor_content ); ?></textarea>
 			</div>
 			<?php
 		}
@@ -352,22 +352,22 @@ class Custom_Nav_Menu_Fields {
 
 			if ( 'image' === $selected_feature && ! empty( $data['media-url'] ) ) {
 				if ( ! $div_set ) {
-					$field_html .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
+					$field_html .= sprintf( '<div class="%s-wrapper">', esc_attr( $this->meta_key ) );
 					$div_set     = true;
 				}
 
-				$image_html = '<div class="' . esc_attr( $this->meta_key ) . '-image-wrapper">';
+				$image_html = sprintf( '<div class="%s-image-wrapper">', esc_attr( $this->meta_key ) );
 
 				if ( ! empty( $data['media-link'] ) ) {
-					$image_html .= '<a href="' . esc_url( $data['media-link'] ) . '">';
+					$image_html .= sprintf( '<a href="%s">', esc_url( $data['media-link'] ) );
 				}
-				$image_html .= '<img class="' . esc_attr( $this->meta_key ) . '-image" src="' . esc_url( $data['media-url'] ) . '">';
+				$image_html .= sprintf( '<img class="%s-image" src="%s">', esc_attr( $this->meta_key ), esc_url( $data['media-url'] ) );
 				if ( ! empty( $data['media-link'] ) ) {
 					$image_html .= '</a>';
 				}
 
 				if ( ! empty( $data['media-caption'] ) ) {
-					$image_html .= '<span class="' . esc_attr( $this->meta_key ) . '-image-caption">' . esc_html( $data['media-caption'] ) . '</span>';
+					$image_html .= sprintf( '<span class="%s-image-caption">%s</span>', esc_attr( $this->meta_key ), esc_html( $data['media-caption'] ) );
 				}
 
 				$image_html .= '</div>';
@@ -388,15 +388,15 @@ class Custom_Nav_Menu_Fields {
 				$field_html .= $image_html;
 			} elseif ( 'shortcode' === $selected_feature && ! empty( $data['shortcode'] ) ) {
 				if ( ! $div_set ) {
-					$field_html .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
+					$field_html .= sprintf( '<div class="%s-wrapper">', esc_attr( $this->meta_key ) );
 					$div_set     = true;
 				}
 
-				$shortcode_html  = '<div class="' . esc_attr( $this->meta_key ) . '-shortcode-wrapper">';
-				$shortcode_html .= '<div class="' . esc_attr( $this->meta_key ) . '-shortcode">' . do_shortcode( $data['shortcode'] ) . '</div>';
+				$shortcode_html  = sprintf( '<div class="%s-shortcode-wrapper">', esc_attr( $this->meta_key ) );
+				$shortcode_html .= sprintf( '<div class="%s-shortcode">' . do_shortcode( $data['shortcode'] ) . '</div>', esc_attr( $this->meta_key ) );
 
 				if ( ! empty( $data['shortcode-caption'] ) ) {
-					$shortcode_html .= '<span class="' . esc_attr( $this->meta_key ) . '-shortcode-caption">' . esc_html( $data['shortcode-caption'] ) . '</span>';
+					$shortcode_html .= sprintf( '<span class="%s-shortcode-caption">%s</span>', esc_attr( $this->meta_key ), esc_html( $data['shortcode-caption'] ) );
 				}
 
 				$shortcode_html .= '</div>';
@@ -417,11 +417,11 @@ class Custom_Nav_Menu_Fields {
 				$field_html .= $shortcode_html;
 			} elseif ( 'html' === $selected_feature && ! empty( $data['custom-html'] ) ) {
 				if ( ! $div_set ) {
-					$field_html .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
+					$field_html .= sprintf( '<div class="%s-wrapper">', esc_attr( $this->meta_key ) );
 					$div_set     = true;
 				}
 
-				$custom_html = '<div class="' . esc_attr( $this->meta_key ) . '-custom-html">' . wp_kses_post( $data['custom-html'] ) . '</div>';
+				$custom_html = sprintf( '<div class="%s-custom-html">%s</div>', esc_attr( $this->meta_key ), wp_kses_post( $data['custom-html'] ) );
 
 				/**
 				 * Hook to filter custom html's HTML.
@@ -442,11 +442,11 @@ class Custom_Nav_Menu_Fields {
 
 		if ( ! empty( $nav_menu_custom_fields[ $item->ID ]['custom-text'] ) ) {
 			if ( ! $div_set ) {
-				$field_html .= '<div class="' . esc_attr( $this->meta_key ) . '-wrapper">';
+				$field_html .= sprintf( '<div class="%s-wrapper">', esc_attr( $this->meta_key ) );
 				$div_set     = true;
 			}
 
-			$custom_text_html = '<span class="' . esc_attr( $this->meta_key ) . '-custom-text">' . esc_html( $nav_menu_custom_fields[ $item->ID ]['custom-text'] ) . '</span>';
+			$custom_text_html = sprintf( '<span class="%s-custom-text">%s</span>', esc_attr( $this->meta_key ), esc_html( $nav_menu_custom_fields[ $item->ID ]['custom-text'] ) );
 
 			/**
 			 * Hook to filter custom text HTML.
