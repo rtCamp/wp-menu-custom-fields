@@ -44,10 +44,22 @@ class Assets {
 	 * @return void
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_style( 'wp-menu-custom-fields-style', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/css/main.css', array(), time() );
+		$file_path = WP_MENU_CUSTOM_FIELDS_PATH . '/assets/build/css/main.css';
+		$time      = time();
+		if ( file_exists( $file_path ) ) {
+			$time = filemtime( $file_path );
+		}
+
+		wp_enqueue_style( 'wp-menu-custom-fields-style', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/css/main.css', array(), $time );
 
 		wp_enqueue_script( 'jquery' );
-		wp_enqueue_script( 'wp-menu-custom-fields-script', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/js/main.js', array( 'jquery' ), time(), true );
+		$file_path = WP_MENU_CUSTOM_FIELDS_PATH . '/assets/build/js/main.js';
+		$time      = time();
+		if ( file_exists( $file_path ) ) {
+			$time = filemtime( $file_path );
+		}
+
+		wp_enqueue_script( 'wp-menu-custom-fields-script', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/js/main.js', array(), $time, true );
 	}
 
 	/**
@@ -59,14 +71,26 @@ class Assets {
 	 */
 	public function admin_enqueue_scripts( $hook_suffix ) {
 		if ( 'nav-menus.php' === $hook_suffix ) {
-			wp_enqueue_style( 'wp-menu-custom-fields-admin-style', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/css/admin.css', array(), time() );
+			$file_path = WP_MENU_CUSTOM_FIELDS_PATH . '/assets/build/css/admin.css';
+			$time      = time();
+			if ( file_exists( $file_path ) ) {
+				$time = filemtime( $file_path );
+			}
+
+			wp_enqueue_style( 'wp-menu-custom-fields-admin-style', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/css/admin.css', array(), $time );
 			wp_enqueue_style( 'dashicons' );
 
 			wp_enqueue_editor();
 			wp_enqueue_script( 'jquery' );
 			wp_enqueue_script( 'wp-tinymce' );
 			wp_enqueue_media();
-			wp_enqueue_script( 'wp-menu-custom-fields-admin-script', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/js/admin.js', array( 'jquery', 'wp-tinymce', 'media-editor', 'media-views' ), time(), true );
+
+			$file_path = WP_MENU_CUSTOM_FIELDS_PATH . '/assets/build/js/admin.js';
+			$time      = time();
+			if ( file_exists( $file_path ) ) {
+				$time = filemtime( $file_path );
+			}
+			wp_enqueue_script( 'wp-menu-custom-fields-admin-script', WP_MENU_CUSTOM_FIELDS_URL . '/assets/build/js/admin.js', array( 'jquery', 'wp-tinymce', 'media-editor', 'media-views' ), $time, true );
 
 			wp_localize_script(
 				'wp-menu-custom-fields-admin-script',
