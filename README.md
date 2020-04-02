@@ -34,6 +34,8 @@ Below is the list of custom fields added by this plugin.
 - Shortcode with caption
 - Custom HTML with tinyMCE editor
 
+**Note:** This plugin works with default themes. In order to use it with custom themes, please add the necessary styling.
+
 ## Installation ##
 
 1. Extract the zip file.
@@ -64,7 +66,7 @@ Below is the list of custom fields added by this plugin.
 
 ### Screenshots ###
 
-Custom fields added on (Appearance -> Menus):
+Custom fields added under Appearance -> Menus:
 
 ![Custom Fields](/screenshots/edit-menu-custom-field.gif?raw=true)
 
