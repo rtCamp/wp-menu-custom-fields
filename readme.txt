@@ -1,5 +1,5 @@
 === WP Menu Custom Fields ===
-Contributors: sid177, kiranpotphode, devikvekariya, rtcamp
+Contributors: rtcamp, sid177, kiranpotphode, devikvekariya
 Tags: Navigation Menu, Navigation Menu Custom Fields
 Requires at least: 5.4
 Tested up to: 5.4
