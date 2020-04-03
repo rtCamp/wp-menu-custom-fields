@@ -1,5 +1,5 @@
 === WP Menu Custom Fields ===
-Contributors: sid177, kiranpotphode, devikvekariya
+Contributors: sid177, kiranpotphode, devikvekariya, rtcamp
 Tags: Navigation Menu, Navigation Menu Custom Fields
 Requires at least: 5.4
 Tested up to: 5.4
@@ -188,7 +188,7 @@ A theme developer can add stylings for the custom fields added by this plugin by
 
 == License ==
 
-Same [GPL] (http://www.gnu.org/licenses/gpl-2.0.txt) that WordPress uses!
+Same [GPL](http://www.gnu.org/licenses/gpl-2.0.txt) that WordPress uses!
 
 == Changelog ==
 
