@@ -1,0 +1,73 @@
+# Copyright (C) 2020 rtCamp
+# This file is distributed under the same license as the WP Menu Custom Fields plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Menu Custom Fields 1.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-menu-custom-fields\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-04-23T10:11:40+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: wp-menu-custom-fields\n"
+
+#. Plugin Name of the plugin
+msgid "WP Menu Custom Fields"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://wordpress.org/plugins/wp-menu-custom-fields/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Adds custom fields on menu items under Appearance -> Menus and shows it on front-end."
+msgstr ""
+
+#. Author of the plugin
+msgid "rtCamp"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://rtcamp.com"
+msgstr ""
+
+#: inc/classes/class-assets.php:99
+#: inc/classes/class-custom-nav-menu-fields.php:192
+msgid "Select Image"
+msgstr ""
+
+#: inc/classes/class-custom-nav-menu-fields.php:119
+msgid "Image"
+msgstr ""
+
+#: inc/classes/class-custom-nav-menu-fields.php:120
+#: inc/classes/class-custom-nav-menu-fields.php:226
+msgid "Shortcode"
+msgstr ""
+
+#: inc/classes/class-custom-nav-menu-fields.php:121
+msgid "Custom HTML"
+msgstr ""
+
+#: inc/classes/class-custom-nav-menu-fields.php:134
+msgid "Custom Text"
+msgstr ""
+
+#: inc/classes/class-custom-nav-menu-fields.php:141
+msgid "Select Feature"
+msgstr ""
+
+#: inc/classes/class-custom-nav-menu-fields.php:211
+msgid "Image Link"
+msgstr ""
+
+#: inc/classes/class-custom-nav-menu-fields.php:217
+msgid "Image Caption"
+msgstr ""
+
+#: inc/classes/class-custom-nav-menu-fields.php:232
+msgid "Shortcode Caption"
+msgstr ""
