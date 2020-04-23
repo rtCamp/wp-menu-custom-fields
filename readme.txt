@@ -196,7 +196,9 @@ Same [GPL](http://www.gnu.org/licenses/gpl-2.0.txt) that WordPress uses!
 * Initial release
 
 = 1.0.1 =
-FIXED
+
+###FIXED
+
  * Class `WP_Menu_Custom_Fields\Inc\Plugin` not found error on Windows platform
 
 == Upgrade Notice ==
