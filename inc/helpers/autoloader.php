@@ -77,8 +77,8 @@ function autoloader( $resource = '' ) {
 
 	}
 
-	if ( ! empty( $resource_path ) && file_exists( $resource_path ) && 0 === validate_file( $resource_path ) ) {
-		// We already making sure that file is exists and valid.
+	if ( ! empty( $resource_path ) && file_exists( $resource_path ) && ( 0 === validate_file( $resource_path ) || 2 === validate_file( $resource_path ) ) ) {
+		// We are already making sure that the file exists and it's valid.
 		require_once( $resource_path ); // phpcs:ignore
 	}
 
