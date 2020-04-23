@@ -4,7 +4,7 @@ Tags: Navigation Menu, Navigation Menu Custom Fields
 Requires at least: 5.4
 Tested up to: 5.4
 Requires PHP: 7.0
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later (of course!)
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -195,7 +195,12 @@ Same [GPL](http://www.gnu.org/licenses/gpl-2.0.txt) that WordPress uses!
 = 1.0 =
 * Initial release
 
+= 1.0.1 =
+FIXED
+ * Class `WP_Menu_Custom_Fields\Inc\Plugin` not found error on Windows platform
+
 == Upgrade Notice ==
+WP Menu Custom Fields v1.0.1, with added support for Windows platform.
 
 == See room for improvement? ==
 
