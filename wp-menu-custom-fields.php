@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Menu Custom Fields
  * Description: Adds custom fields on menu items under Appearance -> Menus and shows it on front-end.
- * Plugin URI:  https://rtcamp.com
+ * Plugin URI:  https://wordpress.org/plugins/wp-menu-custom-fields/
  * Author:      rtCamp
  * Author URI:  https://rtcamp.com
  * License:     GPL2

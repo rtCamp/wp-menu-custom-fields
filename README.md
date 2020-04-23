@@ -9,7 +9,7 @@ This plugin adds custom fields on menu item's edit screen of wp-admin.
 
 **Author:** rtCamp
 
-**Contributors:** sid177, kiranpotphode, devikvekariya
+**Contributors:** rtcamp, sid177, kiranpotphode, devikvekariya
 
 **Tags:** Navigation Menu, Navigation Menu Custom Fields
 
