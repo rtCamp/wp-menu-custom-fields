@@ -474,13 +474,13 @@ class Custom_Nav_Menu_Fields {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string $field_html Current custom field HTML.
-		 * @param array $nav_menu_custom_fields[ $item->ID ] Menu item's custom fields data.
-		 * @param int $item->ID Menu item's ID.
+		 * @param string $field_html                         Current custom field HTML.
+		 * @param array  $nav_menu_custom_field[ $item->ID ] Menu item's custom fields data.
+		 * @param int    $item->ID                           Menu item's ID.
 		 *
 		 * @return string Final custom field HTML.
 		 */
-		$field_html = apply_filters( 'wp_menu_custom_fields_fields_html', $field_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+		$field_html = apply_filters( 'wp_menu_custom_fields_fields_html', $field_html, $nav_menu_custom_fields[ $item->ID ] ?? array(), $item->ID );
 
 		return $html . $field_html;
 	}

@@ -6,9 +6,11 @@ p.feature-list-label-p {
 	display: none;
 }
 
+/* stylelint-disable selector-max-specificity */
 #menu-to-edit .custom-field-select-image {
 	margin-left: 0;
 }
+/* stylelint-enable */
 
 div.menu-item-select-feature-list-wrapper {
 	margin-bottom: 0.7em;
