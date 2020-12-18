@@ -387,13 +387,14 @@ class Custom_Nav_Menu_Fields {
 
 				$field_html .= $image_html;
 			} elseif ( 'shortcode' === $selected_feature && ! empty( $data['shortcode'] ) ) {
+
 				if ( ! $div_set ) {
 					$field_html .= sprintf( '<div class="%s-wrapper">', esc_attr( $this->meta_key ) );
 					$div_set     = true;
 				}
 
-				$shortcode_html  = sprintf( '<div class="%s-shortcode-wrapper">', esc_attr( $this->meta_key ) );
-				$shortcode_html .= sprintf( '<div class="%s-shortcode">' . do_shortcode( $data['shortcode'] ) . '</div>', esc_attr( $this->meta_key ) );
+				$shortcode_html  = sprintf( '<div class="%1$s-shortcode-wrapper">', esc_attr( $this->meta_key ) );
+				$shortcode_html .= sprintf( '<div class="%1$s-shortcode">' . do_shortcode( $data['shortcode'] ) . '</div>', esc_attr( $this->meta_key ) );
 
 				if ( ! empty( $data['shortcode-caption'] ) ) {
 					$shortcode_html .= sprintf( '<span class="%s-shortcode-caption">%s</span>', esc_attr( $this->meta_key ), esc_html( $data['shortcode-caption'] ) );
