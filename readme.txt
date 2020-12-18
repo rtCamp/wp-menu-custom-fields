@@ -205,7 +205,7 @@ FIXED
 * Initial release
 
 == Upgrade Notice ==
-WP Menu Custom Fields v1.0.1, with added support for Windows platform.
+WP Menu Custom Fields v1.0.2, with added fix for Audio Shortcode.
 
 == See room for improvement? ==
 
