@@ -387,13 +387,14 @@ class Custom_Nav_Menu_Fields {
 
 				$field_html .= $image_html;
 			} elseif ( 'shortcode' === $selected_feature && ! empty( $data['shortcode'] ) ) {
+
 				if ( ! $div_set ) {
 					$field_html .= sprintf( '<div class="%s-wrapper">', esc_attr( $this->meta_key ) );
 					$div_set     = true;
 				}
 
-				$shortcode_html  = sprintf( '<div class="%s-shortcode-wrapper">', esc_attr( $this->meta_key ) );
-				$shortcode_html .= sprintf( '<div class="%s-shortcode">' . do_shortcode( $data['shortcode'] ) . '</div>', esc_attr( $this->meta_key ) );
+				$shortcode_html  = sprintf( '<div class="%1$s-shortcode-wrapper">', esc_attr( $this->meta_key ) );
+				$shortcode_html .= sprintf( '<div class="%1$s-shortcode">' . do_shortcode( $data['shortcode'] ) . '</div>', esc_attr( $this->meta_key ) );
 
 				if ( ! empty( $data['shortcode-caption'] ) ) {
 					$shortcode_html .= sprintf( '<span class="%s-shortcode-caption">%s</span>', esc_attr( $this->meta_key ), esc_html( $data['shortcode-caption'] ) );
@@ -473,13 +474,13 @@ class Custom_Nav_Menu_Fields {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string $field_html Current custom field HTML.
-		 * @param array $nav_menu_custom_fields[ $item->ID ] Menu item's custom fields data.
-		 * @param int $item->ID Menu item's ID.
+		 * @param string $field_html                         Current custom field HTML.
+		 * @param array  $nav_menu_custom_field[ $item->ID ] Menu item's custom fields data.
+		 * @param int    $item->ID                           Menu item's ID.
 		 *
 		 * @return string Final custom field HTML.
 		 */
-		$field_html = apply_filters( 'wp_menu_custom_fields_fields_html', $field_html, $nav_menu_custom_fields[ $item->ID ], $item->ID );
+		$field_html = apply_filters( 'wp_menu_custom_fields_fields_html', $field_html, $nav_menu_custom_fields[ $item->ID ] ?? array(), $item->ID );
 
 		return $html . $field_html;
 	}

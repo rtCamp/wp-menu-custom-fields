@@ -35,3 +35,16 @@
 	font-size: $captionFontSize;
 	margin-top: 1em;
 }
+
+.rt-custom-menu-field-item {
+	display: grid;
+	grid-template-columns: 23% 75%;
+	column-gap: 2%;
+	padding-bottom: 0.5em;
+}
+
+.rt-custom-menu-field-item-link {
+	width: auto;
+	word-break: break-all;
+	padding-right: 0.5em;
+}
