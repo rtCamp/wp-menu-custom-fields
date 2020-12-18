@@ -475,7 +475,7 @@ class Custom_Nav_Menu_Fields {
 		 *
 		 * @param string $field_html                         Current custom field HTML.
 		 * @param array  $nav_menu_custom_field[ $item->ID ] Menu item's custom fields data.
-		 * @param int    $item->ID                          Menu item's ID.
+		 * @param int    $item->ID                           Menu item's ID.
 		 *
 		 * @return string Final custom field HTML.
 		 */
