@@ -95,7 +95,7 @@ class Custom_Nav_Menu_Fields {
 		if ( ! empty( $data['image']['media-id'] ) ) {
 			$media_url = wp_get_attachment_url( $data['image']['media-id'] );
 			if ( ! empty( $media_url ) ) {
-				$data['image']['media-url'] = $media_url;
+				$data['image']['media-link'] = $media_url;
 			}
 		}
 
@@ -199,9 +199,9 @@ class Custom_Nav_Menu_Fields {
 			</p>
 			<p id="menu-item-selected-media-display-paragraph-<?php echo esc_attr( $id ); ?>" class="description description-wide menu-item-media-p-<?php echo esc_attr( $id ); ?> <?php echo ( $is_hidden ? 'menu-item-hidden' : '' ); ?>">
 				<?php
-				if ( isset( $data['media-url'] ) && isset( $data['media-type'] ) ) {
+				if ( isset( $data['media-link'] ) && isset( $data['media-type'] ) ) {
 					if ( 'image' === $data['media-type'] ) {
-						printf( '<img src="%s" height="100">', esc_url( $data['media-url'] ) );
+						printf( '<img src="%s" height="100">', esc_url( $data['media-link'] ) );
 					}
 				}
 				?>
@@ -293,7 +293,7 @@ class Custom_Nav_Menu_Fields {
 		if ( ! empty( $data['image']['media-id'] ) ) {
 			$media_url = wp_get_attachment_url( $data['image']['media-id'] );
 			if ( ! empty( $media_url ) ) {
-				$data['image']['media-url'] = $media_url;
+				$data['image']['media-link'] = $media_url;
 			}
 		}
 
@@ -350,7 +350,7 @@ class Custom_Nav_Menu_Fields {
 			$selected_feature = $nav_menu_custom_fields[ $item->ID ]['selected-feature'];
 			$data             = $nav_menu_custom_fields[ $item->ID ][ $selected_feature ];
 
-			if ( 'image' === $selected_feature && ! empty( $data['media-url'] ) ) {
+			if ( 'image' === $selected_feature && ! empty( $data['media-link'] ) ) {
 				if ( ! $div_set ) {
 					$field_html .= sprintf( '<div class="%s-wrapper">', esc_attr( $this->meta_key ) );
 					$div_set     = true;
@@ -361,7 +361,7 @@ class Custom_Nav_Menu_Fields {
 				if ( ! empty( $data['media-link'] ) ) {
 					$image_html .= sprintf( '<a href="%s">', esc_url( $data['media-link'] ) );
 				}
-				$image_html .= sprintf( '<img class="%s-image" src="%s">', esc_attr( $this->meta_key ), esc_url( $data['media-url'] ) );
+				$image_html .= sprintf( '<img class="%s-image" src="%s">', esc_attr( $this->meta_key ), esc_url( $data['media-link'] ) );
 				if ( ! empty( $data['media-link'] ) ) {
 					$image_html .= '</a>';
 				}
