@@ -361,7 +361,7 @@ class Custom_Nav_Menu_Fields {
 				if ( ! empty( $data['media-link'] ) ) {
 					$image_html .= sprintf( '<a href="%s">', esc_url( $data['media-link'] ) );
 				}
-				$image_html .= sprintf( '<img class="%s-image" src="%s">', esc_attr( $this->meta_key ), esc_url( $data['media-link'] ) );
+				$image_html .= sprintf( '<img class="%1$s-image" src="%2$s">', esc_attr( $this->meta_key ), esc_url( $data['media-link'] ) );
 				if ( ! empty( $data['media-link'] ) ) {
 					$image_html .= '</a>';
 				}
