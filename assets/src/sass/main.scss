@@ -47,4 +47,9 @@
 	width: auto;
 	word-break: break-all;
 	padding-right: 0.5em;
+	word-wrap: break-word;
+}
+
+.sub-menu .rt-wp-menu-custom-fields-custom-html a {
+	word-break: break-all;
 }
