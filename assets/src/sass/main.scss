@@ -61,3 +61,14 @@ li.menu-item-has-children .sub-menu {
 	}
 }
 // stylelint-enable selector-max-specificity
+
+.sub-menu .rt-wp-menu-custom-fields-custom-html {
+	a {
+		padding-top: 0.5em;
+		word-break: break-all;
+	}
+	& > * {
+		padding: 0;
+		padding-bottom: 0.5em;
+	}
+}
