@@ -11,8 +11,12 @@
 
 	.rt-wp-menu-custom-fields-image-wrapper {
 
+		& > a {
+			padding: 0.5em 1em;
+		}
+
 		.rt-wp-menu-custom-fields-image {
-			max-height: 200px;
+			max-width: 100%;
 			display: block;
 		}
 
@@ -48,3 +52,12 @@
 	word-break: break-all;
 	padding-right: 0.5em;
 }
+
+// stylelint-disable selector-max-specificity
+li.menu-item-has-children .sub-menu {
+	// Adding css with higher specificity to have the grid layout always.
+	li.rt-custom-menu-field-item {
+		display: grid;
+	}
+}
+// stylelint-enable selector-max-specificity

@@ -13,6 +13,11 @@ $( document ).ready( () => {
 	wrappers.closest( '.sub-menu' ).css( 'min-width', '400px' );
 	wrappers.find( '.rt-wp-menu-custom-fields-shortcode' ).closest( '.sub-menu' ).css( 'min-width', '600px' );
 
+	// Set different width for mobile-sized devices.
+	if ( 768 > $( window ).width() ) {
+		wrappers.closest( '.sub-menu' ).css( 'min-width', '300px' );
+	}
+
 	let li = wrappers.closest( 'li.menu-item' );
 	li.addClass( 'rt-custom-menu-field-item' );
 	let a = li.find( '> a' ).addClass( 'rt-custom-menu-field-item-link' );
