@@ -105,6 +105,8 @@ ul:not(.sub-menu) > li.menu-item-has-children > ul.sub-menu > li {
 				transform: rotate(-90deg);
 				top: -0.9412em;
 				right: 0.9412em;
+				left: unset;
+				bottom: unset;
 			}
 		}
 
