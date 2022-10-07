@@ -16,7 +16,7 @@
 		}
 
 		.rt-wp-menu-custom-fields-image {
-			max-width: 100%;
+			width: 250px;
 			display: block;
 		}
 
@@ -93,3 +93,27 @@ li.menu-item-has-children {
 	width: 100% !important;
 }
 // stylelint-enable selector-max-specificity,declaration-no-important
+
+// stylelint-disable selector-max-specificity
+ul:not(.sub-menu) > li.menu-item-has-children > ul.sub-menu > li {
+	@media only screen and ( min-width: 1000px ) {
+		ul {
+			top: 150%;
+			left: 0;
+
+			&::after {
+				transform: rotate(-90deg);
+				top: -0.9412em;
+				right: 0.9412em;
+			}
+		}
+
+		&.rt-custom-menu-field-item ul {
+			top: calc( 100% + 32px );
+			left: 0;
+			bottom: unset;
+			right: unset;
+		}
+	}
+}
+// stylelint-enable selector-max-specificity
