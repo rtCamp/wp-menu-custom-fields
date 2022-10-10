@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://rtcamp.com/?ref=wp-menu-custom-fields-repo" target="_blank"><img width="200"src="https://rtcamp.com/wp-content/themes/rtcamp-v9/assets/img/site-logo-black.svg"></a>
+<a href="https://rtcamp.com/?ref=wp-menu-custom-fields-repo" target="_blank"><img width="200"src="https://rtcamp.com/wp-content/uploads/sites/2/2020/11/site-logo-black.svg"></a>
 </p>
 
 # WP Menu Custom Fields - v1.0.2
@@ -27,7 +27,7 @@ This plugin adds custom fields on menu item's edit screen of wp-admin.
 
 ## Description ##
 This plugin adds custom fields on Appearance -> Menus page of wp-admin (see [screenshots](#screenshots)).
-It uses `wp_nav_menu_item_custom_fields` hook added in WordPress 5.4 release to add custom fields.  
+It uses `wp_nav_menu_item_custom_fields` hook added in WordPress 5.4 release to add custom fields.
 Below is the list of custom fields added by this plugin.
 - Custom text
 - Image selection with link and caption
@@ -180,7 +180,7 @@ A theme developer can add stylings for the custom fields added by this plugin by
 
 ### Reporting a bug 🐞
 
-Before creating a new issue, do browse through the [existing issues](https://github.com/rtCamp/wp-menu-custom-fields/issues) for resolution or upcoming fixes. 
+Before creating a new issue, do browse through the [existing issues](https://github.com/rtCamp/wp-menu-custom-fields/issues) for resolution or upcoming fixes.
 
 If you still need to [log an issue](https://github.com/rtCamp/wp-menu-custom-fields/issues/new), making sure to include as much detail as you can, including clear steps to reproduce your issue if possible.
 
@@ -188,7 +188,7 @@ If you still need to [log an issue](https://github.com/rtCamp/wp-menu-custom-fie
 
 Want to contribute a new feature? Start a conversation by logging an [issue](https://github.com/rtCamp/wp-menu-custom-fields/issues).
 
-Once you're ready to send a pull request, please run through the following checklist: 
+Once you're ready to send a pull request, please run through the following checklist:
 
 1. Browse through the [existing issues](https://github.com/rtCamp/wp-menu-custom-fields/issues) for anything related to what you want to work on. If you don't find any related issues, open a new one.
 
