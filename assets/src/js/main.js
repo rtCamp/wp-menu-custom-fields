@@ -13,11 +13,11 @@ $( document ).ready( () => {
 	wrappers.closest( '.sub-menu' ).css( 'min-width', '400px' );
 	wrappers.find( '.rt-wp-menu-custom-fields-shortcode' ).closest( '.sub-menu' ).css( 'min-width', '600px' );
 
-	let submenuShortcode = wrappers.find( '.rt-wp-menu-custom-fields-shortcode' ).closest( '.sub-menu' );
+	let submenuCustomField = wrappers.find( '.rt-wp-menu-custom-fields-shortcode, .rt-wp-menu-custom-fields-image-wrapper' ).closest( '.sub-menu' );
 
 	// Change submenu width for non-mobile devices.
 	if ( 768 <= $( window ).width() ) {
-		submenuShortcode.each( ( index, value ) => {
+		submenuCustomField.each( ( index, value ) => {
 			value.style.minWidth = ( 600 - ( index * 14.5 ) ) + 'px';
 		} );
 	}
@@ -26,6 +26,7 @@ $( document ).ready( () => {
 	if ( 768 > $( window ).width() ) {
 		wrappers.closest( '.sub-menu' ).css( 'min-width', '300px' );
 		wrappers.find( '.rt-wp-menu-custom-fields-shortcode' ).closest( '.sub-menu' ).css( 'min-width', '400px' );
+		$( 'ul:not(.sub-menu) > li.menu-item-has-children > ul.sub-menu' ).has( '.rt-wp-menu-custom-fields-shortcode' ).css( 'min-width', '350px' );
 	}
 
 	let li = wrappers.closest( 'li.menu-item' );
