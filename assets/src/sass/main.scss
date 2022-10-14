@@ -11,8 +11,12 @@
 
 	.rt-wp-menu-custom-fields-image-wrapper {
 
+		& > a {
+			padding: 0.5em 1em;
+		}
+
 		.rt-wp-menu-custom-fields-image {
-			max-height: 200px;
+			width: 250px;
 			display: block;
 		}
 
@@ -43,8 +47,75 @@
 	padding-bottom: 0.5em;
 }
 
+@media only screen and ( max-width: 767px ) {
+	.rt-custom-menu-field-item {
+		grid-template-columns: 15em;
+	}
+
+	// stylelint-disable-next-line selector-max-specificity
+	ul:not(.sub-menu) > li > .sub-menu > .rt-custom-menu-field-item {
+		margin-left: 0.7em;
+	}
+}
+
 .rt-custom-menu-field-item-link {
 	width: auto;
 	word-break: break-all;
 	padding-right: 0.5em;
 }
+
+// stylelint-disable selector-max-specificity
+li.menu-item-has-children {
+	.sub-menu {
+		// Adding css with higher specificity to have the grid layout always.
+		li.rt-custom-menu-field-item {
+			display: grid;
+			max-width: calc( 30em - var(--primary-nav--padding) );
+		}
+	}
+}
+// stylelint-enable selector-max-specificity
+
+.sub-menu .rt-wp-menu-custom-fields-custom-html {
+	a {
+		padding-top: 0.5em;
+		word-break: break-all;
+	}
+	& > * {
+		padding: 0;
+		padding-bottom: 0.5em;
+	}
+}
+
+// stylelint-disable selector-max-specificity,declaration-no-important
+.sub-menu .rt-wp-menu-custom-fields-shortcode .wp-video-shortcode.mejs-video {
+	// Width added through custom script gets overwritten by core script when video plays, so added width css with !important.
+	width: 100% !important;
+}
+// stylelint-enable selector-max-specificity,declaration-no-important
+
+// stylelint-disable selector-max-specificity
+ul:not(.sub-menu) > li.menu-item-has-children > ul.sub-menu > li {
+	@media only screen and ( min-width: 1000px ) {
+		ul {
+			top: 150%;
+			left: 0;
+
+			&::after {
+				transform: rotate(-90deg);
+				top: -0.9412em;
+				right: 0.9412em;
+				left: unset;
+				bottom: unset;
+			}
+		}
+
+		&.rt-custom-menu-field-item ul {
+			top: calc( 100% + 32px );
+			left: 0;
+			bottom: unset;
+			right: unset;
+		}
+	}
+}
+// stylelint-enable selector-max-specificity
