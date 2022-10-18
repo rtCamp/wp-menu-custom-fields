@@ -2,7 +2,7 @@
 Contributors: rtcamp, sid177, kiranpotphode, devikvekariya
 Tags: Navigation Menu, Navigation Menu Custom Fields
 Requires at least: 5.4
-Tested up to: 5.7
+Tested up to: 6.0.2
 Requires PHP: 7.0
 Stable tag: 1.0.2
 License: GPLv2 or later (of course!)
@@ -20,7 +20,11 @@ Below is the list of custom fields this plugin adds.
 - Shortcode with caption
 - Custom HTML with TinyMCE editor
 
-**Note:** This plugin works with default themes. In order to use it with custom themes, please add the necessary styling.
+**Notes:**
+
+- This plugin works with default themes. In order to use it with custom themes, please add the necessary styling from your theme to overwrite the plugin CSS.
+- The custom fields from this plugin should be used in the submenu for well-structured and responsive UI.
+- Currently, this plugin is not supported on FSE themes.
 
 == Installation ==
 
@@ -50,7 +54,7 @@ Below is the list of custom fields this plugin adds.
 
 = Using Shortcode =
 
-- You can add a shortcode in **Shortcode** field. We've added some stylings to handle WordPress' defaut `[video]` shortcode.
+- You can add a shortcode in **Shortcode** field. We've added some stylings to handle WordPress' default `[video]` and `[audio]` shortcode.
 - You can enter a caption text in **Shortcode Caption** field and it'll be displayed below the shortcode on the front-end.
 
 = Using Custom HTML =
@@ -61,10 +65,16 @@ Below is the list of custom fields this plugin adds.
 
 == Screenshots ==
 
-1. Custom fields added under Appearance -> Menus
-2. Custom HTML
-3. Image with custom text
-4. Video via shortcode
+1. Custom text field added under Appearance -> Menus
+2. Custom text field (frontend)
+3. Custom image field added under Appearance -> Menus from WP-Media
+4. Custom image field (frontend from WP-Media)
+5. Custom image field added under Appearance -> Menus from image url
+6. Custom image field (frontend from image url)
+7. Custom shortcode field added under Appearance -> Menus
+8. Custom shortcode field (frontend)
+9. Custom HTML field added under Appearance -> Menus
+10. Custom HTML field (frontend)
 
 == Hooks ==
 
