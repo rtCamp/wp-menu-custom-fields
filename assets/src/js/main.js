@@ -36,10 +36,13 @@ $( document ).ready( () => {
 
 	$( window ).load( () => {
 		if ( 768 <= $( window ).width() ) {
-			let mejsContainer = $( '.sub-menu .rt-wp-menu-custom-fields-shortcode .wp-video-shortcode.mejs-video' );
+			let mejsVideoContainer = $( '.sub-menu .rt-wp-menu-custom-fields-shortcode .wp-video-shortcode.mejs-video' );
+			let mejsAudioContainer = $( '.sub-menu .rt-wp-menu-custom-fields-shortcode .wp-audio-shortcode.mejs-audio' );
 
-			mejsContainer.css( { minWidth: '100%', minHeight: '12em' } );
-			mejsContainer.find( 'video.wp-video-shortcode' ).css( { minWidth: '100%', minHeight: '100%' } );
+			mejsVideoContainer.css( { minWidth: '100%', minHeight: '12em' } );
+			mejsVideoContainer.find( 'video.wp-video-shortcode' ).css( { minWidth: '100%', minHeight: '100%' } );
+
+			mejsAudioContainer.css( { minWidth: '100%' } );
 		}
 	} );
 } );

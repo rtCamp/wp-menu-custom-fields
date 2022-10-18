@@ -88,9 +88,26 @@ li.menu-item-has-children {
 }
 
 // stylelint-disable selector-max-specificity,declaration-no-important
-.sub-menu .rt-wp-menu-custom-fields-shortcode .wp-video-shortcode.mejs-video {
-	// Width added through custom script gets overwritten by core script when video plays, so added width css with !important.
-	width: 100% !important;
+.sub-menu .rt-wp-menu-custom-fields-shortcode {
+	.wp-video-shortcode.mejs-video {
+		// Width added through custom script gets overwritten by core script when video plays, so added width css with !important.
+		width: 100% !important;
+	}
+
+	.wp-audio-shortcode.mejs-audio {
+		@media only screen and ( min-width: 1000px ) {
+			.mejs-controls > * {
+				width: 100%;
+				min-width: 2em;
+				padding-left: 0;
+				padding-right: 0;
+			}
+
+			.mejs-controls > .mejs-playpause-button {
+				width: 4em;
+			}
+		}
+	}
 }
 // stylelint-enable selector-max-specificity,declaration-no-important
 
