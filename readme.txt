@@ -1,10 +1,10 @@
 === WP Menu Custom Fields ===
-Contributors: rtcamp, sid177, kiranpotphode, devikvekariya
+Contributors: rtcamp, sid177, kiranpotphode, devikvekariya, vaishaliagola27, deepaklalwani97, shreyasikhar26
 Tags: Navigation Menu, Navigation Menu Custom Fields
 Requires at least: 5.4
 Tested up to: 6.0.2
 Requires PHP: 7.0
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later (of course!)
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -201,6 +201,12 @@ A theme developer can add stylings for the custom fields added by this plugin by
 Same [GPL](http://www.gnu.org/licenses/gpl-2.0.txt) that WordPress uses!
 
 == Changelog ==
+
+= 1.0.3 =
+FIXED
+ * Fix UI bugs on default themes
+ * Fix fatal error related to unknown format specifier with PHP v8.x.x
+ * Fix image not showing when added with a link
 
 = 1.0.2 =
 FIXED
