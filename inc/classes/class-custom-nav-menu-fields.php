@@ -394,7 +394,8 @@ class Custom_Nav_Menu_Fields {
 				}
 
 				$shortcode_html  = sprintf( '<div class="%1$s-shortcode-wrapper">', esc_attr( $this->meta_key ) );
-				$shortcode_html .= sprintf( '<div class="%1$s-shortcode">' . do_shortcode( $data['shortcode'] ) . '</div>', esc_attr( $this->meta_key ) );
+				$shortcode_html .= sprintf( '<div class="%1$s-shortcode">', esc_attr( $this->meta_key ) );
+				$shortcode_html .= do_shortcode( $data['shortcode'] ) . '</div>';
 
 				if ( ! empty( $data['shortcode-caption'] ) ) {
 					$shortcode_html .= sprintf( '<span class="%s-shortcode-caption">%s</span>', esc_attr( $this->meta_key ), esc_html( $data['shortcode-caption'] ) );
