@@ -2,7 +2,7 @@
 <a href="https://rtcamp.com/?ref=wp-menu-custom-fields-repo" target="_blank"><img width="200"src="https://rtcamp.com/wp-content/uploads/sites/2/2020/11/site-logo-black.svg"></a>
 </p>
 
-# WP Menu Custom Fields - v1.0.2
+# WP Menu Custom Fields - v1.0.3
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 This plugin adds custom fields on menu item's edit screen of wp-admin.
