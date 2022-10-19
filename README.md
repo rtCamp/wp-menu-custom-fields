@@ -26,7 +26,7 @@ This plugin adds custom fields on menu item's edit screen of wp-admin.
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
 ## Description ##
-This plugin adds custom fields on Appearance -> Menus page of wp-admin (see [screenshots](#screenshots)).
+This plugin adds custom fields on Appearance -> Menus page of wp-admin (see [screenshots](#screenshots)) and supports only 1-level menu configuration.
 It uses `wp_nav_menu_item_custom_fields` hook added in WordPress 5.4 release to add custom fields.
 Below is the list of custom fields added by this plugin.
 - Custom text

@@ -12,7 +12,7 @@ This plugin adds custom fields on menu item's edit interface of wp-admin.
 
 == Description ==
 
-This plugin adds custom fields on menu item's edit interface of wp-admin.
+This plugin adds custom fields on the menu item's edit interface of wp-admin and supports only 1-level menu configuration.
 Below is the list of custom fields this plugin adds.
 
 - Custom text
