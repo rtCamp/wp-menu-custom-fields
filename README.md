@@ -15,7 +15,7 @@ This plugin adds custom fields on menu item's edit screen of wp-admin.
 
 **Requires at least:** 5.4
 
-**Tested up to:** 6.0.2
+**Tested up to:** 6.0.3
 
 **Requires PHP version:** 7.0
 
