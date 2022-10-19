@@ -22,9 +22,9 @@ Below is the list of custom fields this plugin adds.
 
 **Notes:**
 
-- This plugin works with default themes. In order to use it with custom themes, please add the necessary styling from your theme to overwrite the plugin CSS.
+- This plugin works with default themes. In order to use it with custom themes, please add the necessary styling in your theme/child theme to override the plugin's CSS.
 - The custom fields from this plugin should be used in the submenu for well-structured and responsive UI.
-- Currently, this plugin is not supported on FSE themes.
+- Currently, this plugin is not supported with FSE themes.
 
 == Installation ==
 
@@ -204,7 +204,7 @@ Same [GPL](http://www.gnu.org/licenses/gpl-2.0.txt) that WordPress uses!
 
 = 1.1 =
 FIXED
- * Fix UI bugs on default themes
+ * Fix UI bugs with default themes
  * Fix fatal error related to unknown format specifier with PHP v8.x.x
  * Fix image not showing when added with a link
 
