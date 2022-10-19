@@ -4,7 +4,7 @@ Tags: Navigation Menu, Navigation Menu Custom Fields
 Requires at least: 5.4
 Tested up to: 6.0.2
 Requires PHP: 7.0
-Stable tag: 1.0.3
+Stable tag: 1.1
 License: GPLv2 or later (of course!)
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -202,7 +202,7 @@ Same [GPL](http://www.gnu.org/licenses/gpl-2.0.txt) that WordPress uses!
 
 == Changelog ==
 
-= 1.0.3 =
+= 1.1 =
 FIXED
  * Fix UI bugs on default themes
  * Fix fatal error related to unknown format specifier with PHP v8.x.x
