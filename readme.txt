@@ -1,10 +1,10 @@
 === WP Menu Custom Fields ===
-Contributors: rtcamp, sid177, kiranpotphode, devikvekariya
+Contributors: rtcamp, sid177, kiranpotphode, devikvekariya, vaishuagola27, deepaklalwani, alvitazwar052, pradeep1308, shreyasikhar26, gagan0123
 Tags: Navigation Menu, Navigation Menu Custom Fields
 Requires at least: 5.4
-Tested up to: 5.7
+Tested up to: 6.0.3
 Requires PHP: 7.0
-Stable tag: 1.0.2
+Stable tag: 1.1
 License: GPLv2 or later (of course!)
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ This plugin adds custom fields on menu item's edit interface of wp-admin.
 
 == Description ==
 
-This plugin adds custom fields on menu item's edit interface of wp-admin.
+This plugin adds custom fields on the menu item's edit interface of wp-admin and supports only 1-level menu configuration.
 Below is the list of custom fields this plugin adds.
 
 - Custom text
@@ -20,7 +20,11 @@ Below is the list of custom fields this plugin adds.
 - Shortcode with caption
 - Custom HTML with TinyMCE editor
 
-**Note:** This plugin works with default themes. In order to use it with custom themes, please add the necessary styling.
+**Notes:**
+
+- This plugin works with default themes. In order to use it with custom themes, please add the necessary styling in your theme/child theme to override the plugin's CSS.
+- The custom fields from this plugin should be used in the submenu for well-structured and responsive UI.
+- Currently, this plugin is not supported with FSE themes.
 
 == Installation ==
 
@@ -50,7 +54,7 @@ Below is the list of custom fields this plugin adds.
 
 = Using Shortcode =
 
-- You can add a shortcode in **Shortcode** field. We've added some stylings to handle WordPress' defaut `[video]` shortcode.
+- You can add a shortcode in **Shortcode** field. We've added some stylings to handle WordPress' default `[video]` and `[audio]` shortcode.
 - You can enter a caption text in **Shortcode Caption** field and it'll be displayed below the shortcode on the front-end.
 
 = Using Custom HTML =
@@ -61,10 +65,16 @@ Below is the list of custom fields this plugin adds.
 
 == Screenshots ==
 
-1. Custom fields added under Appearance -> Menus
-2. Custom HTML
-3. Image with custom text
-4. Video via shortcode
+1. Custom text field added under Appearance -> Menus
+2. Custom text field (frontend)
+3. Custom image field added under Appearance -> Menus from WP-Media
+4. Custom image field (frontend from WP-Media)
+5. Custom image field added under Appearance -> Menus from image url
+6. Custom image field (frontend from image url)
+7. Custom shortcode field added under Appearance -> Menus
+8. Custom shortcode field (frontend)
+9. Custom HTML field added under Appearance -> Menus
+10. Custom HTML field (frontend)
 
 == Hooks ==
 
@@ -191,6 +201,12 @@ A theme developer can add stylings for the custom fields added by this plugin by
 Same [GPL](http://www.gnu.org/licenses/gpl-2.0.txt) that WordPress uses!
 
 == Changelog ==
+
+= 1.1 =
+FIXED
+ * Fix UI bugs with default themes
+ * Fix fatal error related to unknown format specifier with PHP v8.x.x
+ * Fix image not showing when added with a link
 
 = 1.0.2 =
 FIXED

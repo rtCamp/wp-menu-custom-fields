@@ -2,31 +2,31 @@
 <a href="https://rtcamp.com/?ref=wp-menu-custom-fields-repo" target="_blank"><img width="200"src="https://rtcamp.com/wp-content/uploads/sites/2/2020/11/site-logo-black.svg"></a>
 </p>
 
-# WP Menu Custom Fields - v1.0.2
+# WP Menu Custom Fields - v1.1
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 This plugin adds custom fields on menu item's edit screen of wp-admin.
 
 **Author:** rtCamp
 
-**Contributors:** rtcamp, sid177, kiranpotphode, devikvekariya, vaishaliagola27, deepaklalwani97
+**Contributors:** rtcamp, sid177, kiranpotphode, devikvekariya, vaishuagola27, deepaklalwani, alvitazwar052, pradeep1308, shreyasikhar26, gagan0123
 
 **Tags:** Navigation Menu, Navigation Menu Custom Fields
 
 **Requires at least:** 5.4
 
-**Tested up to:** 5.7
+**Tested up to:** 6.0.3
 
 **Requires PHP version:** 7.0
 
-**Stable tag:** 1.0.2
+**Stable tag:** 1.1
 
 **License:** GPLv2 or later (of course!)
 
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
 ## Description ##
-This plugin adds custom fields on Appearance -> Menus page of wp-admin (see [screenshots](#screenshots)).
+This plugin adds custom fields on Appearance -> Menus page of wp-admin (see [screenshots](#screenshots)) and supports only 1-level menu configuration.
 It uses `wp_nav_menu_item_custom_fields` hook added in WordPress 5.4 release to add custom fields.
 Below is the list of custom fields added by this plugin.
 - Custom text
@@ -34,7 +34,11 @@ Below is the list of custom fields added by this plugin.
 - Shortcode with caption
 - Custom HTML with tinyMCE editor
 
-**Note:** This plugin works with default themes. In order to use it with custom themes, please add the necessary styling.
+**Notes:**
+
+- This plugin works with default themes. In order to use it with custom themes, please add the necessary styling in your theme/child theme to override the plugin's CSS.
+- The custom fields from this plugin should be used in the submenu for well-structured and responsive UI.
+- Currently, this plugin is not supported with FSE themes.
 
 ## Installation ##
 
@@ -57,7 +61,7 @@ Below is the list of custom fields added by this plugin.
 - You can enter a URL in **Image Link** text field. On front-end, clicking on the image will lead to this URL.
 - You can enter a caption text in **Image Caption** field and it'll be displayed below the image on the front-end.
 #### Using Shortcode ####
-- You can add a shortcode in **Shortcode** field. We've added some stylings to handle WordPress' defaut `[video]` shortcode.
+- You can add a shortcode in **Shortcode** field. We've added some stylings to handle WordPress' default `[video]` and `[audio]` shortcode.
 - You can enter a caption text in **Shortcode Caption** field and it'll be displayed below the shortcode on the front-end.
 #### Using Custom HTML ####
 - TinyMCE editor is used to add custom HTML here.
