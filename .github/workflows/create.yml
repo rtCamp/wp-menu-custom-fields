@@ -15,3 +15,4 @@ jobs:
           SLUG: wp-menu-custom-fields
           WORDPRESS_PASSWORD: ${{ secrets.WORDPRESS_PASSWORD }}
           WORDPRESS_USERNAME: ${{ secrets.WORDPRESS_USERNAME }}
+          ASSETS_DIR: screenshots
