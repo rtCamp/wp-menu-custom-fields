@@ -1,0 +1,50 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <clipPath id="clip-icon-256x256">
+      <rect width="256" height="256"/>
+    </clipPath>
+  </defs>
+  <g id="icon-256x256" clip-path="url(#clip-icon-256x256)">
+    <rect width="256" height="256" fill="#fff"/>
+    <g id="Group_40" data-name="Group 40">
+      <rect id="Rectangle_6" data-name="Rectangle 6" width="256" height="256" fill="#579eff"/>
+      <g id="Group_36" data-name="Group 36" transform="translate(0 39)">
+        <rect id="Rectangle_7" data-name="Rectangle 7" width="199" height="103" rx="1" transform="translate(29 44)" fill="#fff"/>
+        <rect id="Rectangle_33" data-name="Rectangle 33" width="199" height="11" rx="1" transform="translate(29 31)" fill="#fff"/>
+        <circle id="Ellipse_8" data-name="Ellipse 8" cx="1.5" cy="1.5" r="1.5" transform="translate(34 35)" fill="#579eff"/>
+        <circle id="Ellipse_9" data-name="Ellipse 9" cx="1.5" cy="1.5" r="1.5" transform="translate(39 35)" fill="#579eff"/>
+        <circle id="Ellipse_10" data-name="Ellipse 10" cx="1.5" cy="1.5" r="1.5" transform="translate(44 35)" fill="#579eff"/>
+        <rect id="Rectangle_13" data-name="Rectangle 13" width="24" height="5" rx="1" transform="translate(191 54)" fill="#579eff"/>
+        <rect id="Rectangle_36" data-name="Rectangle 36" width="36" height="13" rx="1" transform="translate(147 50)" fill="#579eff"/>
+        <rect id="Rectangle_34" data-name="Rectangle 34" width="24" height="5" rx="1" transform="translate(153 54)" fill="#fff"/>
+        <rect id="Rectangle_35" data-name="Rectangle 35" width="24" height="5" rx="1" transform="translate(115 54)" fill="#579eff"/>
+        <g id="Group_31" data-name="Group 31" transform="translate(1 -7)">
+          <path id="Rectangle_8" data-name="Rectangle 8" d="M2,0H94a0,0,0,0,1,0,0V67a2,2,0,0,1-2,2H2a2,2,0,0,1-2-2V2A2,2,0,0,1,2,0Z" transform="translate(88 69)" fill="#579eff"/>
+          <g id="Group_34" data-name="Group 34" transform="translate(2)">
+            <rect id="Rectangle_37" data-name="Rectangle 37" width="30" height="4" rx="1" transform="translate(94 77)" fill="#fff"/>
+            <g id="Group_32" data-name="Group 32" transform="translate(49 -16)">
+              <rect id="Rectangle_9" data-name="Rectangle 9" width="35" height="2" rx="0.5" transform="translate(86 125)" fill="#fff"/>
+              <rect id="Rectangle_10" data-name="Rectangle 10" width="26" height="2" rx="0.5" transform="translate(86 129)" fill="#fff"/>
+            </g>
+            <g id="Group_33" data-name="Group 33">
+              <rect id="Rectangle_38" data-name="Rectangle 38" width="37" height="27" rx="1" transform="translate(135 77)" fill="#fff"/>
+              <g id="Group_35" data-name="Group 35" transform="translate(5)">
+                <path id="Polygon_7" data-name="Polygon 7" d="M8.143,1.429a1,1,0,0,1,1.715,0l7.234,12.056A1,1,0,0,1,16.234,15H1.766a1,1,0,0,1-.857-1.514Z" transform="translate(137 84)" fill="#579eff"/>
+                <path id="Polygon_8" data-name="Polygon 8" d="M5.143,1.429a1,1,0,0,1,1.715,0l4.234,7.056A1,1,0,0,1,10.234,10H1.766A1,1,0,0,1,.909,8.486Z" transform="translate(148 89)" fill="#579eff"/>
+                <circle id="Ellipse_11" data-name="Ellipse 11" cx="2" cy="2" r="2" transform="translate(154 83)" fill="#579eff"/>
+              </g>
+            </g>
+            <g id="Rectangle_39" data-name="Rectangle 39" transform="translate(135 119)" fill="#579eff" stroke="#fff" stroke-linejoin="round" stroke-width="1.5">
+              <rect width="23" height="9" rx="1" stroke="none"/>
+              <rect x="0.75" y="0.75" width="21.5" height="7.5" rx="0.25" fill="none"/>
+            </g>
+            <g id="Group_38" data-name="Group 38">
+              <rect id="Rectangle_43" data-name="Rectangle 43" width="4" height="0.5" rx="0.25" transform="translate(150 123)" fill="#fff"/>
+              <path id="Path_3" data-name="Path 3" d="M152.5,121.9l1.3,1.3-1.3,1.3" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
