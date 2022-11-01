@@ -26,7 +26,7 @@
          new URL( './config/global-setup.ts', 'file:' + __filename ).href
      ),
      use: {
-         baseURL: 'https://alvi-tazwar.rt.gw/',
+         baseURL: 'http:/alvitestfresh.local/',
          headless: true,
          viewport: {
              width: 960,
@@ -43,6 +43,8 @@
          trace: 'retain-on-failure',
          screenshot: 'only-on-failure',
          video: 'on-first-retry',
+         
+         
      },
     //  webServer: {
     //      command: 'npm run wp-env start',
