@@ -31,17 +31,14 @@ test.describe('Validate Video shortcode', () => {
         await pageUtils.pressKeyWithModifier('primary', 'a');
         await page.keyboard.press('Delete');
         await page.locator("input[id*='menu-item-shortcode-']").nth(1).fill(Code)
-
         // Caption.
         await page.locator("textarea[id*='menu-item-shortcode-caption-']").nth(1).click();
         await pageUtils.pressKeyWithModifier('primary', 'a');
         await page.keyboard.press('Delete');
         await page.locator("textarea[id*='menu-item-shortcode-caption-']").nth(1).fill("Video caption")
-
         // Click text=Main Menu has been updated.
         await page.locator("role=button[name='Save Menu'i]").click();
         await expect(page.locator("#message")).not.toBeNull();
-
         await Promise.all([
             page.click("#wp-admin-bar-site-name > a"),
         ]);
