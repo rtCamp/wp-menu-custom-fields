@@ -2,17 +2,13 @@
  * WordPress dependencies
  */
 const { test, expect } = require('@wordpress/e2e-test-utils-playwright');
-
-
 test.describe('Validate Custom HTML', () => {
     test.beforeEach(async ({ admin }) => {
         await admin.visitAdminPage("nav-menus.php");
     });
-    test('Check custom html', async ({ page,pageUtils }) => {
-
+    test('Check custom html', async ({ page, pageUtils }) => {
         //Expand Custom Html
         await page.locator("a[class='item-edit'][id*='edit-']").nth(1).click();
-
         //Add Proper title
         await page.locator("textarea[id*='menu-item-custom-text-']").nth(1).click();
         await pageUtils.pressKeyWithModifier('primary', 'a');
@@ -27,19 +23,17 @@ test.describe('Validate Custom HTML', () => {
         await expect(textarea).toHaveText('Bold')
         await page.locator("role=button[name='Save Menu'i]").click();
         await expect(page.locator("#message")).not.toBeNull();
-    
+
         // Click text=Main Menu has been updated.
-       await page.locator('text=Main Menu has been updated.').click();
+        await page.locator('text=Main Menu has been updated.').click();
         await Promise.all([
             page.click("#wp-admin-bar-site-name > a"),
-            //page.click("#wp-admin-bar-view-site > a")
         ]);
-    
         //Verify Frontend
         await page.locator("li[id*='menu-item-']").first().hover();
         const tweets = page.locator("div[class='rt-wp-menu-custom-fields-wrapper']");
         await expect(tweets).not.toBeNull();
-      
+
     });
 
 });

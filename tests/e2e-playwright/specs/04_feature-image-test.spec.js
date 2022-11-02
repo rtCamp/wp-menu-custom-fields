@@ -18,15 +18,13 @@ test.describe('Validate Feature Image', () => {
         await pageUtils.pressKeyWithModifier('primary', 'a');
         await page.keyboard.press('Delete');
         await page.keyboard.type('Feature Image');
-
         //checkbox
         await page.locator("input[id*='menu-item-selected-feature-radio-image-']").nth(1).check();
-
         //Select image
         await page.locator("button[id*='custom-field-select-image-']").nth(1).click();
         await page.locator("role=tab[name='Media Library'i]").click();
         const selectBtn = page.locator('role=button[name="Select"i]');
-        if (selectBtn.isDisabled()){
+        if (selectBtn.isDisabled()) {
             await page.locator('div[class="thumbnail"]').click();
         }
         else {
@@ -39,21 +37,20 @@ test.describe('Validate Feature Image', () => {
         await pageUtils.pressKeyWithModifier('primary', 'a');
         await page.keyboard.press('Delete');
         await page.locator("textarea[id*='menu-item-media-caption-']").nth(1).fill("Featured ImageCaption")
-    
+
         // Click text=Main Menu has been updated.
         await page.locator("role=button[name='Save Menu'i]").click();
         await expect(page.locator("#message")).not.toBeNull();
 
         await Promise.all([
             page.click("#wp-admin-bar-site-name > a"),
-            //page.click("#wp-admin-bar-view-site > a")
         ]);
-    
+
         //Verify Frontend
         await page.locator("li[id*='menu-item-']").first().hover();
         const tweets = page.locator("div[class='rt-wp-menu-custom-fields-wrapper']");
         await expect(tweets).not.toBeNull();
-      
+
     });
 
 });
