@@ -9,7 +9,6 @@ on:
     branches: [automation/playwright]
   pull_request:
     branches: [automation/playwright]
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 jobs:
