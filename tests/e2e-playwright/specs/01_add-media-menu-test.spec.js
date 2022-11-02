@@ -11,9 +11,7 @@ test.describe('Prepare Test scenario', () => {
         // Create a new Menu
         await page.locator('input[name="menu-name"]').fill('Main Menu');
 
-        if (await page.locator('role=link[name="create a new menu"i]').count() > 0) {
-            await page.click('role=link[name="create a new menu"i]')
-        }
+        await page.locator('role=button[name="Create Menu"i]').click();
         // Add pages to menu
         await page.locator('.menu-item-title').first().check();
         await page.locator('role=button[name="Add to Menu"i]').click();
