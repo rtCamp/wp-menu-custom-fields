@@ -26,7 +26,7 @@
          new URL( './config/global-setup.ts', 'file:' + __filename ).href
      ),
      use: {
-         baseURL: 'http://wp-menu-custom-field.com',
+         baseURL: 'http:/wp-menu-custom-field.com',
          headless: true,
          viewport: {
              width: 960,
