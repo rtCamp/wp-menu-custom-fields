@@ -6,7 +6,7 @@
 /**
  * Sets browser viewport to specified type.
  *
- * @this {import('./').PageUtils}
+ * @this {import('.').PageUtils}
  * @param {WPViewport} viewport Viewport name or dimensions object to assign.
  */
 export function setBrowserViewport(viewport: WPViewport): Promise<void>;

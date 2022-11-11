@@ -2,8 +2,8 @@
  * External dependencies
  */
 import type { Browser, Page, BrowserContext } from '@playwright/test';
-import { pressKeyTimes } from '../../src/page-utils/press-key-times';
-import { setBrowserViewport } from '../../src/page-utils/set-browser-viewport';
+import { pressKeyTimes } from './press-key-times';
+import { setBrowserViewport } from './set-browser-viewport';
 declare type PageUtilConstructorParams = {
     page: Page;
 };

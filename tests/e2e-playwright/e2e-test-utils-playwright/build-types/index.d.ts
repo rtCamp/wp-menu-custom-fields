@@ -1,6 +1,6 @@
-export { Admin } from '../src/admin';
-export { Editor } from '../src/editor';
-export { PageUtils } from '../src/page-utils';
-export { RequestUtils } from '../src/request-utils';
-export { test, expect } from '../src/test';
+export { Admin } from './admin';
+export { Editor } from './editor';
+export { PageUtils } from './page-utils';
+export { RequestUtils } from './request-utils';
+export { test, expect } from './test';
 //# sourceMappingURL=index.d.ts.map

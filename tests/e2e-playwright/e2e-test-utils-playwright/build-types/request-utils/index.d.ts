@@ -1,10 +1,10 @@
 /// <reference types="node" />
 import type { APIRequestContext, Cookie } from '@playwright/test';
-import type { User } from '../../src/request-utils/login';
-import { rest, batchRest } from '../../src/request-utils/rest';
-import { deleteAllBlocks } from '../../src/request-utils/blocks';
-import { deleteAllPosts } from '../../src/request-utils/posts';
-import { deleteAllWidgets, addWidgetBlock } from '../../src/request-utils/widgets';
+import type { User } from './login';
+import { rest, batchRest } from './rest';
+import { deleteAllBlocks } from './blocks';
+import { deleteAllPosts } from './posts';
+import { deleteAllWidgets, addWidgetBlock } from './widgets';
 interface StorageState {
     cookies: Cookie[];
     nonce: string;
@@ -40,14 +40,14 @@ declare class RequestUtils {
     activateTheme: (themeSlug: string) => Promise<void>;
     deleteAllBlocks: typeof deleteAllBlocks;
     deleteAllPosts: typeof deleteAllPosts;
-    createComment: (payload: import("../../src/request-utils/comments").CreateCommentPayload) => Promise<import("../../src/request-utils/comments").Comment>;
+    createComment: (payload: import("./comments").CreateCommentPayload) => Promise<import("./comments").Comment>;
     deleteAllComments: () => Promise<void>;
     deleteAllWidgets: typeof deleteAllWidgets;
     addWidgetBlock: typeof addWidgetBlock;
     deleteAllTemplates: (type: "wp_template" | "wp_template_part") => Promise<void>;
     resetPreferences: () => Promise<void>;
-    listMedia: () => Promise<import("../../src/request-utils/media").Media[]>;
-    uploadMedia: (filePathOrData: string | import("fs").ReadStream) => Promise<import("../../src/request-utils/media").Media>;
+    listMedia: () => Promise<import("./media").Media[]>;
+    uploadMedia: (filePathOrData: string | import("fs").ReadStream) => Promise<import("./media").Media>;
     deleteMedia: (mediaId: number) => Promise<any>;
     deleteAllMedia: () => Promise<any[]>;
 }
