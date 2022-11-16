@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import type { RequestUtils } from '../../src/request-utils/index';
+import type { RequestUtils } from './index';
 export interface Comment {
     id: number;
     author: number;

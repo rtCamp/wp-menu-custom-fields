@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import type { RequestUtils } from '../../src/request-utils/index';
+import type { RequestUtils } from './index';
 export interface User {
     username: string;
     password: string;

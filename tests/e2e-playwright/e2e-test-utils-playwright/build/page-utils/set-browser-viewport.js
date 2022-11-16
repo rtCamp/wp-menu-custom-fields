@@ -34,7 +34,7 @@ const PREDEFINED_DIMENSIONS = {
 /**
  * Sets browser viewport to specified type.
  *
- * @this {import('./').PageUtils}
+ * @this {import('.').PageUtils}
  * @param {WPViewport} viewport Viewport name or dimensions object to assign.
  */
 async function setBrowserViewport(viewport) {

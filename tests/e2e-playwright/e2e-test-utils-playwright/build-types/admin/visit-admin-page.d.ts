@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import type { Admin } from './';
+import type { Admin } from '.';
 /**
  * Visits admin page and handle errors.
  *

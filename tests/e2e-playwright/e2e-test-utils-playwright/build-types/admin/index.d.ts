@@ -8,8 +8,8 @@ import type { Browser, Page, BrowserContext } from '@playwright/test';
 /**
  * Internal dependencies
  */
-import { createNewPost } from '../../src/admin/create-new-post';
-import type { PageUtils } from '../../src/page-utils';
+import { createNewPost } from './create-new-post';
+import type { PageUtils } from '../page-utils';
 declare type AdminConstructorProps = {
     page: Page;
     pageUtils: PageUtils;
@@ -23,7 +23,7 @@ export declare class Admin {
     createNewPost: typeof createNewPost;
     getPageError: () => Promise<string | null>;
     visitAdminPage: (adminPath: string, query: string) => Promise<void>;
-    visitSiteEditor: (query: import("../../src/admin/visit-site-editor").SiteEditorQueryParams, skipWelcomeGuide?: boolean | undefined) => Promise<void>;
+    visitSiteEditor: (query: import("./visit-site-editor").SiteEditorQueryParams, skipWelcomeGuide?: boolean | undefined) => Promise<void>;
 }
 export {};
 //# sourceMappingURL=index.d.ts.map

@@ -1,4 +1,4 @@
-import type { PageUtils } from './';
+import type { PageUtils } from '.';
 /**
  * Checks if current path of the URL matches the provided path.
  *
