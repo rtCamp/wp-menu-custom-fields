@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import type { Editor } from '../../src/editor/index';
+import type { Editor } from './index';
 interface BlockRepresentation {
     name: string;
     attributes: Object;

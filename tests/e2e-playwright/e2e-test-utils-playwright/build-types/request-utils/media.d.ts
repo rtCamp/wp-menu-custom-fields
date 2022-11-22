@@ -6,7 +6,7 @@ import * as fs from 'fs';
 /**
  * Internal dependencies
  */
-import type { RequestUtils } from '../../src/request-utils/index';
+import type { RequestUtils } from './index';
 export interface Media {
     id: number;
     title: {

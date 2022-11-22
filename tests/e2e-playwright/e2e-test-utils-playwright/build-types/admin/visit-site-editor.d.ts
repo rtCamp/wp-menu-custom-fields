@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import type { Admin } from '../../src/admin';
+import type { Admin } from '.';
 export interface SiteEditorQueryParams {
     postId: string | number;
     postType: string;

@@ -16,7 +16,7 @@ export declare class Editor {
     clickBlockOptionsMenuItem: (label: string) => Promise<void>;
     clickBlockToolbarButton: (label: string) => Promise<void>;
     getEditedPostContent: () => Promise<any>;
-    insertBlock: (blockRepresentation: import("../../src/editor/insert-block").BlockRepresentation) => Promise<void>;
+    insertBlock: (blockRepresentation: import("./insert-block").BlockRepresentation) => Promise<void>;
     openDocumentSettingsSidebar: () => Promise<void>;
     openPreviewPage: () => Promise<Page>;
     publishPost: () => Promise<number | null>;
