@@ -11,9 +11,14 @@
      path.join( process.cwd(), 'artifacts/storage-states/admin.json' );
  
  const config: PlaywrightTestConfig = {
-     reporter: process.env.CI
-         ? [ [ 'github' ], [ './config/flaky-tests-reporter.ts' ] ]
-         : 'list',
+     reporter: [
+         ["html", { open: "never" }],
+         ["junit", { outputFile: "playwright-report/results.xml" }],
+         [
+             "playwright-tesults-reporter",
+             { "tesults-target": process.env.TESRESULT_TOKEN },
+         ],
+     ],
      forbidOnly: !! process.env.CI,
      workers: 1,
      retries: process.env.CI ? 2 : 0,
@@ -26,7 +31,7 @@
          new URL( './config/global-setup.ts', 'file:' + __filename ).href
      ),
      use: {
-         baseURL: 'http:/wp-menu-custom-field.com',
+         baseURL: 'http://wp-menu-custom-field.com', //http:/wp-menu-custom-field.com
          headless: true,
          viewport: {
              width: 960,
@@ -46,12 +51,6 @@
          
          
      },
-    //  webServer: {
-    //      command: 'npm run wp-env start',
-    //      port: 8889,
-    //      timeout: 120_000, // 120 seconds.
-    //      reuseExistingServer: true,
-    //  },
      projects: [
          {
              name: 'chromium',
