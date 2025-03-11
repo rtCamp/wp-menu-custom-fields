@@ -104,14 +104,11 @@ class Custom_Nav_Menu_Fields {
 	/**
 	 * Add custom fields on menu item edit screen.
 	 *
-	 * @param int    $id Current menu item ID.
-	 * @param object $item Current menu object.
-	 * @param int    $depth Current menu children depth.
-	 * @param array  $args Current menu Arguments.
+	 * @param int $id Current menu item ID.
 	 *
 	 * @return void
 	 */
-	public function wp_nav_menu_item_custom_fields( $id, $item, $depth, $args ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
+	public function wp_nav_menu_item_custom_fields( $id ) {
 		$data = $this->get_nav_menu_meta_data( $id, false );
 
 		$features         = array(
@@ -304,11 +301,10 @@ class Custom_Nav_Menu_Fields {
 	 * Function to filter nav menu objects.
 	 *
 	 * @param array $sorted_items Menu items after being sorted.
-	 * @param array $args Menu arguments.
 	 *
 	 * @return array Sorted menu items.
 	 */
-	public function wp_nav_menu_objects( $sorted_items, $args ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
+	public function wp_nav_menu_objects( $sorted_items ) {
 		global $nav_menu_custom_fields;
 		if ( empty( $nav_menu_custom_fields ) || ! is_array( $nav_menu_custom_fields ) ) {
 			$nav_menu_custom_fields = array();
@@ -330,12 +326,10 @@ class Custom_Nav_Menu_Fields {
 	 *
 	 * @param string $html HTML of nav menu item.
 	 * @param object $item Menu item object.
-	 * @param int    $depth Menu item's children depth.
-	 * @param array  $args Menu item's arguments.
 	 *
 	 * @return string HTML of nav menu item.
 	 */
-	public function walker_nav_menu_start_el( $html, $item, $depth, $args ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
+	public function walker_nav_menu_start_el( $html, $item ) {
 		global $nav_menu_custom_fields;
 		if ( empty( $nav_menu_custom_fields ) || ! is_array( $nav_menu_custom_fields ) ) {
 			return $html;
