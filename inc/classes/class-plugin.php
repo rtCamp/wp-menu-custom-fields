@@ -7,7 +7,7 @@
 
 namespace WP_Menu_Custom_Fields\Inc;
 
-use \WP_Menu_Custom_Fields\Inc\Traits\Singleton;
+use WP_Menu_Custom_Fields\Inc\Traits\Singleton;
 
 /**
  * Class Plugin
@@ -24,7 +24,5 @@ class Plugin {
 		// Load plugin classes.
 		Assets::get_instance();
 		Custom_Nav_Menu_Fields::get_instance();
-
 	}
-
 }

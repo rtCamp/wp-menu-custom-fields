@@ -70,7 +70,6 @@ class Custom_Nav_Menu_Fields {
 		 */
 		add_filter( 'wp_nav_menu_objects', array( $this, 'wp_nav_menu_objects' ), 10, 2 );
 		add_filter( 'walker_nav_menu_start_el', array( $this, 'walker_nav_menu_start_el' ), 10, 4 );
-
 	}
 
 	/**
@@ -112,7 +111,7 @@ class Custom_Nav_Menu_Fields {
 	 *
 	 * @return void
 	 */
-	public function wp_nav_menu_item_custom_fields( $id, $item, $depth, $args ) {
+	public function wp_nav_menu_item_custom_fields( $id, $item, $depth, $args ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
 		$data = $this->get_nav_menu_meta_data( $id, false );
 
 		$features         = array(
@@ -309,7 +308,7 @@ class Custom_Nav_Menu_Fields {
 	 *
 	 * @return array Sorted menu items.
 	 */
-	public function wp_nav_menu_objects( $sorted_items, $args ) {
+	public function wp_nav_menu_objects( $sorted_items, $args ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
 		global $nav_menu_custom_fields;
 		if ( empty( $nav_menu_custom_fields ) || ! is_array( $nav_menu_custom_fields ) ) {
 			$nav_menu_custom_fields = array();
@@ -336,7 +335,7 @@ class Custom_Nav_Menu_Fields {
 	 *
 	 * @return string HTML of nav menu item.
 	 */
-	public function walker_nav_menu_start_el( $html, $item, $depth, $args ) {
+	public function walker_nav_menu_start_el( $html, $item, $depth, $args ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
 		global $nav_menu_custom_fields;
 		if ( empty( $nav_menu_custom_fields ) || ! is_array( $nav_menu_custom_fields ) ) {
 			return $html;
@@ -513,5 +512,4 @@ class Custom_Nav_Menu_Fields {
 	private function cache_nav_menu_meta_data( $item_id, $data ) {
 		set_transient( $this->meta_key . '-' . $item_id, $data, DAY_IN_SECONDS );
 	}
-
 }
