@@ -14,7 +14,7 @@ namespace WP_Menu_Custom_Fields\Inc\Helpers;
  *
  * @return void
  */
-function autoloader( $resource = '' ) {
+function autoloader( $resource = '' ) { // phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.resourceFound
 
 	$resource_path  = false;
 	$namespace_root = 'WP_Menu_Custom_Fields\\';
@@ -81,7 +81,6 @@ function autoloader( $resource = '' ) {
 		// We are already making sure that the file exists and it's valid.
 		require_once( $resource_path ); // phpcs:ignore
 	}
-
 }
 
 spl_autoload_register( '\WP_Menu_Custom_Fields\Inc\Helpers\autoloader' );
